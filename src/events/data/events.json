@@ -1,0 +1,340 @@
+{
+    "events":[
+        {
+            "day": 1,
+            "date": "7th Feb",
+            "list": [
+              {
+                "id": 1,
+                "name": "Code Combat",
+                "category": "coding",
+                "prizePool": 10000,
+                "about": "Unleash your coding prowess in a thrilling coding battle! Solve logical challenges and compete with the best minds.",
+                "image": "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg",
+                "rulespdf": "https://drive.google.com/file/d/xyz1/view?usp=sharing",
+                "time": "7th Feb 10:00 AM",
+                "venue": "Lab 1, CS Block",
+                "spocs": [
+                  { "name": "Aryan Mehta", "contact": "9876543210" },
+                  { "name": "Simran Patel", "contact": "8765432109" }
+                ],
+                "fee": 100,
+                "registration_form": [
+                  {
+                    "link": "https://docs.google.com/forms/d/e/codecombat-form/viewform?usp=sharing",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "name": "Tech Quiz",
+                "category": "quiz",
+                "prizePool": 5000,
+                "about": "Test your tech knowledge with questions spanning across computer science, electronics, and general tech trends.",
+                "image": "/images/posters/test.jpeg",
+                "rulespdf": "https://drive.google.com/file/d/xyz2/view?usp=sharing",
+                "time": "7th Feb 2:00 PM",
+                "venue": "Seminar Hall A",
+                "spocs": [
+                  { "name": "Ritika Sharma", "contact": "9823456780" }
+                ],
+                "fee": 50,
+                "registration_form": [
+                  {
+                    "link": "https://docs.google.com/forms/d/e/techquiz-form/viewform?usp=sharing",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "name": "AI Challenge",
+                "category": "machine learning",
+                "prizePool": 12000,
+                "about": "Dive into the world of artificial intelligence and solve real-world problems using machine learning techniques.",
+                "image": "https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg",
+                "rulespdf": "https://drive.google.com/file/d/xyz3/view?usp=sharing",
+                "time": "7th Feb 4:00 PM",
+                "venue": "AI Lab, Tech Building",
+                "spocs": [
+                  { "name": "Neha Verma", "contact": "9123456789" }
+                ],
+                "fee": 150,
+                "registration_form": [
+                  {
+                    "link": "https://docs.google.com/forms/d/e/aichallenge-form/viewform?usp=sharing",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 4,
+                "name": "Tech Debate",
+                "category": "debate",
+                "prizePool": 3000,
+                "about": "Engage in intellectual debates on contemporary tech topics and showcase your critical thinking skills.",
+                "image": "https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg",
+                "rulespdf": "https://drive.google.com/file/d/xyz4/view?usp=sharing",
+                "time": "7th Feb 6:00 PM",
+                "venue": "Auditorium B",
+                "spocs": [
+                  { "name": "Rahul Das", "contact": "9988776655" }
+                ],
+                "fee": 50,
+                "registration_form": [
+                  {
+                    "link": "https://docs.google.com/forms/d/e/techdebate-form/viewform?usp=sharing",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 5,
+                "name": "Cybersecurity Workshop",
+                "category": "workshop",
+                "prizePool": 0,
+                "about": "Learn the basics of cybersecurity and ethical hacking from industry experts in this hands-on workshop.",
+                "image": "https://images.pexels.com/photos/5380641/pexels-photo-5380641.jpeg",
+                "rulespdf": "https://drive.google.com/file/d/xyz5/view?usp=sharing",
+                "time": "7th Feb 8:00 PM",
+                "venue": "Lab 3, CS Block",
+                "spocs": [
+                  { "name": "Anjali Menon", "contact": "9876543211" }
+                ],
+                "fee": 200,
+                "registration_form": [
+                  {
+                    "link": "https://docs.google.com/forms/d/e/cyberworkshop-form/viewform?usp=sharing",
+                    "info": ""
+                  }
+                ]
+              }
+            ]
+          },          
+          {
+            "day": 2,
+            "date": "8th Feb",
+            "list": [
+              {
+                "id": 6,
+                "name": "Hackfinity - 12hr Hackathon",
+                "category": "hackathon",
+                "prizePool": 25000,
+                "about": "Build innovative tech solutions in this 12-hour hackathon. Bring your ideas to life and impress the judges!",
+                "image": "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg",
+                "rulespdf": "https://drive.google.com/file/d/xyz6/view?usp=sharing",
+                "time": "8th Feb 9:00 AM",
+                "venue": "Innovation Lab",
+                "spocs": [
+                  { "name": "Devansh Kulkarni", "contact": "9012345678" },
+                  { "name": "Anusha Rao", "contact": "8123456789" }
+                ],
+                "fee": 300,
+                "registration_form": [
+                  {
+                    "link": "https://docs.google.com/forms/d/e/hackfinity-form/viewform?usp=sharing",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 7,
+                "name": "Tech Treasure Hunt",
+                "category": "fun",
+                "prizePool": 8000,
+                "about": "Decode clues and solve tech-based riddles as you hunt across campus in this adrenaline-pumping event!",
+                "image": "https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg",
+                "rulespdf": "https://drive.google.com/file/d/xyz7/view?usp=sharing",
+                "time": "8th Feb 3:00 PM",
+                "venue": "Main Lawn",
+                "spocs": [
+                  { "name": "Nikhil Jain", "contact": "9988776655" }
+                ],
+                "fee": 150,
+                "registration_form": [
+                  {
+                    "link": "https://docs.google.com/forms/d/e/treasurehunt-form/viewform?usp=sharing",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 8,
+                "name": "Robotics Workshop",
+                "category": "workshop",
+                "prizePool": 0,
+                "about": "Get hands-on experience in building and programming robots in this interactive workshop.",
+                "image": "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg",
+                "rulespdf": "https://drive.google.com/file/d/xyz8/view?usp=sharing",
+                "time": "8th Feb 5:00 PM",
+                "venue": "Robotics Lab",
+                "spocs": [
+                  { "name": "Meera Singh", "contact": "9123456780" }
+                ],
+                "fee": 200,
+                "registration_form": [
+                  {
+                    "link": "https://docs.google.com/forms/d/e/roboticsworkshop-form/viewform?usp=sharing",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 9,
+                "name": "Tech Talk: Future of AI",
+                "category": "seminar",
+                "prizePool": 0,
+                "about": "Join industry leaders as they discuss the future of artificial intelligence and its impact on society.",
+                "image": "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg",
+                "rulespdf": "https://drive.google.com/file/d/xyz9/view?usp=sharing",
+                "time": "8th Feb 7:00 PM",
+                "venue": "Conference Hall",
+                "spocs": [
+                  { "name": "Suresh Kumar", "contact": "9876543212" }
+                ],
+                "fee": 0,
+                "registration_form": [
+                  {
+                    "link": "https://docs.google.com/forms/d/e/techtalk-form/viewform?usp=sharing",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 10,
+                "name": "Gaming Night",
+                "category": "gaming",
+                "prizePool": 5000,
+                "about": "Compete in popular e-sports games and win exciting prizes in this overnight gaming marathon.",
+                "image": "https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg",
+                "rulespdf": "https://drive.google.com/file/d/xyz10/view?usp=sharing",
+                "time": "8th Feb 9:00 PM",
+                "venue": "Game Zone",
+                "spocs": [
+                  { "name": "Aman Joshi", "contact": "9988776656" }
+                ],
+                "fee": 100,
+                "registration_form": [
+                  {
+                    "link": "https://docs.google.com/forms/d/e/gamingnight-form/viewform?usp=sharing",
+                    "info": ""
+                  }
+                ]
+              }
+            ]
+          },          
+          {
+            "day": 3,
+            "date": "9th Feb",
+            "list": [
+              {
+                "id": 11,
+                "name": "RoboWars",
+                "category": "robotics",
+                "prizePool": 20000,
+                "about": "Build and battle your robots in the ultimate fight for supremacy. Only the strongest bot survives!",
+                "image": "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg",
+                "rulespdf": "https://drive.google.com/file/d/xyz11/view?usp=sharing",
+                "time": "9th Feb 11:00 AM",
+                "venue": "Mechanical Workshop Arena",
+                "spocs": [
+                  { "name": "Shreya Iyer", "contact": "9090909090" },
+                  { "name": "Aditya Das", "contact": "8080808080" }
+                ],
+                "fee": 400,
+                "registration_form": [
+                  {
+                    "link": "https://docs.google.com/forms/d/e/robowars-form/viewform?usp=sharing",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 12,
+                "name": "Design-o-Mania",
+                "category": "design",
+                "prizePool": 7000,
+                "about": "UI/UX designers, show off your creativity and design thinking in this fast-paced design sprint challenge!",
+                "image": "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg",
+                "rulespdf": "https://drive.google.com/file/d/xyz12/view?usp=sharing",
+                "time": "9th Feb 2:00 PM",
+                "venue": "Design Lab",
+                "spocs": [
+                  { "name": "Kriti Menon", "contact": "7070707070" }
+                ],
+                "fee": 200,
+                "registration_form": [
+                  {
+                    "link": "https://docs.google.com/forms/d/e/designomania-form/viewform?usp=sharing",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 13,
+                "name": "Techno-Beat Coding",
+                "category": "coding",
+                "prizePool": 9000,
+                "about": "Combine your love for music and coding in this unique event where participants code to the rhythm!",
+                "image": "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg",
+                "rulespdf": "https://drive.google.com/file/d/xyz13/view?usp=sharing",
+                "time": "9th Feb 4:00 PM",
+                "venue": "Lab 2, CS Block",
+                "spocs": [
+                  { "name": "Ankit Roy", "contact": "9123456781" }
+                ],
+                "fee": 150,
+                "registration_form": [
+                  {
+                    "link": "https://docs.google.com/forms/d/e/technobeat-form/viewform?usp=sharing",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 14,
+                "name": "Virtual Reality Showcase",
+                "category": "exhibition",
+                "prizePool": 0,
+                "about": "Experience the latest in VR technology as students showcase their innovative projects.",
+                "image": "https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg",
+                "rulespdf": "https://drive.google.com/file/d/xyz14/view?usp=sharing",
+                "time": "9th Feb 6:00 PM",
+                "venue": "Exhibition Hall",
+                "spocs": [
+                  { "name": "Priya Nair", "contact": "9876543213" }
+                ],
+                "fee": 0,
+                "registration_form": [
+                  {
+                    "link": "https://docs.google.com/forms/d/e/vrshowcase-form/viewform?usp=sharing",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 15,
+                "name": "Closing Ceremony, Awards",
+                "category": "ceremony",
+                "prizePool": 0,
+                "about": "Join us as we conclude the tech fest with a grand ceremony and award distribution.",
+                "image": "https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg",
+                "rulespdf": "https://drive.google.com/file/d/xyz15/view?usp=sharing",
+                "time": "9th Feb 8:00 PM",
+                "venue": "Main Auditorium",
+                "spocs": [
+                  { "name": "Event Coordinator", "contact": "9000000000" }
+                ],
+                "fee": 0,
+                "registration_form": [
+                  {
+                    "link": "https://docs.google.com/forms/d/e/closingceremony-form/viewform?usp=sharing",
+                    "info": ""
+                  }
+                ]
+              }
+            ]
+          }          
+    ]
+}

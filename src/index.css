@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --neon-blue: #00f0ff;
+    --neon-pink: #ff00ea;
+    --neon-green: #39ff14;
+    --neon-purple: #9900ff;
+    --dark-bg: #070215;
+    --darker-bg: #030111;
+    --light-text: #f1f1f9;
+    --grid-color: rgba(0, 240, 255, 0.1);
+    --dark-grid-color: rgba(0, 240, 255, 0.05);
+}
+
+@font-face {
+    font-family: 'MyFont';
+    src: url('/fonts/SDGlitch.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+@font-face {
+font-family: 'CyberAlert';
+src: url('/fonts/CyberAlert.otf') format('truetype');
+font-weight: normal;
+font-style: normal;
+}
+
+@font-face {
+font-family: 'AstrozTrial';
+src: url('/fonts/AstrozTrial.ttf') format('truetype');
+font-weight: normal;
+font-style: normal;
+}
+
+@font-face {
+font-family: 'OrbitronBold';
+src: url('/fonts/OrbitronBold.ttf') format('truetype');
+font-weight: normal;
+font-style: normal;
+}
+
+@font-face {
+font-family: 'OrbitronRegular';
+src: url('/fonts/OrbitronRegular.ttf') format('truetype');
+font-weight: normal;
+font-style: normal;
+}

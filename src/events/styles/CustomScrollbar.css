@@ -1,0 +1,161 @@
+.custom-scrollbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 60px;
+  z-index: 100;
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-container {
+  position: relative;
+  height: 80%;
+  width: 2px;
+  background-color: rgba(255, 255, 255, 0.1);
+  overflow: visible;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+  transition: height 0.2s ease-out;
+}
+
+.day-marker {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.day-marker::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background-color: var(--dark-bg);
+  border: 1px solid var(--neon-blue);
+  border-radius: 50%;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.day-marker::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background-color: var(--neon-blue);
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+  transition: all 0.3s ease;
+}
+
+.day-marker.active::before {
+  width: 16px;
+  height: 16px;
+  border-color: var(--neon-green);
+}
+
+.day-marker.active::after {
+  width: 8px;
+  height: 8px;
+  background-color: var(--neon-green);
+  box-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green);
+}
+
+.marker-content {
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  padding-left: 15px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.day-marker:hover .marker-content,
+.day-marker.active .marker-content {
+  opacity: 1;
+  left: 40px;
+}
+
+.day-number {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--light-text);
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.day-marker:hover .day-number,
+.day-marker.active .day-number {
+  color: var(--neon-green);
+  text-shadow: 0 0 5px var(--neon-green);
+}
+
+.day-marker:hover::before {
+  border-color: var(--neon-pink);
+}
+
+.day-marker:hover::after {
+  background-color: var(--neon-pink);
+  box-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink);
+}
+
+@media (max-width: 768px) {
+  .custom-scrollbar {
+    width: 40px;
+  }
+  
+  .marker-content {
+    display: none;
+  }
+  
+  .day-marker {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .day-marker::before {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .day-marker::after {
+    width: 4px;
+    height: 4px;
+  }
+  
+  .day-marker.active::before {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .day-marker.active::after {
+    width: 6px;
+    height: 6px;
+  }
+}

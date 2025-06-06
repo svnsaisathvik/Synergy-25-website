@@ -1,14 +1,8 @@
 import React,{lazy,Suspense} from 'react'
 import {Routes,Route,BrowserRouter} from "react-router-dom";
+import HomePage from './home/HomePage';
 
 const EventPage = lazy(()=>import("./events/components/EventsPage"));
-
-function HomePage(){
-  return <>
-  <h1 style={{fontFamily:"CyberAlert"}}>Page under progress....</h1>
-  <h2 style={{fontFamily:"CyberAlert"}}>Hello Synergy!!!</h2>
-  </>
-}
 
 function TeamsPage(){
   return <>

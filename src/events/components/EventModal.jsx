@@ -95,7 +95,7 @@ const EventModal = ({ event, isOpen, onClose }) => {
             <div className="hud-details-content">
               {/* Event title with glitch effect */}
               <h1 className="hud-title">
-                <span className="hud-title-text" data-text={event.name}>
+                <span className="hud-title-gradient-text" data-text={event.name} style={{fontFamily:"CyberAlert"}}>
                   {event.name}
                 </span>
                 <div className="title-glow"></div>
@@ -126,7 +126,7 @@ const EventModal = ({ event, isOpen, onClose }) => {
               {event.prizePool!=0&&<div className="hud-section registration-fee-section">
                 <div className="section-header">
                   <div className="section-line"></div>
-                  <h3 className="section-title" style={{fontFamily:"CyberAlert"}}>PRIZE POOL</h3>
+                  <h3 className="gradient-section-title" style={{fontFamily:"CyberAlert"}}>PRIZE POOL</h3>
                   <div className="section-line"></div>
                 </div>
                 <div className="registration-fee">
@@ -152,7 +152,7 @@ const EventModal = ({ event, isOpen, onClose }) => {
               <div className="hud-section">
                 <div className="section-header">
                   <div className="section-line"></div>
-                  <h3 className="section-title" style={{fontFamily:"CyberAlert"}}>ABOUT THE EVENT</h3>
+                  <h3 className="gradient-section-title" style={{fontFamily:"CyberAlert"}}>ABOUT THE EVENT</h3>
                   <div className="section-line"></div>
                 </div>
                 <div className="section-content">
@@ -203,7 +203,7 @@ const EventModal = ({ event, isOpen, onClose }) => {
                 <div className="hud-section">
                   <div className="section-header">
                     <div className="section-line"></div>
-                    <h3 className="section-title" style={{fontFamily:"CyberAlert"}}>EVENT COORDINATORS</h3>
+                    <h3 className="gradient-section-title" style={{fontFamily:"CyberAlert"}}>EVENT COORDINATORS</h3>
                     <div className="section-line"></div>
                   </div>
                   <div className="contacts-grid">

@@ -14,7 +14,7 @@ const DaySection = forwardRef(
           <div className="day-title">
             <div className="day-number-container">
               <div className="day-number-wrapper">
-                <p className="day-number" style={{fontSize:"5rem",fontFamily:"CyberAlert"}}>DAY {dayData.day}</p>
+                <p className="gradient-day-number" style={{fontSize:"5rem",fontFamily:"CyberAlert"}}>DAY {dayData.day}</p>
                 <div className="day-number-glow"></div>
               </div>
             </div>

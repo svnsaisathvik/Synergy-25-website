@@ -388,6 +388,16 @@
   animation: text-flicker 5s infinite;
 }
 
+.hud-title-gradient-text{
+  background: linear-gradient(45deg, #06B6D4, #9333EA, #06B6D4, #9333EA);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientFlow 3s ease-in-out infinite;
+  font-size: 3.5rem;
+}
+
 .hud-title-text::before,
 .hud-title-text::after {
   content: attr(data-text);
@@ -720,6 +730,16 @@
   font-family: var(--font-share-tech-mono), monospace;
   font-size: 2rem;
   color: var(--neon-cyan);
+  margin: 0 15px;
+  letter-spacing: 2px;
+}
+
+.gradient-section-title{
+  background: linear-gradient(45deg, #06B6D4, #9333EA, #06B6D4, #9333EA);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size:  2rem;
   margin: 0 15px;
   letter-spacing: 2px;
 }

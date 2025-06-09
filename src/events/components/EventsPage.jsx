@@ -247,7 +247,7 @@ const EventsPage = () => {
             </div>
             <div className="glitch-container">
               <h1 
-                className="glitch font-SDGlitch" 
+                className="gradient-text font-SDGlitch" 
                 data-text="EVENTS" 
                 style={{ fontFamily: "CyberAlert" }}
                 role="banner"

@@ -53,6 +53,13 @@ body::before {
   min-height: 100vh;
 }
 
+.gradient-text{
+  background: linear-gradient(to right, #06B6D4, #9333EA);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* Events Page Styles */
 .events-page {
   position: relative;
@@ -144,6 +151,62 @@ body::before {
   }
 }
 
+
+.gradient-text {
+  background: linear-gradient(45deg, #06B6D4, #9333EA, #06B6D4, #9333EA);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientFlow 3s ease-in-out infinite;
+  font-size: var(--header-font-size);
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Combined gradient and glitch effect */
+.gradient-glitch {
+  position: relative;
+  font-size: var(--header-font-size);
+  background: linear-gradient(45deg, #06B6D4, #9333EA, #06B6D4, #9333EA);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientFlow 3s ease-in-out infinite, glitch-skew 1s infinite linear alternate-reverse;
+}
+
+.gradient-glitch::before,
+.gradient-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.gradient-glitch::before {
+  color: var(--neon-pink);
+  animation: glitch-effect 3s infinite;
+}
+
+.gradient-glitch::after {
+  color: var(--neon-blue);
+  animation: glitch-effect 2s infinite reverse;
+}
+
 /* Glitch Effect Styles */
 .glitch-container {
   position: relative;
@@ -155,7 +218,10 @@ body::before {
   font-weight: 900;
   margin: 0;
   padding: 0;
-  color: var(--neon-blue);
+  background: linear-gradient(to right, #06B6D4, #9333EA);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color:transparent;
   text-shadow: 0 0 20px var(--neon-blue);
   mix-blend-mode: screen;
   position: relative;
@@ -176,6 +242,7 @@ body::before {
 }
 
 .glitch::before {
+  
   color: var(--neon-pink);
   animation: glitch-effect 3s infinite;
 }

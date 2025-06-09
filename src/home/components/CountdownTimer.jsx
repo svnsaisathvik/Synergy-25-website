@@ -43,10 +43,10 @@ const CountdownTimer = ({ targetDate }) => {
             <div className="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-purple-500" />
             
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-cyan-400 font-mono mb-2">
+              <div className="text-4xl md:text-5xl font-bold text-cyan-400 font-mono mb-2" style={{ fontFamily: "CyberAlert" }}>
                 {String(value).padStart(2, '0')}
               </div>
-              <div className="text-sm text-gray-400 uppercase tracking-wide">
+              <div className="text-sm text-gray-400 uppercase tracking-wide" style={{ fontFamily: "CyberAlert" }}>
                 {unit}
               </div>
             </div>

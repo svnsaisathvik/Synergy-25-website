@@ -3,6 +3,7 @@ import DaySection from './DaySection';
 import CustomScrollbar from './CustomScrollbar';
 import eventsData from '../data/events.json';
 import EventModal from './EventModal';
+import FloatingElements from "../../home/components/FloatingElements";
 import '../styles/EventsPage.css';
 import { CircuitBoard, Cpu, GithubIcon } from 'lucide-react';
 
@@ -216,8 +217,9 @@ const EventsPage = () => {
 
   return (
     <div className="events-page" ref={pageRef}>
+      <FloatingElements/>
       <header className="events-header">
-        <canvas 
+        {/* <canvas 
           ref={canvasRef} 
           className="matrix-canvas"
           style={{ 
@@ -226,7 +228,7 @@ const EventsPage = () => {
             // Optimize rendering on mobile
             imageRendering: isMobile ? 'pixelated' : 'auto'
           }}
-        />
+        /> */}
         <div className="header-content">
           <div className="logo-container">
             <div className="animated-icons">

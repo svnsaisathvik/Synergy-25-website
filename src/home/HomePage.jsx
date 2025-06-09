@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import FeatureCard from './components/FeatureCard';
 import FloatingElements from './components/FloatingElements';
 import CleanGlitchText from './components/CleanGlitchText';
@@ -34,14 +35,14 @@ const SynergyHomepage = () => {
               { name: 'Our Team', path: '/teams'},
               { name: 'Contact', path: '#contact' }
             ].map((item) => (
-              <a 
+              <Link
                 key={item.name}
-                href={item.path}
+                to={item.path}
                 className="relative text-gray-300 hover:text-cyan-400 transition-colors duration-300 group"
               >
                 {item.name}
                 <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300" />
-              </a>
+              </Link>
             ))}
           </div>
         </nav>
@@ -77,10 +78,10 @@ const SynergyHomepage = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mb-16">
-            <a href = "/events" className="relative bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-black font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 group overflow-hidden">
+            <Link to = "/events" className="relative bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-black font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 group overflow-hidden">
               <span className="relative z-10">Explore Events</span>
               <div className="absolute inset-0 bg-white/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-            </a>
+            </Link>
             
             <button onClick={() => window.location.href = "#timeline"} className="relative border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 group overflow-hidden">
               <span className="relative z-10">View Timeline</span>
@@ -200,13 +201,13 @@ const SynergyHomepage = () => {
             </div>
             <div className="flex space-x-6">
               {['Twitter', 'LinkedIn', 'Instagram', 'GitHub'].map((social) => (
-                <a 
+                <Link 
                   key={social}
-                  href="#" 
+                  to="#" 
                   className="text-gray-400 hover:text-cyan-400 transition-colors duration-300 text-sm"
                 >
                   {social}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

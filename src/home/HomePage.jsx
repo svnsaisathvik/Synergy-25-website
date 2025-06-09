@@ -3,7 +3,7 @@ import FeatureCard from './components/FeatureCard';
 import FloatingElements from './components/FloatingElements';
 import CleanGlitchText from './components/CleanGlitchText';
 import CountdownTimer from './components/CountdownTimer';
-import { IconX, IconLinkedin, IconInstagram, IconGithub } from "lucide-react";
+import { Github, Instagram, Linkedin, X } from 'lucide-react';
 
 
 const SynergyHomepage = () => {
@@ -231,27 +231,27 @@ const SynergyHomepage = () => {
 
         {/* Footer */}
         <section id="contact" className="px-6 md:px-8 py-16 bg-gray-900/20">
-        <footer className="border-t border-cyan-400/20 p-6 md:p-8">
-  <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-    <div className="text-gray-400 text-sm" style={{ fontFamily: "CyberAlert" }}>
-      © 2025 Synergy TechFest. Powered by innovation.
-    </div>
-    <div className="flex space-x-6">
-      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors duration-300">
-        <IconX className="w-5 h-5" />
-      </a>
-      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors duration-300">
-        <IconLinkedin className="w-5 h-5" />
-      </a>
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors duration-300">
-        <IconInstagram className="w-5 h-5" />
-      </a>
-      <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors duration-300">
-        <IconGithub className="w-5 h-5" />
-      </a>
-    </div>
-  </div>
-</footer>
+          <footer className="border-t border-cyan-400/20 p-6 md:p-8">
+            <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+              <div className="text-gray-400 text-sm" style={{ fontFamily: "CyberAlert" }}>
+                © 2025 Synergy TechFest. Powered by innovation.
+              </div>
+              <div className="flex space-x-6">
+                <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors duration-300">
+                  <X className="w-5 h-5" />
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors duration-300">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors duration-300">
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors duration-300">
+                  <Github className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+          </footer>
         </section>
       </div>
 

@@ -81,7 +81,7 @@ const CleanGlitchText = () => {
         className="text-6xl md:text-7xl lg:text-8xl font-black text-white relative z-20 select-none tracking-tight"
         style={{
           transform: `translate(${glitchOffset.x}px, ${glitchOffset.y}px)`,
-          fontFamily: 'system-ui, -apple-system, sans-serif',
+          fontFamily: "CyberAlert",
           textShadow: isGlitching ? '2px 0 #ff0040, -2px 0 #00ffff' : 'none'
         }}
       >
@@ -96,7 +96,7 @@ const CleanGlitchText = () => {
             transform: `translate(${glitchOffset.x + 3}px, ${glitchOffset.y}px)`,
             opacity: 0.8,
             mixBlendMode: 'screen',
-            fontFamily: 'system-ui, -apple-system, sans-serif'
+            fontFamily: "CyberAlert"
           }}
         >
           {currentText}
@@ -111,7 +111,7 @@ const CleanGlitchText = () => {
             transform: `translate(${glitchOffset.x - 3}px, ${glitchOffset.y}px)`,
             opacity: 0.8,
             mixBlendMode: 'screen',
-            fontFamily: 'system-ui, -apple-system, sans-serif'
+            fontFamily: "CyberAlert"
           }}
         >
           {currentText}

@@ -3,13 +3,8 @@ import {Routes,Route,BrowserRouter} from "react-router-dom";
 import HomePage from './home/HomePage';
 
 const EventPage = lazy(()=>import("./events/components/EventsPage"));
+const TeamsPage = lazy(()=>import("./team/components/TeamPage"));
 
-function TeamsPage(){
-  return <>
-    <h1 style={{fontFamily:"CyberAlert"}}>Page under progress....</h1>
-    <h2 style={{fontFamily:"CyberAlert"}}>Meet our team!!</h2>
-  </>
-}
 
 function LoadingPage(){
   return <>

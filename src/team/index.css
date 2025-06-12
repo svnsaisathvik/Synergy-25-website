@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: 'Rajdhani', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #000;
+  color: #fff;
+  overflow-x: hidden;
+  perspective: 1000px;
+}
+
+/* Custom cursor */
+* {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' style='fill:none;stroke:%2300ffff;stroke-width:2px'><circle cx='8' cy='8' r='6'/></svg>") 8 8, auto;
+}
+
+/* Cyberpunk background patterns */
+.bg-scanlines {
+  background-image: repeating-linear-gradient(
+    transparent 0px,
+    transparent 1px,
+    rgba(0, 255, 255, 0.05) 1px,
+    rgba(0, 255, 255, 0.05) 2px
+  );
+  background-size: 100% 2px;
+}
+
+.bg-glitch {
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2300ffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+/* Animation keyframes */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotateX(0) rotateY(0);
+  }
+  25% {
+    transform: translateY(-10px) rotateX(2deg) rotateY(2deg);
+  }
+  75% {
+    transform: translateY(10px) rotateX(-2deg) rotateY(-2deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  75% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes glitch {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+  }
+  50% {
+    box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
+  }
+}
+
+@keyframes textGlitch {
+  0% {
+    text-shadow: 0.05em 0 0 #00ffff, -0.05em -0.025em 0 #ff00ff;
+    transform: translate(0);
+  }
+  25% {
+    text-shadow: -0.05em -0.025em 0 #00ffff, 0.025em 0.025em 0 #ff00ff;
+  }
+  49% {
+    text-shadow: -0.05em -0.025em 0 #00ffff, 0.025em 0.025em 0 #ff00ff;
+  }
+  50% {
+    text-shadow: 0.025em 0.05em 0 #00ffff, 0.05em 0 0 #ff00ff;
+    transform: translate(2px, 2px);
+  }
+  75% {
+    text-shadow: 0.05em 0.025em 0 #00ffff, -0.05em -0.025em 0 #ff00ff;
+    transform: translate(-2px, -2px);
+  }
+  100% {
+    text-shadow: 0.05em 0 0 #00ffff, -0.05em -0.025em 0 #ff00ff;
+    transform: translate(0);
+  }
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    border-color: #00ffff;
+  }
+  50% {
+    border-color: #ff00ff;
+  }
+}
+
+@keyframes hologram {
+  0%, 100% {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0) rotateY(0);
+  }
+  25% {
+    opacity: 0.8;
+    transform: perspective(1000px) rotateX(2deg) rotateY(5deg);
+  }
+  75% {
+    opacity: 0.9;
+    transform: perspective(1000px) rotateX(-2deg) rotateY(-5deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+.animate-flicker {
+  animation: flicker 3s infinite;
+}
+
+.animate-neon-pulse {
+  animation: neonPulse 2s infinite;
+}
+
+.animate-text-glitch {
+  animation: textGlitch 3s infinite;
+}
+
+.animate-border-glow {
+  animation: borderGlow 4s infinite;
+}
+
+.animate-hologram {
+  animation: hologram 8s infinite;
+}
+
+/* Hover effects */
+.hover-glitch:hover {
+  animation: glitch 0.3s infinite;
+}
+
+.hover-neon:hover {
+  text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+  transition: text-shadow 0.3s ease;
+}
+
+/* 3D Transform styles */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #060620;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00FFFF;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00CCCC;
+}

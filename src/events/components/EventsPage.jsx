@@ -5,7 +5,7 @@ import eventsData from '../data/events.json';
 import EventModal from './EventModal';
 import FloatingElements from "../../home/components/FloatingElements";
 import '../styles/EventsPage.css';
-import { CircuitBoard, Cpu, GithubIcon } from 'lucide-react';
+import { CircuitBoard, Cpu, GithubIcon, ArrowLeft, ChevronLeft } from 'lucide-react';
 
 const EventsPage = () => {
   const [activeDay, setActiveDay] = useState(1);
@@ -19,6 +19,12 @@ const EventsPage = () => {
   const pageRef = useRef(null);
   const canvasRef = useRef(null);
   const animationFrameRef = useRef(null);
+
+  // Handle back navigation
+  const handleBack = useCallback(() => {
+    // Navigate back or to home page
+    window.history.back();
+  }, []);
 
   // Detect if device is mobile
   const checkIfMobile = useCallback(() => {
@@ -218,6 +224,90 @@ const EventsPage = () => {
   return (
     <div className="events-page" ref={pageRef}>
       <FloatingElements/>
+      
+      {/* Cyberpunk Back Button */}
+      <button
+        onClick={handleBack}
+        className={`
+          fixed top-4 left-4 z-50
+          ${isMobile ? 'w-12 h-12' : 'w-14 h-14'}
+          bg-black/80 backdrop-blur-sm
+          border-2 border-cyan-400/50
+          rounded-lg
+          hover:border-cyan-300 hover:bg-cyan-400/10
+          active:border-cyan-200 active:bg-cyan-400/20
+          transition-all duration-300 ease-out
+          group
+          shadow-lg shadow-cyan-400/20
+          hover:shadow-cyan-400/40
+          hover:shadow-lg
+          cursor-pointer
+          ${isMobile ? 'touch-manipulation' : ''}
+          relative
+          overflow-hidden
+        `}
+        aria-label="Go back"
+        style={{
+          boxShadow: '0 0 20px rgba(6, 182, 212, 0.3), inset 0 0 20px rgba(6, 182, 212, 0.1)',
+        }}
+      >
+        {/* Main content container */}
+        <div className="absolute inset-0 flex items-center justify-center z-20">
+          {isMobile ? (
+            <ChevronLeft 
+              className="w-7 h-7 text-cyan-300 group-hover:text-white transition-colors duration-300"
+              strokeWidth={2.5}
+            />
+          ) : (
+            <ArrowLeft 
+              className="w-7 h-7 text-cyan-300 group-hover:text-white transition-colors duration-300"
+              strokeWidth={2}
+            />
+          )}
+        </div>
+        
+        {/* Glitch effect overlay */}
+        <div 
+          className="
+            absolute inset-0 rounded-lg
+            bg-gradient-to-r from-cyan-400/10 to-purple-500/10
+            opacity-0 group-hover:opacity-100
+            transition-opacity duration-300
+            animate-pulse
+            z-10
+          "
+        />
+        
+        {/* Scan line effect */}
+        <div 
+          className="
+            absolute inset-0 rounded-lg overflow-hidden
+            opacity-0 group-hover:opacity-100
+            transition-opacity duration-300
+            z-10
+          "
+        >
+          <div 
+            className="
+              absolute top-0 left-0 w-full h-0.5
+              bg-gradient-to-r from-transparent via-cyan-300 to-transparent
+              animate-pulse
+            "
+          />
+        </div>
+
+        {/* Background gradient effect */}
+        <div 
+          className="
+            absolute inset-0 rounded-lg
+            bg-gradient-to-r from-cyan-400/20 to-purple-500/20
+            opacity-0 group-hover:opacity-100
+            transition-opacity duration-300
+            z-0
+          "
+        />
+      </button>
+
       <header className="events-header">
         {/* <canvas 
           ref={canvasRef} 
@@ -269,6 +359,7 @@ const EventsPage = () => {
       <div className="events-container">
         {eventsData.events.map((dayData, index) => (
           <DaySection 
+            id = {dayData.day}
             key={dayData.day}
             ref={(el) => sectionRefs.current[index] = el}
             dayData={dayData}

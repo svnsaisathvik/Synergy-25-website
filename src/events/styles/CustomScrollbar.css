@@ -74,14 +74,14 @@
 .day-marker.active::before {
   width: 16px;
   height: 16px;
-  border-color: var(--neon-green);
+  border-color: var(--neon-purple);
 }
 
 .day-marker.active::after {
   width: 8px;
   height: 8px;
-  background-color: var(--neon-green);
-  box-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green);
+  background-color: var(--neon-purple);
+  box-shadow: 0 0 5px var(--neon-purple), 0 0 10px var(--neon-purple);
 }
 
 .marker-content {
@@ -112,8 +112,8 @@
 
 .day-marker:hover .day-number,
 .day-marker.active .day-number {
-  color: var(--neon-green);
-  text-shadow: 0 0 5px var(--neon-green);
+  color: var(--neon-purple);
+  text-shadow: 0 0 5px var(--neon-purple);
 }
 
 .day-marker:hover::before {

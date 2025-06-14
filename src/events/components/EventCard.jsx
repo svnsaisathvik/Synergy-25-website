@@ -3,10 +3,12 @@ import '../styles/EventCard.css';
 
 const EventCard = ({ event, onClick, delay }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const cardRef = useRef(null);
+  const imageRef = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const cardObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setTimeout(() => {
@@ -17,13 +19,30 @@ const EventCard = ({ event, onClick, delay }) => {
       { threshold: 0.1 }
     );
 
+    const imageObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setImageLoaded(true);
+          imageObserver.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: '100px' }
+    );
+
     if (cardRef.current) {
-      observer.observe(cardRef.current);
+      cardObserver.observe(cardRef.current);
+    }
+
+    if (imageRef.current) {
+      imageObserver.observe(imageRef.current);
     }
 
     return () => {
       if (cardRef.current) {
-        observer.unobserve(cardRef.current);
+        cardObserver.unobserve(cardRef.current);
+      }
+      if (imageRef.current) {
+        imageObserver.unobserve(imageRef.current);
       }
     };
   }, [delay]);
@@ -39,11 +58,12 @@ const EventCard = ({ event, onClick, delay }) => {
     >
       <div className="event-card-border"></div>
       
-      {/* Image Section */}
+      {/* Image Section with Lazy Loading */}
       <div 
+        ref={imageRef}
         className="event-image"
         style={{
-          backgroundImage: `url(${event.image})`
+          backgroundImage: imageLoaded ? `url(${event.image})` : 'none'
         }}
       >
         {/* Category moved to be over the image */}
@@ -52,11 +72,11 @@ const EventCard = ({ event, onClick, delay }) => {
       
       {/* Content Section */}
       <div className="event-card-content">
-        {/* Blurred background image */}
+        {/* Blurred background image with Lazy Loading */}
         <div 
           className="event-content-bg"
           style={{
-            backgroundImage: `url(${event.image})`
+            backgroundImage: imageLoaded ? `url(${event.image})` : 'none'
           }}
         ></div>
         

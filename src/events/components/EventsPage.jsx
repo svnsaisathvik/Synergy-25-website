@@ -1,4 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { gsap } from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import DaySection from './DaySection';
 import CustomScrollbar from './CustomScrollbar';
 import eventsData from '../data/events.json';
@@ -6,6 +9,9 @@ import EventModal from './EventModal';
 import FloatingElements from "../../home/components/FloatingElements";
 import '../styles/EventsPage.css';
 import { CircuitBoard, Cpu, GithubIcon, ArrowLeft, ChevronLeft } from 'lucide-react';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
 const EventsPage = () => {
   const [activeDay, setActiveDay] = useState(1);
@@ -19,11 +25,19 @@ const EventsPage = () => {
   const pageRef = useRef(null);
   const canvasRef = useRef(null);
   const animationFrameRef = useRef(null);
+  const scrollTriggerRefs = useRef([]);
 
-  // Handle back navigation
+  // Handle back navigation with GSAP animation
   const handleBack = useCallback(() => {
-    // Navigate back or to home page
-    window.history.back();
+    // Add a smooth fade out animation before navigation
+    gsap.to(pageRef.current, {
+      opacity: 0,
+      duration: 0.3,
+      ease: "power2.out",
+      onComplete: () => {
+        window.history.back();
+      }
+    });
   }, []);
 
   // Detect if device is mobile
@@ -40,6 +54,9 @@ const EventsPage = () => {
     const newWidth = window.innerWidth;
     const newHeight = Math.min(window.innerHeight * 0.4, 400);
     setCanvasSize({ width: newWidth, height: newHeight });
+    
+    // Refresh ScrollTrigger on resize
+    ScrollTrigger.refresh();
   }, [checkIfMobile]);
 
   // Optimized matrix effect for mobile
@@ -55,7 +72,7 @@ const EventsPage = () => {
 
     // Adjust performance based on device type
     const fontSize = isMobile ? 16 : 14;
-    const animationSpeed = isMobile ? 80 : 50; // Slower on mobile for better performance
+    const animationSpeed = isMobile ? 80 : 50;
     const columns = Math.floor(canvas.width / fontSize);
     const drops = Array(columns).fill(1);
     const chars = '01';
@@ -63,7 +80,6 @@ const EventsPage = () => {
     ctx.font = `${fontSize}px monospace`;
 
     const matrix = () => {
-      // Lighter effect on mobile to save battery
       ctx.fillStyle = isMobile ? 'rgba(0, 0, 0, 0.08)' : 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -94,43 +110,42 @@ const EventsPage = () => {
     };
   }, [isMobile, canvasSize]);
 
-  // Throttled scroll handler for better performance
-  const handleScroll = useCallback(() => {
-    if (!pageRef.current) return;
-    
-    const scrollPosition = pageRef.current.scrollTop;
-    const scrollHeight = pageRef.current.scrollHeight - pageRef.current.clientHeight;
-    const progress = Math.min(scrollPosition / scrollHeight, 1);
-    setScrollProgress(progress);
-    
-    // Update active day based on scroll position
-    sectionRefs.current.forEach((ref, index) => {
-      if (ref) {
-        const { offsetTop } = ref;
-        const offset = isMobile ? 100 : 200; // Smaller offset on mobile
-        if (scrollPosition >= offsetTop - offset) {
-          setActiveDay(index + 1);
-        }
-      }
-    });
-  }, [isMobile]);
-
-  // Smooth scroll to day section
+  // GSAP-powered smooth scroll to day section
   const scrollToDay = useCallback((day) => {
     const ref = sectionRefs.current[day - 1];
     if (ref && pageRef.current) {
       const offset = isMobile ? 20 : 50;
-      pageRef.current.scrollTo({
-        top: ref.offsetTop - offset,
-        behavior: 'smooth'
+      
+      // Use GSAP for buttery smooth scrolling
+      gsap.to(pageRef.current, {
+        scrollTo: {
+          y: ref.offsetTop - offset,
+          autoKill: false
+        },
+        duration: isMobile ? 0.8 : 1.2,
+        ease: "power2.inOut",
+        onUpdate: () => {
+          // Update scroll progress during animation
+          const scrollPosition = pageRef.current.scrollTop;
+          const scrollHeight = pageRef.current.scrollHeight - pageRef.current.clientHeight;
+          const progress = Math.min(scrollPosition / scrollHeight, 1);
+          setScrollProgress(progress);
+        }
       });
+
+      // Add a subtle scale animation to the target section
+      gsap.fromTo(ref, 
+        { scale: 0.98, opacity: 0.8 },
+        { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.2)", delay: 0.3 }
+      );
     }
   }, [isMobile]);
 
-  // Modal handlers
+  // Modal handlers with GSAP animations
   const openEventModal = useCallback((event) => {
     setSelectedEvent(event);
     setIsModalOpen(true);
+    
     // Prevent body scroll on mobile when modal is open
     if (isMobile) {
       document.body.style.overflow = 'hidden';
@@ -139,12 +154,85 @@ const EventsPage = () => {
 
   const closeEventModal = useCallback(() => {
     setIsModalOpen(false);
+    
     // Re-enable body scroll
     if (isMobile) {
       document.body.style.overflow = 'auto';
     }
+    
     setTimeout(() => setSelectedEvent(null), 300);
   }, [isMobile]);
+
+  // Initialize GSAP ScrollTrigger for each day section
+  useEffect(() => {
+    // Clear existing ScrollTriggers
+    scrollTriggerRefs.current.forEach(trigger => trigger.kill());
+    scrollTriggerRefs.current = [];
+
+    sectionRefs.current.forEach((ref, index) => {
+      if (ref) {
+        // Create ScrollTrigger for each section
+        const trigger = ScrollTrigger.create({
+          trigger: ref,
+          start: "top 60%",
+          end: "bottom 40%",
+          scroller: pageRef.current,
+          onEnter: () => {
+            setActiveDay(index + 1);
+            // Add entrance animation
+            gsap.fromTo(ref.querySelectorAll('.event-card'), 
+              { 
+                y: 30, 
+                opacity: 0,
+                scale: 0.95
+              },
+              { 
+                y: 0, 
+                opacity: 1,
+                scale: 1,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: "power2.out"
+              }
+            );
+          },
+          onEnterBack: () => {
+            setActiveDay(index + 1);
+          }
+        });
+
+        scrollTriggerRefs.current.push(trigger);
+
+        // Add initial animation for sections
+        gsap.set(ref, { opacity: 0, y: 50 });
+        gsap.to(ref, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: index * 0.2,
+          ease: "power2.out"
+        });
+      }
+    });
+
+    // Create main scroll progress trigger
+    const progressTrigger = ScrollTrigger.create({
+      trigger: pageRef.current,
+      start: "top top",
+      end: "bottom bottom",
+      scroller: pageRef.current,
+      onUpdate: (self) => {
+        setScrollProgress(self.progress);
+      }
+    });
+
+    scrollTriggerRefs.current.push(progressTrigger);
+
+    return () => {
+      scrollTriggerRefs.current.forEach(trigger => trigger.kill());
+      scrollTriggerRefs.current = [];
+    };
+  }, [eventsData]);
 
   // Initialize responsive behavior
   useEffect(() => {
@@ -168,64 +256,89 @@ const EventsPage = () => {
     };
   }, [handleResize, checkIfMobile]);
 
-  // Setup scroll listener with throttling
+  // Add entrance animation for the entire page
   useEffect(() => {
-    const currentPageRef = pageRef.current;
-    if (!currentPageRef) return;
+    // Animate page entrance
+    gsap.fromTo(pageRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.8, ease: "power2.out" }
+    );
 
-    let ticking = false;
-    const throttledScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
+    // Animate header elements
+    gsap.fromTo('.header-content',
+      { y: -50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, delay: 0.3, ease: "power2.out" }
+    );
 
-    currentPageRef.addEventListener('scroll', throttledScroll, { passive: true });
-    
-    return () => {
-      if (currentPageRef) {
-        currentPageRef.removeEventListener('scroll', throttledScroll);
-      }
-    };
-  }, [handleScroll]);
+    // Animate floating elements
+    gsap.fromTo('.floating-elements',
+      { scale: 0, rotation: -180 },
+      { scale: 1, rotation: 0, duration: 1.2, delay: 0.5, ease: "back.out(1.7)" }
+    );
 
-  // Handle touch events for better mobile interaction
+    // Add continuous floating animation
+    gsap.to('.floating-elements', {
+      y: "+=20",
+      duration: 3,
+      yoyo: true,
+      repeat: -1,
+      ease: "power1.inOut"
+    });
+
+  }, []);
+
+  // Add smooth scroll behavior for better UX
   useEffect(() => {
-    if (!isMobile) return;
+    // Configure ScrollTrigger defaults
+    ScrollTrigger.config({
+      autoRefreshEvents: "visibilitychange,DOMContentLoaded,load"
+    });
 
-    const handleTouchStart = (e) => {
-      // Store initial touch position for swipe detection if needed
-      const touch = e.touches[0];
-      if (touch) {
-        // Could implement swipe navigation here
-      }
-    };
-
-    const handleTouchMove = (e) => {
-      // Prevent horizontal scrolling on mobile
-      if (e.touches.length === 1) {
+    // Add smooth scrolling to all internal links
+    const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
+    smoothScrollLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
         e.preventDefault();
-      }
-    };
-
-    document.addEventListener('touchstart', handleTouchStart, { passive: true });
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          gsap.to(pageRef.current, {
+            scrollTo: target,
+            duration: 1,
+            ease: "power2.inOut"
+          });
+        }
+      });
+    });
 
     return () => {
-      document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchmove', handleTouchMove);
+      ScrollTrigger.killAll();
     };
-  }, [isMobile]);
+  }, []);
+
+  // Add parallax effect to background elements
+  useEffect(() => {
+    const parallaxElements = document.querySelectorAll('.parallax-element');
+    
+    parallaxElements.forEach(element => {
+      gsap.to(element, {
+        yPercent: -50,
+        ease: "none",
+        scrollTrigger: {
+          trigger: element,
+          start: "top bottom",
+          end: "bottom top",
+          scroller: pageRef.current,
+          scrub: true
+        }
+      });
+    });
+  }, []);
 
   return (
     <div className="events-page" ref={pageRef}>
       <FloatingElements/>
       
-      {/* Cyberpunk Back Button */}
+      {/* Cyberpunk Back Button with enhanced animations */}
       <button
         onClick={handleBack}
         className={`
@@ -249,6 +362,12 @@ const EventsPage = () => {
         aria-label="Go back"
         style={{
           boxShadow: '0 0 20px rgba(6, 182, 212, 0.3), inset 0 0 20px rgba(6, 182, 212, 0.1)',
+        }}
+        onMouseEnter={() => {
+          gsap.to(this, { scale: 1.05, duration: 0.3, ease: "back.out(1.7)" });
+        }}
+        onMouseLeave={() => {
+          gsap.to(this, { scale: 1, duration: 0.3, ease: "power2.out" });
         }}
       >
         {/* Main content container */}
@@ -309,16 +428,6 @@ const EventsPage = () => {
       </button>
 
       <header className="events-header">
-        {/* <canvas 
-          ref={canvasRef} 
-          className="matrix-canvas"
-          style={{ 
-            width: '100%', 
-            height: '100%',
-            // Optimize rendering on mobile
-            imageRendering: isMobile ? 'pixelated' : 'auto'
-          }}
-        /> */}
         <div className="header-content">
           <div className="logo-container">
             <div className="animated-icons">
@@ -359,7 +468,7 @@ const EventsPage = () => {
       <div className="events-container">
         {eventsData.events.map((dayData, index) => (
           <DaySection 
-            id = {dayData.day}
+            id={dayData.day}
             key={dayData.day}
             ref={(el) => sectionRefs.current[index] = el}
             dayData={dayData}
@@ -380,10 +489,10 @@ const EventsPage = () => {
       )}
       
       {/* Add screen effect overlay for enhanced cyberpunk feel */}
-      <div className="screen-effect" />
+      <div className="screen-effect parallax-element" />
       
       {/* Add scan line effect */}
-      <div className="scan-line" />
+      <div className="scan-line parallax-element" />
     </div>
   );
 };

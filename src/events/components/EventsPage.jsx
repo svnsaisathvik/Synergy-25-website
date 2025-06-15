@@ -6,7 +6,7 @@ import DaySection from './DaySection';
 import CustomScrollbar from './CustomScrollbar';
 import eventsData from '../data/events.json';
 import EventModal from './EventModal';
-import FloatingElements from "../../home/components/FloatingElements";
+import FloatingElements from "./FloatingComponentsEvents";
 import '../styles/EventsPage.css';
 import { CircuitBoard, Cpu, GithubIcon, ArrowLeft, ChevronLeft } from 'lucide-react';
 

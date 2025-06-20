@@ -1,17 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { gsap } from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion, AnimatePresence } from 'framer-motion';
 import DaySection from './DaySection';
 import CustomScrollbar from './CustomScrollbar';
 import eventsData from '../data/events.json';
 import EventModal from './EventModal';
-import FloatingElements from "./FloatingComponentsEvents";
+import FloatingElements from "../../home/components/FloatingElements";
 import '../styles/EventsPage.css';
 import { CircuitBoard, Cpu, GithubIcon, ArrowLeft, ChevronLeft } from 'lucide-react';
-
-// Register GSAP plugins
-gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
 const EventsPage = () => {
   const [activeDay, setActiveDay] = useState(1);
@@ -25,19 +20,12 @@ const EventsPage = () => {
   const pageRef = useRef(null);
   const canvasRef = useRef(null);
   const animationFrameRef = useRef(null);
-  const scrollTriggerRefs = useRef([]);
 
-  // Handle back navigation with GSAP animation
+
+
+  // Handle back navigation
   const handleBack = useCallback(() => {
-    // Add a smooth fade out animation before navigation
-    gsap.to(pageRef.current, {
-      opacity: 0,
-      duration: 0.3,
-      ease: "power2.out",
-      onComplete: () => {
-        window.history.back();
-      }
-    });
+    window.history.back();
   }, []);
 
   // Detect if device is mobile
@@ -54,9 +42,6 @@ const EventsPage = () => {
     const newWidth = window.innerWidth;
     const newHeight = Math.min(window.innerHeight * 0.4, 400);
     setCanvasSize({ width: newWidth, height: newHeight });
-    
-    // Refresh ScrollTrigger on resize
-    ScrollTrigger.refresh();
   }, [checkIfMobile]);
 
   // Optimized matrix effect for mobile
@@ -110,43 +95,43 @@ const EventsPage = () => {
     };
   }, [isMobile, canvasSize]);
 
-  // GSAP-powered smooth scroll to day section
+  // Optimized scroll handler - restored original performance
+  const handleScroll = useCallback(() => {
+    if (!pageRef.current) return;
+    
+    const scrollPosition = pageRef.current.scrollTop;
+    const scrollHeight = pageRef.current.scrollHeight - pageRef.current.clientHeight;
+    const progress = Math.min(scrollPosition / scrollHeight, 1);
+    setScrollProgress(progress);
+    
+    // Update active day based on scroll position
+    sectionRefs.current.forEach((ref, index) => {
+      if (ref) {
+        const { offsetTop } = ref;
+        const offset = isMobile ? 100 : 200;
+        if (scrollPosition >= offsetTop - offset) {
+          setActiveDay(index + 1);
+        }
+      }
+    });
+  }, [isMobile]);
+
+  // Smooth scroll to day section
   const scrollToDay = useCallback((day) => {
     const ref = sectionRefs.current[day - 1];
     if (ref && pageRef.current) {
       const offset = isMobile ? 20 : 50;
-      
-      // Use GSAP for buttery smooth scrolling
-      gsap.to(pageRef.current, {
-        scrollTo: {
-          y: ref.offsetTop - offset,
-          autoKill: false
-        },
-        duration: isMobile ? 0.8 : 1.2,
-        ease: "power2.inOut",
-        onUpdate: () => {
-          // Update scroll progress during animation
-          const scrollPosition = pageRef.current.scrollTop;
-          const scrollHeight = pageRef.current.scrollHeight - pageRef.current.clientHeight;
-          const progress = Math.min(scrollPosition / scrollHeight, 1);
-          setScrollProgress(progress);
-        }
+      pageRef.current.scrollTo({
+        top: ref.offsetTop - offset,
+        behavior: 'smooth'
       });
-
-      // Add a subtle scale animation to the target section
-      gsap.fromTo(ref, 
-        { scale: 0.98, opacity: 0.8 },
-        { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.2)", delay: 0.3 }
-      );
     }
   }, [isMobile]);
 
-  // Modal handlers with GSAP animations
+  // Modal handlers with smooth animations
   const openEventModal = useCallback((event) => {
     setSelectedEvent(event);
     setIsModalOpen(true);
-    
-    // Prevent body scroll on mobile when modal is open
     if (isMobile) {
       document.body.style.overflow = 'hidden';
     }
@@ -154,90 +139,21 @@ const EventsPage = () => {
 
   const closeEventModal = useCallback(() => {
     setIsModalOpen(false);
-    
-    // Re-enable body scroll
     if (isMobile) {
       document.body.style.overflow = 'auto';
     }
-    
     setTimeout(() => setSelectedEvent(null), 300);
   }, [isMobile]);
-
-  // Initialize GSAP ScrollTrigger for each day section
-  useEffect(() => {
-    // Clear existing ScrollTriggers
-    scrollTriggerRefs.current.forEach(trigger => trigger.kill());
-    scrollTriggerRefs.current = [];
-
-    sectionRefs.current.forEach((ref, index) => {
-      if (ref) {
-        // Create ScrollTrigger for each section
-        const trigger = ScrollTrigger.create({
-          trigger: ref,
-          start: "top 60%",
-          end: "bottom 40%",
-          scroller: pageRef.current,
-          onEnter: () => {
-            setActiveDay(index + 1);
-            // Add entrance animation
-            gsap.fromTo(ref.querySelectorAll('.event-card'), 
-              { 
-                y: 30, 
-                opacity: 0,
-                scale: 0.95
-              },
-              { 
-                y: 0, 
-                opacity: 1,
-                scale: 1,
-                duration: 0.6,
-                stagger: 0.1,
-                ease: "power2.out"
-              }
-            );
-          },
-          onEnterBack: () => {
-            setActiveDay(index + 1);
-          }
-        });
-
-        scrollTriggerRefs.current.push(trigger);
-
-        // Add initial animation for sections
-        gsap.set(ref, { opacity: 0, y: 50 });
-        gsap.to(ref, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          delay: index * 0.2,
-          ease: "power2.out"
-        });
-      }
-    });
-
-    // Create main scroll progress trigger
-    const progressTrigger = ScrollTrigger.create({
-      trigger: pageRef.current,
-      start: "top top",
-      end: "bottom bottom",
-      scroller: pageRef.current,
-      onUpdate: (self) => {
-        setScrollProgress(self.progress);
-      }
-    });
-
-    scrollTriggerRefs.current.push(progressTrigger);
-
-    return () => {
-      scrollTriggerRefs.current.forEach(trigger => trigger.kill());
-      scrollTriggerRefs.current = [];
-    };
-  }, [eventsData]);
 
   // Initialize responsive behavior
   useEffect(() => {
     checkIfMobile();
     handleResize();
+
+    const pageElement = pageRef.current;
+    if (pageElement) {
+      pageElement.addEventListener('scroll', handleScroll);
+    }
     
     const throttledResize = (() => {
       let timeoutId = null;
@@ -253,93 +169,114 @@ const EventsPage = () => {
     return () => {
       window.removeEventListener('resize', throttledResize);
       window.removeEventListener('orientationchange', throttledResize);
+      if (pageElement) {
+        pageElement.removeEventListener('scroll', handleScroll);
+      }
     };
-  }, [handleResize, checkIfMobile]);
+  }, [handleScroll,handleResize, checkIfMobile]);
 
-  // Add entrance animation for the entire page
+  // Handle touch events for better mobile interaction
   useEffect(() => {
-    // Animate page entrance
-    gsap.fromTo(pageRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.8, ease: "power2.out" }
-    );
+    if (!isMobile) return;
 
-    // Animate header elements
-    gsap.fromTo('.header-content',
-      { y: -50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, delay: 0.3, ease: "power2.out" }
-    );
+    const handleTouchStart = (e) => {
+      const touch = e.touches[0];
+      if (touch) {
+        // Could implement swipe navigation here
+      }
+    };
 
-    // Animate floating elements
-    gsap.fromTo('.floating-elements',
-      { scale: 0, rotation: -180 },
-      { scale: 1, rotation: 0, duration: 1.2, delay: 0.5, ease: "back.out(1.7)" }
-    );
-
-    // Add continuous floating animation
-    gsap.to('.floating-elements', {
-      y: "+=20",
-      duration: 3,
-      yoyo: true,
-      repeat: -1,
-      ease: "power1.inOut"
-    });
-
-  }, []);
-
-  // Add smooth scroll behavior for better UX
-  useEffect(() => {
-    // Configure ScrollTrigger defaults
-    ScrollTrigger.config({
-      autoRefreshEvents: "visibilitychange,DOMContentLoaded,load"
-    });
-
-    // Add smooth scrolling to all internal links
-    const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
-    smoothScrollLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
+    const handleTouchMove = (e) => {
+      if (e.touches.length === 1) {
         e.preventDefault();
-        const target = document.querySelector(link.getAttribute('href'));
-        if (target) {
-          gsap.to(pageRef.current, {
-            scrollTo: target,
-            duration: 1,
-            ease: "power2.inOut"
-          });
-        }
-      });
-    });
+      }
+    };
+
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
 
     return () => {
-      ScrollTrigger.killAll();
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchmove', handleTouchMove);
     };
-  }, []);
+  }, [isMobile]);
 
-  // Add parallax effect to background elements
-  useEffect(() => {
-    const parallaxElements = document.querySelectorAll('.parallax-element');
-    
-    parallaxElements.forEach(element => {
-      gsap.to(element, {
-        yPercent: -50,
-        ease: "none",
-        scrollTrigger: {
-          trigger: element,
-          start: "top bottom",
-          end: "bottom top",
-          scroller: pageRef.current,
-          scrub: true
-        }
-      });
-    });
-  }, []);
+  // Animation variants for staggered entrance
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const sectionVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 50,
+      scale: 0.95
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        mass: 1
+      }
+    }
+  };
+
+  const buttonVariants = {
+    initial: { scale: 1, rotate: 0 },
+    hover: { 
+      scale: 1.05, 
+      rotate: -5,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 10
+      }
+    },
+    tap: { 
+      scale: 0.95,
+      rotate: 0,
+      transition: {
+        type: "spring",
+        stiffness: 600,
+        damping: 15
+      }
+    }
+  };
+
+  const iconVariants = {
+    hover: {
+      rotate: 360,
+      scale: 1.1,
+      transition: {
+        duration: 0.6,
+        ease: "easeInOut"
+      }
+    }
+  };
 
   return (
-    <div className="events-page" ref={pageRef}>
+    <motion.div 
+      className="events-page" 
+      ref={pageRef}
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
       <FloatingElements/>
       
       {/* Cyberpunk Back Button with enhanced animations */}
-      <button
+      <motion.button
         onClick={handleBack}
         className={`
           fixed top-4 left-4 z-50
@@ -359,34 +296,34 @@ const EventsPage = () => {
           relative
           overflow-hidden
         `}
+        variants={buttonVariants}
+        initial="initial"
+        whileHover="hover"
+        whileTap="tap"
         aria-label="Go back"
         style={{
           boxShadow: '0 0 20px rgba(6, 182, 212, 0.3), inset 0 0 20px rgba(6, 182, 212, 0.1)',
         }}
-        onMouseEnter={() => {
-          gsap.to(this, { scale: 1.05, duration: 0.3, ease: "back.out(1.7)" });
-        }}
-        onMouseLeave={() => {
-          gsap.to(this, { scale: 1, duration: 0.3, ease: "power2.out" });
-        }}
       >
         {/* Main content container */}
         <div className="absolute inset-0 flex items-center justify-center z-20">
-          {isMobile ? (
-            <ChevronLeft 
-              className="w-7 h-7 text-cyan-300 group-hover:text-white transition-colors duration-300"
-              strokeWidth={2.5}
-            />
-          ) : (
-            <ArrowLeft 
-              className="w-7 h-7 text-cyan-300 group-hover:text-white transition-colors duration-300"
-              strokeWidth={2}
-            />
-          )}
+          <motion.div variants={iconVariants}>
+            {isMobile ? (
+              <ChevronLeft 
+                className="w-7 h-7 text-cyan-300 group-hover:text-white transition-colors duration-300"
+                strokeWidth={2.5}
+              />
+            ) : (
+              <ArrowLeft 
+                className="w-7 h-7 text-cyan-300 group-hover:text-white transition-colors duration-300"
+                strokeWidth={2}
+              />
+            )}
+          </motion.div>
         </div>
         
         {/* Glitch effect overlay */}
-        <div 
+        <motion.div 
           className="
             absolute inset-0 rounded-lg
             bg-gradient-to-r from-cyan-400/10 to-purple-500/10
@@ -395,6 +332,8 @@ const EventsPage = () => {
             animate-pulse
             z-10
           "
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
         />
         
         {/* Scan line effect */}
@@ -406,12 +345,20 @@ const EventsPage = () => {
             z-10
           "
         >
-          <div 
+          <motion.div 
             className="
               absolute top-0 left-0 w-full h-0.5
               bg-gradient-to-r from-transparent via-cyan-300 to-transparent
               animate-pulse
             "
+            animate={{
+              y: [0, 48, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "linear"
+            }}
           />
         </div>
 
@@ -425,38 +372,95 @@ const EventsPage = () => {
             z-0
           "
         />
-      </button>
+      </motion.button>
 
-      <header className="events-header">
-        <div className="header-content">
+      <motion.header 
+        className="events-header"
+      >
+        {/* <canvas 
+          ref={canvasRef} 
+          className="matrix-canvas"
+          style={{ 
+            width: '100%', 
+            height: '100%',
+            imageRendering: isMobile ? 'pixelated' : 'auto'
+          }}
+        /> */}
+        <motion.div 
+          className="header-content"
+          variants={sectionVariants}
+        >
           <div className="logo-container">
-            <div className="animated-icons">
-              <CircuitBoard 
-                className="icon icon-1" 
-                aria-label="Circuit Board Icon"
-              />
-              <Cpu 
-                className="icon icon-2" 
-                aria-label="CPU Icon"
-              />
-              <GithubIcon 
-                className="icon icon-3" 
-                aria-label="GitHub Icon"
-              />
-            </div>
-            <div className="glitch-container">
-              <h1 
+            <motion.div 
+              className="animated-icons"
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 200,
+                damping: 15,
+                delay: 0.5
+              }}
+            >
+              <motion.div
+                whileHover={{ rotate: 360, scale: 1.2 }}
+                transition={{ duration: 0.8, ease: "easeInOut" }}
+              >
+                <CircuitBoard 
+                  className="icon icon-1" 
+                  aria-label="Circuit Board Icon"
+                />
+              </motion.div>
+              <motion.div
+                whileHover={{ rotate: -360, scale: 1.2 }}
+                transition={{ duration: 0.8, ease: "easeInOut" }}
+              >
+                <Cpu 
+                  className="icon icon-2" 
+                  aria-label="CPU Icon"
+                />
+              </motion.div>
+              <motion.div
+                whileHover={{ rotate: 360, scale: 1.2 }}
+                transition={{ duration: 0.8, ease: "easeInOut" }}
+              >
+                <GithubIcon 
+                  className="icon icon-3" 
+                  aria-label="GitHub Icon"
+                />
+              </motion.div>
+            </motion.div>
+            <motion.div 
+              className="glitch-container"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 20,
+                delay: 0.8
+              }}
+            >
+              <motion.h1 
                 className="gradient-text font-SDGlitch" 
                 data-text="EVENTS" 
                 style={{ fontFamily: "CyberAlert" }}
                 role="banner"
+                whileHover={{
+                  textShadow: [
+                    "0 0 20px #06b6d4",
+                    "0 0 40px #06b6d4",
+                    "0 0 20px #06b6d4"
+                  ]
+                }}
+                transition={{ duration: 0.5 }}
               >
                 EVENTS
-              </h1>
-            </div>
+              </motion.h1>
+            </motion.div>
           </div>
-        </div>
-      </header>
+        </motion.div>
+      </motion.header>
       
       <CustomScrollbar 
         progress={scrollProgress} 
@@ -465,35 +469,58 @@ const EventsPage = () => {
         isMobile={isMobile}
       />
       
-      <div className="events-container">
+      <motion.div 
+        className="events-container"
+        variants={containerVariants}
+      >
         {eventsData.events.map((dayData, index) => (
-          <DaySection 
-            id={dayData.day}
+          <motion.div
             key={dayData.day}
-            ref={(el) => sectionRefs.current[index] = el}
-            dayData={dayData}
-            onEventClick={openEventModal}
-            isActive={activeDay === dayData.day}
+            variants={sectionVariants}
+            viewport={{ once: true, margin: "-100px" }}
+            whileInView="visible"
+            initial="hidden"
+          >
+            <DaySection 
+              id={dayData.day}
+              ref={(el) => sectionRefs.current[index] = el}
+              dayData={dayData}
+              onEventClick={openEventModal}
+              isActive={activeDay === dayData.day}
+              isMobile={isMobile}
+            />
+          </motion.div>
+        ))}
+      </motion.div>
+
+      <AnimatePresence mode="wait">
+        {selectedEvent && (
+          <EventModal 
+            event={selectedEvent} 
+            isOpen={isModalOpen} 
+            onClose={closeEventModal}
             isMobile={isMobile}
           />
-        ))}
-      </div>
-
-      {selectedEvent && (
-        <EventModal 
-          event={selectedEvent} 
-          isOpen={isModalOpen} 
-          onClose={closeEventModal}
-          isMobile={isMobile}
-        />
-      )}
+        )}
+      </AnimatePresence>
       
       {/* Add screen effect overlay for enhanced cyberpunk feel */}
-      <div className="screen-effect parallax-element" />
+      <div className="screen-effect" />
       
-      {/* Add scan line effect */}
-      <div className="scan-line parallax-element" />
-    </div>
+      {/* Add scan line effect with motion */}
+      <motion.div 
+        className="scan-line"
+        animate={{
+          y: [0, window.innerHeight, 0]
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "linear",
+          repeatDelay: 2
+        }}
+      />
+    </motion.div>
   );
 };
 

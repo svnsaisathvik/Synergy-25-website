@@ -3,6 +3,7 @@ import FeatureCard from './components/FeatureCard';
 import FloatingElements from './components/FloatingElements';
 import CleanGlitchText from './components/CleanGlitchText';
 import CountdownTimer from './components/CountdownTimer';
+import Timeline from '../events/components/EventTimeline';
 import { Github, Instagram, Linkedin, X } from 'lucide-react';
 
 
@@ -187,17 +188,8 @@ const SynergyHomepage = () => {
         </section>
 
         {/* Timeline Section */}
-        <section id="timeline" className="px-6 md:px-8 py-16 bg-gray-900/20">
-          <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent" style={{ fontFamily: "CyberAlert" }}>
-                Event Timeline
-              </span>
-            </h2>
-            <div className="text-gray-400" style={{ fontFamily: "CyberAlert" }}>
-              [Timeline content placeholder]
-            </div>
-          </div>
+        <section id="timeline" className="py-16 bg-gray-900/20">
+            <Timeline />
         </section>
 
         {/* Sponsors Section */}

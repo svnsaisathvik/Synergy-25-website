@@ -4,8 +4,8 @@ import FloatingElements from './components/FloatingElements';
 import CleanGlitchText from './components/CleanGlitchText';
 import CountdownTimer from './components/CountdownTimer';
 import Timeline from '../events/components/EventTimeline';
+import SpecialEvents from './components/SpecialEvents';
 import { Github, Instagram, Linkedin, X } from 'lucide-react';
-
 
 const SynergyHomepage = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -14,6 +14,7 @@ const SynergyHomepage = () => {
   const navigationItems = [
     { name: 'About', path: '#about' },
     { name: 'Events', path: '/events' },
+    { name: 'Special Events', path: '#special-events' },
     { name: 'Timeline', path: '#timeline' },
     { name: 'Sponsors', path: '#sponsors' },
     { name: 'FAQs', path: '#faqs' },
@@ -186,7 +187,10 @@ const SynergyHomepage = () => {
             </div>
           </div>
         </section>
-
+        
+        <section id="special-events" className="px-6 md:px-8 py-16">
+          <SpecialEvents />
+        </section>
         {/* Timeline Section */}
         <section id="timeline" className="py-16 bg-gray-900/20">
             <Timeline />

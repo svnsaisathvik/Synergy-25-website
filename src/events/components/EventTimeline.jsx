@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import FloatingComponent from "./FloatingComponentsEvents";
 import events from "../data/events.json"
 
 const eventData = events.events;
@@ -12,66 +13,159 @@ const Timeline = () => {
   const currentDayEvents = eventData[day]?.list || [];
   const days = eventData.map((dayData, index) => `day${index + 1}`);
 
+  // Create circular array by duplicating events for seamless scrolling
+  const getCircularEvents = () => {
+    if (currentDayEvents.length === 0) return [];
+    
+    // Create multiple copies for smooth circular scrolling
+    const copies = 3; // Show 3 copies of the array
+    const circularEvents = [];
+    
+    for (let i = 0; i < copies; i++) {
+      currentDayEvents.forEach((event, index) => {
+        circularEvents.push({
+          ...event,
+          circularId: `${event.id}-copy-${i}`,
+          originalIndex: index,
+          copyIndex: i
+        });
+      });
+    }
+    
+    return circularEvents;
+  };
+
+  const circularEvents = getCircularEvents();
+  const originalLength = currentDayEvents.length;
+  const middleCopyStartIndex = originalLength; // Start of middle copy
+
   const handleDayClick = (selectedDay) => {
     setDay(selectedDay);
     setActiveIndex(0);
+    // Reset to center copy after day change
+    setTimeout(() => {
+      if (scrollContainerRef.current) {
+        const targetIndex = middleCopyStartIndex;
+        scrollToCard(targetIndex, false); // No smooth scroll for reset
+        setActiveIndex(0);
+      }
+    }, 100);
   };
 
-  const handleCardClick = (index) => {
-    setActiveIndex(index);
-    scrollToCard(index);
+  const handleCardClick = (circularIndex) => {
+    const originalIndex = circularIndex % originalLength;
+    setActiveIndex(originalIndex);
+    scrollToCard(circularIndex);
   };
 
-  const scrollToCard = (index) => {
+  const handleArrowClick = (direction) => {
+    const newOriginalIndex = direction === 'left' 
+      ? (activeIndex - 1 + originalLength) % originalLength
+      : (activeIndex + 1) % originalLength;
+    
+    // Find the closest instance of this card to current scroll position
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    const cardWidth = window.innerWidth >= 768 ? 350 : 300;
+    const cardWidth = window.innerWidth >= 768 ? 384 : 320;
+    const gap = window.innerWidth >= 768 ? 32 : 20;
+    const cardWithGap = cardWidth + gap;
+    const currentScrollCenter = container.scrollLeft + container.clientWidth / 2;
+    const currentCenterIndex = Math.round((currentScrollCenter - cardWidth / 2) / cardWithGap);
+
+    // Find the target card index in the circular array
+    let targetCircularIndex;
+    if (direction === 'left') {
+      targetCircularIndex = currentCenterIndex - 1;
+    } else {
+      targetCircularIndex = currentCenterIndex + 1;
+    }
+
+    setActiveIndex(newOriginalIndex);
+    scrollToCard(targetCircularIndex);
+  };
+
+  const scrollToCard = (circularIndex, smooth = true) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const cardWidth = window.innerWidth >= 768 ? 384 : 320;
     const gap = window.innerWidth >= 768 ? 32 : 20;
     const cardWithGap = cardWidth + gap;
     const containerWidth = container.clientWidth;
-    const targetScrollLeft = (index * cardWithGap) - (containerWidth / 2) + (cardWidth / 2);
+    
+    // Calculate scroll position to center the card
+    const targetScrollLeft = (circularIndex * cardWithGap) - (containerWidth - cardWidth) / 2;
     
     container.scrollTo({
       left: Math.max(0, targetScrollLeft),
-      behavior: 'smooth'
+      behavior: smooth ? 'smooth' : 'auto'
     });
   };
 
-  // Auto-scroll on mobile swipe
+  // Initialize scroll position when component mounts or day changes
+  useEffect(() => {
+    if (circularEvents.length > 0) {
+      setTimeout(() => {
+        // Start at the middle copy
+        const initialIndex = middleCopyStartIndex + activeIndex;
+        scrollToCard(initialIndex, false);
+      }, 100);
+    }
+  }, [day]);
+
+  // Handle infinite scroll wraparound
   useEffect(() => {
     const container = scrollContainerRef.current;
-    if (!container) return;
+    if (!container || originalLength === 0) return;
 
-    let isScrolling;
-    
     const handleScroll = () => {
-      clearTimeout(isScrolling);
+      const cardWidth = window.innerWidth >= 768 ? 384 : 320;
+      const gap = window.innerWidth >= 768 ? 32 : 20;
+      const cardWithGap = cardWidth + gap;
+      const scrollLeft = container.scrollLeft;
+      const containerWidth = container.clientWidth;
+      const maxScroll = container.scrollWidth - containerWidth;
+
+      // Calculate which card is in center
+      const centerPosition = scrollLeft + containerWidth / 2;
+      const currentCenterIndex = Math.round((centerPosition - cardWidth / 2) / cardWithGap);
+      const clampedIndex = Math.max(0, Math.min(circularEvents.length - 1, currentCenterIndex));
       
-      isScrolling = setTimeout(() => {
-        const cardWidth = window.innerWidth >= 768 ? 350 : 300;
-        const gap = window.innerWidth >= 768 ? 32 : 20;
-        const cardWithGap = cardWidth + gap;
-        const scrollLeft = container.scrollLeft;
-        const containerWidth = container.clientWidth;
-        const centerOffset = containerWidth / 2;
-        
-        const newActiveIndex = Math.round((scrollLeft + centerOffset - window.innerWidth / 2) / cardWithGap);
-        const clampedIndex = Math.max(0, Math.min(currentDayEvents.length - 1, newActiveIndex));
-        
-        if (clampedIndex !== activeIndex) {
-          setActiveIndex(clampedIndex);
-        }
-      }, 100);
+      // Update active index based on original index
+      const newActiveIndex = clampedIndex % originalLength;
+      if (newActiveIndex !== activeIndex) {
+        setActiveIndex(newActiveIndex);
+      }
+
+      // Handle wraparound - if we're near the edges, jump to equivalent position
+      const threshold = cardWithGap * 2; // 2 cards from edge
+      
+      if (scrollLeft < threshold) {
+        // Near beginning, jump to end of first copy (middle section)
+        const newScrollLeft = scrollLeft + (originalLength * cardWithGap);
+        container.scrollTo({ left: newScrollLeft, behavior: 'auto' });
+      } else if (scrollLeft > maxScroll - threshold) {
+        // Near end, jump to beginning of last copy (middle section)
+        const newScrollLeft = scrollLeft - (originalLength * cardWithGap);
+        container.scrollTo({ left: newScrollLeft, behavior: 'auto' });
+      }
     };
 
-    container.addEventListener('scroll', handleScroll);
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, [activeIndex, currentDayEvents.length]);
+    let isScrolling;
+    const debouncedHandleScroll = () => {
+      clearTimeout(isScrolling);
+      isScrolling = setTimeout(handleScroll, 50);
+    };
+
+    container.addEventListener('scroll', debouncedHandleScroll);
+    return () => container.removeEventListener('scroll', debouncedHandleScroll);
+  }, [activeIndex, originalLength, circularEvents.length]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-purple-900 text-white overflow-hidden relative">
       {/* Background Effects */}
+      <FloatingComponent/>
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent animate-pulse"></div>
         <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-400/30 to-transparent animate-pulse" style={{ animationDelay: '300ms' }}></div>
@@ -92,9 +186,8 @@ const Timeline = () => {
         <div className="relative mb-8 lg:mb-12">
           {/* Left Scroll Button */}
           <button
-            onClick={() => handleCardClick(Math.max(0, activeIndex - 1))}
-            disabled={activeIndex === 0}
-            className="absolute left-2 md:left-6 top-1/2 transform -translate-y-1/2 z-30 group disabled:opacity-30 disabled:cursor-not-allowed"
+            onClick={() => handleArrowClick('left')}
+            className="absolute left-2 md:left-6 top-1/2 transform -translate-y-1/2 z-30 group"
             style={{ fontFamily: "CyberAlert" }}
           >
             <div className="relative">
@@ -123,9 +216,8 @@ const Timeline = () => {
 
           {/* Right Scroll Button */}
           <button
-            onClick={() => handleCardClick(Math.min(currentDayEvents.length - 1, activeIndex + 1))}
-            disabled={activeIndex === currentDayEvents.length - 1}
-            className="absolute right-2 md:right-6 top-1/2 transform -translate-y-1/2 z-30 group disabled:opacity-30 disabled:cursor-not-allowed"
+            onClick={() => handleArrowClick('right')}
+            className="absolute right-2 md:right-6 top-1/2 transform -translate-y-1/2 z-30 group"
             style={{ fontFamily: "CyberAlert" }}
           >
             <div className="relative">
@@ -161,17 +253,21 @@ const Timeline = () => {
               msOverflowStyle: 'none'
             }}
           >
-            {currentDayEvents.map((event, index) => {
-              const isActive = index === activeIndex;
-              const distance = Math.abs(index - activeIndex);
+            {circularEvents.map((event, circularIndex) => {
+              const originalIndex = event.originalIndex;
+              const isActive = originalIndex === activeIndex;
+              const distance = Math.min(
+                Math.abs(originalIndex - activeIndex),
+                originalLength - Math.abs(originalIndex - activeIndex)
+              );
 
               return (
                 <EventPoster
-                  key={event.id}
+                  key={event.circularId}
                   event={event}
                   isActive={isActive}
                   distance={distance}
-                  onClick={() => handleCardClick(index)}
+                  onClick={() => handleCardClick(circularIndex)}
                 />
               );
             })}
@@ -215,15 +311,25 @@ const Timeline = () => {
                   ? 'bg-gradient-to-r from-cyan-400 to-purple-600 scale-125 shadow-lg shadow-cyan-400/50' 
                   : 'bg-white/30 hover:bg-white/50'
               }`}
-              onClick={() => handleCardClick(index)}
+              onClick={() => {
+                setActiveIndex(index);
+                // Find current center and navigate to closest instance of target
+                const container = scrollContainerRef.current;
+                if (container) {
+                  const cardWidth = window.innerWidth >= 768 ? 384 : 320;
+                  const gap = window.innerWidth >= 768 ? 32 : 20;
+                  const cardWithGap = cardWidth + gap;
+                  const currentScrollCenter = container.scrollLeft + container.clientWidth / 2;
+                  const currentCenterIndex = Math.round((currentScrollCenter - cardWidth / 2) / cardWithGap);
+                  
+                  // Find closest copy of target event
+                  const targetCircularIndex = middleCopyStartIndex + index;
+                  scrollToCard(targetCircularIndex);
+                }
+              }}
             />
           ))}
         </div>
-
-        {/* Scroll Hint */}
-        {/* <div className="text-center bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent text-xs md:text-sm opacity-80" style={{ fontFamily: "SDGlitch" }}>
-          {typeof window !== 'undefined' && window.innerWidth >= 768 ? '← Use arrow buttons or scroll horizontally to browse events →' : 'Use arrow buttons or swipe to browse events'}
-        </div> */}
       </div>
 
       <style jsx>{`

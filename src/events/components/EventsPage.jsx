@@ -275,104 +275,60 @@ const EventsPage = () => {
     >
       <FloatingElements/>
       
-      {/* Cyberpunk Back Button with enhanced animations */}
-      <motion.button
-        onClick={handleBack}
-        className={`
-          fixed top-4 left-4 z-50
-          ${isMobile ? 'w-12 h-12' : 'w-14 h-14'}
-          bg-black/80 backdrop-blur-sm
-          border-2 border-cyan-400/50
-          rounded-lg
-          hover:border-cyan-300 hover:bg-cyan-400/10
-          active:border-cyan-200 active:bg-cyan-400/20
-          transition-all duration-300 ease-out
-          group
-          shadow-lg shadow-cyan-400/20
-          hover:shadow-cyan-400/40
-          hover:shadow-lg
-          cursor-pointer
-          ${isMobile ? 'touch-manipulation' : ''}
-          relative
-          overflow-hidden
-        `}
-        variants={buttonVariants}
-        initial="initial"
-        whileHover="hover"
-        whileTap="tap"
-        aria-label="Go back"
-        style={{
-          boxShadow: '0 0 20px rgba(6, 182, 212, 0.3), inset 0 0 20px rgba(6, 182, 212, 0.1)',
-        }}
-      >
-        {/* Main content container */}
-        <div className="absolute inset-0 flex items-center justify-center z-20">
-          <motion.div variants={iconVariants}>
-            {isMobile ? (
-              <ChevronLeft 
-                className="w-7 h-7 text-cyan-300 group-hover:text-white transition-colors duration-300"
-                strokeWidth={2.5}
-              />
-            ) : (
-              <ArrowLeft 
-                className="w-7 h-7 text-cyan-300 group-hover:text-white transition-colors duration-300"
-                strokeWidth={2}
-              />
-            )}
-          </motion.div>
-        </div>
-        
-        {/* Glitch effect overlay */}
-        <motion.div 
-          className="
-            absolute inset-0 rounded-lg
-            bg-gradient-to-r from-cyan-400/10 to-purple-500/10
-            opacity-0 group-hover:opacity-100
-            transition-opacity duration-300
-            animate-pulse
-            z-10
-          "
-          whileHover={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        />
-        
-        {/* Scan line effect */}
-        <div 
-          className="
-            absolute inset-0 rounded-lg overflow-hidden
-            opacity-0 group-hover:opacity-100
-            transition-opacity duration-300
-            z-10
-          "
-        >
-          <motion.div 
-            className="
-              absolute top-0 left-0 w-full h-0.5
-              bg-gradient-to-r from-transparent via-cyan-300 to-transparent
-              animate-pulse
-            "
-            animate={{
-              y: [0, 48, 0],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
-        </div>
+  {/* Cyberpunk Back Button - Super Simplified */}
+  <motion.button
+    onClick={handleBack}
+    className={`
+      fixed top-4 left-4 z-50
+      ${isMobile ? 'w-12 h-12' : 'w-14 h-14'}
+      bg-black/80 backdrop-blur-sm
+      border-2 border-cyan-400/50
+      rounded-lg
+      transition-all duration-300 ease-out
+      shadow-lg shadow-cyan-400/20
+      cursor-pointer
+      ${isMobile ? 'touch-manipulation' : ''}
+      overflow-hidden
+      flex items-center justify-center
+      group
+      
+      hover:border-cyan-300 
+      hover:bg-cyan-400/10
+      hover:shadow-cyan-400/40
+      hover:shadow-lg
+      
+      active:border-cyan-200 
+      active:bg-cyan-400/20
+    `}
+    variants={buttonVariants}
+    initial="initial"
+    whileHover="hover"
+    whileTap="tap"
+    aria-label="Go back"
 
-        {/* Background gradient effect */}
-        <div 
-          className="
-            absolute inset-0 rounded-lg
-            bg-gradient-to-r from-cyan-400/20 to-purple-500/20
-            opacity-0 group-hover:opacity-100
-            transition-opacity duration-300
-            z-0
-          "
+    style={{zIndex:110}}
+  >
+    {/* Icon */}
+    <motion.div variants={iconVariants}>
+      {isMobile ? (
+        <ChevronLeft
+          className="w-7 h-7 text-cyan-300 group-hover:text-white transition-colors duration-300"
+          strokeWidth={2.5}
         />
-      </motion.button>
+      ) : (
+        <ArrowLeft
+          className="w-7 h-7 text-cyan-300 group-hover:text-white transition-colors duration-300"
+          strokeWidth={2}
+        />
+      )}
+    </motion.div>
+    
+    {/* Simple background glow on hover */}
+    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 to-purple-500/0 group-hover:from-cyan-500/20 group-hover:to-purple-500/20 transition-all duration-500 rounded-lg" />
+    
+    {/* Pulse effect */}
+    <div className="absolute inset-0 bg-cyan-400/0 group-hover:bg-cyan-400/10 transition-all duration-300 rounded-lg group-hover:animate-pulse" />
+  </motion.button>
 
       <motion.header 
         className="events-header"

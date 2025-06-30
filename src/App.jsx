@@ -1,9 +1,10 @@
 import React,{lazy,Suspense} from 'react'
 import {Routes,Route,BrowserRouter} from "react-router-dom";
-import HomePage from './home/HomePage';
 
 const EventPage = lazy(()=>import("./events/components/EventsPage"));
 const TeamsPage = lazy(()=>import("./team/components/TeamPage"));
+const HomePage  = lazy(()=>import("./home/HomePage"));
+const ErrorPage = lazy(()=>import("./events/components/Error"));
 
 
 function LoadingPage(){
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<HomePage/>}></Route>
           <Route path="/events" element={<EventPage/>}></Route>
           <Route path="/teams" element={<TeamsPage/>}></Route>
+          <Route path="*" element={<Error/>}></Route>
         </Routes>
       </BrowserRouter>
     </>

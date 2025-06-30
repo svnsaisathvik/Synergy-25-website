@@ -1,143 +1,53 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 
-const CleanGlitchText = () => {
-  const [hasTransitioned, setHasTransitioned] = useState(false);
-  const [isGlitching, setIsGlitching] = useState(false);
-  const [currentText, setCurrentText] = useState("THE OG TECHFEST");
-  const [glitchOffset, setGlitchOffset] = useState({ x: 0, y: 0 });
-  const [showChannels, setShowChannels] = useState(false);
-
-  useEffect(() => {
-    if (!hasTransitioned) {
-      const timer = setTimeout(() => {
-        startTransition();
-      }, 2000);
-      return () => clearTimeout(timer);
-    } else {
-      startPeriodicGlitch();
-    }
-  }, [hasTransitioned]);
-
-  const startTransition = () => {
-    setIsGlitching(true);
-    setShowChannels(true);
-    
-    const duration = 1200;
-    const startTime = Date.now();
-    
-    const animate = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = elapsed / duration;
-      
-      if (progress < 1) {
-        // Create glitch offset
-        setGlitchOffset({
-          x: (Math.random() - 0.5) * 4,
-          y: (Math.random() - 0.5) * 2
-        });
-        
-        // Switch text at 70% progress
-        if (progress > 0.7 && currentText === "THE OG TECHFEST") {
-          setCurrentText("SYNERGY 2025");
-        }
-        
-        requestAnimationFrame(animate);
-      } else {
-        // Complete transition
-        setIsGlitching(false);
-        setShowChannels(false);
-        setGlitchOffset({ x: 0, y: 0 });
-        setCurrentText("SYNERGY 2025");
-        setHasTransitioned(true);
-      }
-    };
-    
-    animate();
-  };
-
-  const startPeriodicGlitch = () => {
-    const interval = setInterval(() => {
-      if (Math.random() < 0.2) {
-        setShowChannels(true);
-        setGlitchOffset({
-          x: (Math.random() - 0.5) * 2,
-          y: (Math.random() - 0.5) * 1
-        });
-        
-        setTimeout(() => {
-          setShowChannels(false);
-          setGlitchOffset({ x: 0, y: 0 });
-        }, 100 + Math.random() * 100);
-      }
-    }, 300);
-    
-    return () => clearInterval(interval);
-  };
-
+const NeonTitle = () => {
   return (
-    <div className="relative inline-block">
-      {/* Main text */}
-      <h1 
-        className="text-6xl md:text-7xl lg:text-8xl font-black text-white relative z-20 select-none tracking-tight"
-        style={{
-          transform: `translate(${glitchOffset.x}px, ${glitchOffset.y}px)`,
-          fontFamily: "CyberAlert",
-          textShadow: isGlitching ? '2px 0 #ff0040, -2px 0 #00ffff' : 'none'
-        }}
-      >
-        {currentText}
-      </h1>
-
-      {/* Red channel */}
-      {showChannels && (
-        <h1 
-          className="absolute top-0 left-0 text-6xl md:text-7xl lg:text-8xl font-black text-red-500 select-none tracking-tight z-10"
+    <div className="flex flex-col items-center justify-center mt-1 px-4">
+      <div className="flex flex-col sm:flex-row sm:space-x-8 items-center justify-center w-full">
+        <h1
+          className="font-[neon] text-[12vw] sm:text-[8vw] leading-none text-[#FB42D4] mt-4 sm:mt-7 text-center"
           style={{
-            transform: `translate(${glitchOffset.x + 3}px, ${glitchOffset.y}px)`,
-            opacity: 0.8,
-            mixBlendMode: 'screen',
-            fontFamily: "CyberAlert"
+            textShadow: '0 0 3vw #F40AD5',
+            animation: 'cyber 2.2s ease-in infinite'
           }}
         >
-          {currentText}
+          SYNERGY
         </h1>
-      )}
-
-      {/* Cyan channel */}
-      {showChannels && (
-        <h1 
-          className="absolute top-0 left-0 text-6xl md:text-7xl lg:text-8xl font-black text-cyan-400 select-none tracking-tight z-10"
+        <h1
+          className="font-[neon] text-[14vw] sm:text-[10vw] leading-none text-[#42FDEB] mt-2 sm:mt-0 text-center"
           style={{
-            transform: `translate(${glitchOffset.x - 3}px, ${glitchOffset.y}px)`,
-            opacity: 0.8,
-            mixBlendMode: 'screen',
-            fontFamily: "CyberAlert"
+            textShadow: '0 0 3vw #23F6EF',
+            animation: 'zone 3.2s ease-out infinite'
           }}
         >
-          {currentText}
+          2025
         </h1>
-      )}
+      </div>
 
-      {/* Glitch lines */}
-      {isGlitching && (
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute bg-white opacity-20"
-              style={{
-                left: `${10 + i * 30}%`,
-                top: `${25 + i * 20}%`,
-                width: `${40 + Math.random() * 30}%`,
-                height: '1px',
-                transform: `translateX(${(Math.random() - 0.5) * 10}px)`
-              }}
-            />
-          ))}
-        </div>
-      )}
+      <style jsx>{`
+        @keyframes cyber {
+          0%, 100% {
+            text-shadow: 0 0 .5vw #FA0AC1, 0 0 2vw #FA0AC1, 0 0 6vw #FA0AC1, 0 0 6vw #FA0AC1, 0 0 .2vw #FE0BB8, .5vw .5vw .1vw #800964;
+            color: #FE0BB8;
+          }
+          50% {
+            text-shadow: 0 0 .5vw #800C5B, 0 0 1vw #800C5B, 0 0 4vw #800C5B, 0 0 4vw #800C5B, 0 0 .2vw #800C5B, .5vw .5vw .1vw #40043A;
+            color: #800964;
+          }
+        }
+        @keyframes zone {
+          0%, 100% {
+            text-shadow: 0 0 .5vw #10E19F, 0 0 2vw #10E19F, 0 0 6vw #10E19F, 0 0 6vw #10E19F, 0 0 .2vw #8BFEFD, .5vw .5vw .1vw #148270;
+            color: #28E7DE;
+          }
+          50% {
+            text-shadow: 0 0 .5vw #088140, 0 0 1vw #088140, 0 0 4vw #088140, 0 0 4vw #088140, 0 0 .2vw #088140, .5vw .5vw .1vw #0A4930;
+            color: #148C6B;
+          }
+        }
+      `}</style>
     </div>
   );
 };
 
-export default CleanGlitchText;
+export default NeonTitle;

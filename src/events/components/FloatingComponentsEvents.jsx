@@ -1,86 +1,112 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from "react";
 
-const FloatingElements = () => {
-  const [elements, setElements] = useState([]);
-  const containerRef = useRef(null);
+const FloatingComponentsEvents = () => {
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    const newElements = [];
-    for (let i = 0; i < 40; i++) {
-      newElements.push({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: Math.random() * 2 + 5,
-        speed: Math.random() * 0.5 + 0.2,
-        opacity: Math.random() * 0.6 + 0.2,
-        color: Math.random() < 0.5 ? '#00ffff' : '#ff0040'
-      });
-    }
-    setElements(newElements);
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
 
-    const animate = () => {
-      setElements(prev => prev.map(el => ({
-        ...el,
-        y: el.y > 100 ? -5 : el.y + el.speed,
-        x: el.x + Math.sin(Date.now() * 0.001 + el.id) * 0.1
-      })));
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    canvas.width = width;
+    canvas.height = height;
+
+    let trails = [];
+
+    class Trail {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.size = Math.random() * 6 + 2;
+        this.alpha = 1;
+        this.color = color;
+        this.angle = Math.random() * Math.PI * 2;
+        this.length = Math.random() * 50 + 20;
+        this.speed = Math.random() * 2 + 2;
+        this.distortion = 0;
+      }
+
+      update() {
+        this.alpha -= 0.02;
+        this.x += Math.cos(this.angle) * this.speed;
+        this.y += Math.sin(this.angle) * this.speed;
+        this.distortion += 0.1;
+      }
+
+      draw() {
+        ctx.globalAlpha = this.alpha;
+        ctx.beginPath();
+        if (Math.floor(this.distortion) % 2 === 0) {
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(
+            this.x + Math.cos(this.angle) * this.length,
+            this.y + Math.sin(this.angle) * this.length
+          );
+        } else {
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        }
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = 2;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
+        ctx.stroke();
+        ctx.closePath();
+      }
+    }
+
+    const createTrail = (x, y) => {
+      const colors = ["cyan", "magenta", "blue", "lime", "purple"];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      trails.push(new Trail(x, y, color));
     };
 
-    const interval = setInterval(animate, 50);
-    return () => clearInterval(interval);
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+      trails.forEach((trail, index) => {
+        trail.update();
+        trail.draw();
+        if (trail.alpha <= 0) {
+          trails.splice(index, 1);
+        }
+      });
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    const handleMouseMove = (e) => {
+      createTrail(e.clientX, e.clientY);
+    };
+
+    const handleResize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("resize", handleResize);
+
+    const intervalId = setInterval(() => {
+      createTrail(Math.random() * width, Math.random() * height);
+    }, 200);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", handleResize);
+      clearInterval(intervalId);
+    };
   }, []);
 
   return (
-    <div ref={containerRef} className="fixed inset-0 pointer-events-none overflow-hidden">
-      {/* Animated grid */}
-      <div 
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(0, 255, 255, 0.3) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0, 255, 255, 0.3) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
-          animation: 'float 20s linear infinite'
-        }}
-      />
-
-      {/* Floating particles */}
-      {elements.map(el => (
-  <div
-    key={el.id}
-    className="absolute rounded-full"
-    style={{
-      left: `${el.x}%`,
-      top: `${el.y}%`,
-      width: `${el.size}px`,
-      height: `${el.size}px`,
-      backgroundColor: el.color,
-      opacity: el.opacity,
-      boxShadow: `
-        0 0 ${el.size * 2.5}px ${el.color},
-        0 0 ${el.size * 4}px ${el.color},
-        0 0 ${el.size * 6}px ${el.color}
-      `,
-      filter: 'blur(1px) drop-shadow(0 0 6px white)',
-    }}
-  />
-))}
-
-
-      {/* Corner accents */}
-      <div className="absolute top-0 left-0 w-20 h-20">
-        <div className="w-full h-0.5 bg-gradient-to-r from-cyan-400 to-transparent" />
-        <div className="w-0.5 h-full bg-gradient-to-b from-cyan-400 to-transparent" />
-      </div>
-      
-      <div className="absolute top-0 right-0 w-20 h-20">
-        <div className="w-full h-0.5 bg-gradient-to-l from-purple-500 to-transparent" />
-        <div className="absolute right-0 w-0.5 h-full bg-gradient-to-b from-purple-500 to-transparent" />
-      </div>
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="fixed top-0 left-0 w-screen h-screen pointer-events-none z-0"
+    />
   );
 };
 
-export default FloatingElements;
+export default FloatingComponentsEvents;

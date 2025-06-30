@@ -7,6 +7,7 @@ import EventModal from './EventModal';
 import FloatingElements from "../../home/components/FloatingElements";
 import '../styles/EventsPage.css';
 import { CircuitBoard, Cpu, GithubIcon, ArrowLeft, ChevronLeft } from 'lucide-react';
+import CyberpunkHeader from './Header';
 
 const EventsPage = () => {
   const [activeDay, setActiveDay] = useState(1);
@@ -330,9 +331,6 @@ const EventsPage = () => {
     <div className="absolute inset-0 bg-cyan-400/0 group-hover:bg-cyan-400/10 transition-all duration-300 rounded-lg group-hover:animate-pulse" />
   </motion.button>
 
-      <motion.header 
-        className="events-header"
-      >
         {/* <canvas 
           ref={canvasRef} 
           className="matrix-canvas"
@@ -342,6 +340,10 @@ const EventsPage = () => {
             imageRendering: isMobile ? 'pixelated' : 'auto'
           }}
         /> */}
+
+      {/* <motion.header 
+        className="events-header"
+      >
         <motion.div 
           className="header-content"
           variants={sectionVariants}
@@ -416,7 +418,9 @@ const EventsPage = () => {
             </motion.div>
           </div>
         </motion.div>
-      </motion.header>
+      </motion.header> */}
+
+      <CyberpunkHeader isMobile={isMobile}/>
       
       <CustomScrollbar 
         progress={scrollProgress} 

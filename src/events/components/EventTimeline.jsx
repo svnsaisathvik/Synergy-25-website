@@ -432,16 +432,16 @@ const EventPoster = ({
                     </h3>
                     
                     {/* Event Details */}
-                    <div className="space-y-2 text-cyan-300 text-sm md:text-base" style={{ fontFamily: "CyberAlert" }}>
+                    <div className="space-y-2 text-cyan-300 text-sm md:text-base font-bold" style={{ fontFamily: "OrbitronBold" }}>
                     {event.about && (
                         <div className="flex justify-center items-center gap-2">
                           <div className="w-2 h-2 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-pulse"></div>
                           <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent font-bold">{event.about}</span>
                         </div>
                       )}
-                      <div className="flex justify-center items-center gap-2" style={{fontFamily:"CyberAlert"}}>
+                      <div className="flex justify-center items-center gap-2" style={{fontFamily:"OrbitronBold"}}>
                         <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-full animate-pulse"></div>
-                        <span >Time: {event.time}</span>
+                        <span className="font-bold" style={{fontFamily:"OrbitronBold"}}>Time: {event.time}</span>
                       </div>
                     </div>
                     

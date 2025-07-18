@@ -2,11 +2,10 @@ import React from 'react';
 
 const categories = [
   'Organizers',
-  'Media',
   'Design',
-  'Marketing',
-  'Webdev',
-  'Sponsorship'
+  'Website',
+  'Sponsorship',
+  'Marketing & Media'
 ];
 
 const SideNavigation = ({ activeCategory, setActiveCategory }) => {

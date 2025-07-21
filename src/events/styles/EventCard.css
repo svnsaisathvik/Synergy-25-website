@@ -1,12 +1,13 @@
 .event-card {
   position: relative;
-  border-radius: 5px;
+  border-radius: 0;
   overflow: hidden;
-  height: 700px;
+  height: 600px; /* Increased from 400px */
   cursor: pointer;
   opacity: 0;
   transform: translateY(30px);
   transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.3s ease;
+  background: var(--darker-bg);
   display: flex;
   flex-direction: column;
 }
@@ -16,64 +17,55 @@
   transform: translateY(0);
 }
 
+/* Cyberpunk border frame */
 .event-card-border {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  border: 1px solid rgba(0, 240, 255, 0.3);
-  border-radius: 5px;
+  border: 2px solid var(--electric-blue);
   z-index: 1;
   pointer-events: none;
   transition: all 0.3s ease;
 }
 
-.event-image {
+.event-card-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 20px;
+  height: 20px;
+  border-top: 2px solid var(--vivid-orange);
+  border-left: 2px solid var(--vivid-orange);
+}
+
+.event-card-border::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 20px;
+  height: 20px;
+  border-bottom: 2px solid var(--synergy-pink);
+  border-right: 2px solid var(--synergy-pink);
+}
+
+/* Event poster section */
+.event-poster-section {
   position: relative;
-  flex: 1;
+  height: 85%; /* Increased from 60% to 75% */
+  overflow: hidden;
+  z-index: 2;
+}
+
+.event-image {
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  min-height: 400px;
-}
-
-.event-card-content {
-  position: relative;
-  z-index: 2;
-  padding: 1rem;
-  border-top: 1px solid rgba(0, 240, 255, 0.2);
-  overflow: hidden;
-}
-
-/* Blurred background image for content section */
-.event-content-bg {
-  position: absolute;
-  top: -100px; /* Extend above to create flowing effect */
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-size: cover;
-  background-position: center bottom;
-  background-repeat: no-repeat;
-  filter: blur(8px);
-  transform: scale(1.1); /* Slightly scale to avoid blur edge artifacts */
-  z-index: -2;
-}
-
-/* Content overlay with gradient */
-.event-content-overlay {
-  position: relative;
-  z-index: 3;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0.7) 30%,
-    rgba(0, 0, 0, 0.9) 100%
-  );
-  padding: 1rem;
-  border-radius: 8px;
-  backdrop-filter: blur(2px);
+  transition: transform 0.3s ease;
 }
 
 .event-category {
@@ -81,119 +73,172 @@
   top: 1rem;
   right: 1rem;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.8rem;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: var(--neon-pink);
+  font-size: 0.7rem;
+  background: rgba(0, 0, 0, 0.9);
+  color: var(--synergy-pink);
   padding: 0.3rem 0.6rem;
-  border: 1px solid var(--neon-pink);
-  border-radius: 3px;
+  border: 1px solid var(--synergy-pink);
   letter-spacing: 1px;
-  z-index: 4;
-  backdrop-filter: blur(4px);
+  text-shadow: 0 0 5px var(--synergy-pink);
+  z-index: 3;
+}
+
+/* Event details section */
+.event-details-section {
+  position: relative;
+  height: 25%; /* Decreased from 40% to 25% */
+  background: var(--darker-bg);
+  padding: 1rem;
+  border-top: 2px solid var(--electric-blue);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 3;
 }
 
 .event-name {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.2rem; /* Slightly reduced to fit in smaller details section */
   font-weight: 700;
-  margin-bottom: 0.8rem;
-  color: var(--light-text);
+  margin-bottom: 0.4rem; /* Slightly reduced margin */
+  color: var(--vivid-orange);
+  text-shadow: 0 0 10px var(--bright-yellow);
   transition: color 0.3s ease;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  line-height: 1.1; /* Tighter line height */
 }
 
 .event-details {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 1rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  flex-direction: column;
+  gap: 0.2rem; /* Reduced gap */
+  font-size: 0.8rem; /* Slightly smaller font */
+  color: var(--light-text);
 }
 
 .event-time, .event-location {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.9rem;
+  font-size: 0.8rem; /* Slightly smaller font */
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.event-time::before {
+  content: '⏰';
+  color: var(--electric-blue);
+  font-size: 0.8rem;
+}
+
+.event-location::before {
+  content: '📍';
+  color: var(--neon-green);
+  font-size: 0.8rem;
 }
 
 .event-hover-info {
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(0, 0, 0, 0.9);
   padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
+  border: 1px solid var(--neon-green);
+  font-size: 0.7rem;
   color: var(--neon-green);
   opacity: 0;
   transition: all 0.3s ease;
   white-space: nowrap;
-  transform: translateY(10px);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(0, 240, 255, 0.2);
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 1px;
+  z-index: 4;
 }
 
 .event-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+  transform: translateY(-8px);
+  box-shadow: 
+    0 0 20px rgba(0, 212, 255, 0.6),
+    0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
 .event-card:hover .event-card-border {
-  border-color: var(--neon-blue);
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.3), inset 0 0 20px rgba(0, 240, 255, 0.1);
+  border-color: var(--bright-yellow);
+  box-shadow: 
+    0 0 20px rgba(255, 255, 0, 0.6),
+    inset 0 0 20px rgba(255, 255, 0, 0.15);
+}
+
+.event-card:hover .event-image {
+  transform: scale(1.05);
 }
 
 .event-card:hover .event-name {
-  color: var(--neon-blue);
+  color: var(--electric-blue);
+  text-shadow: 0 0 15px var(--electric-blue);
 }
 
 .event-card:hover .event-hover-info {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 
-.event-card:hover .event-content-bg {
-  filter: blur(12px);
-  transform: scale(1.15);
+/* Cyberpunk scan lines effect */
+.event-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 212, 255, 0.04) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.event-card:hover::before {
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
   .event-card {
-    height: 600px;
-  }
-  
-  .event-image {
-    min-height: 350px;
+    height: 450px; /* Increased from 350px */
   }
   
   .event-name {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
+  }
+  
+  .event-details-section {
+    padding: 0.8rem;
   }
   
   .event-details {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.3rem;
-  }
-  
-  .event-content-bg {
-    top: -50px;
+    font-size: 0.75rem;
   }
 }
 
 @media (max-width: 576px) {
   .event-card {
-    height: 600px;
-  }
-  
-  .event-image {
-    min-height: 300px;
+    height: 400px; /* Increased from 320px */
   }
   
   .event-name {
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
   
-  .event-content-bg {
-    top: -30px;
+  .event-details-section {
+    padding: 0.7rem;
+  }
+  
+  .event-category {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.4rem;
   }
 }

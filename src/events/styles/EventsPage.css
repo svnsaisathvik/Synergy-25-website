@@ -1,66 +1,3 @@
-/* Base styles and CSS Variables */
-:root {
-  --neon-blue: #00f0ff;
-  --neon-pink: #ff00ff;
-  --dark-bg: #070215;
-  --light-text: #ffffff;
-  --dark-grid-color: rgba(0, 240, 255, 0.1);
-  
-  /* Responsive font sizes */
-  --header-font-size: clamp(4rem, 8vw, 10rem);
-  --icon-size: clamp(24px, 5vw, 60px);
-  --header-gap: clamp(0.5rem, 3vw, 2rem);
-  --header-height: clamp(25vh, 35vh, 40vh);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Rajdhani', sans-serif;
-  background-color: var(--dark-bg);
-  color: var(--light-text);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    linear-gradient(rgba(7, 2, 21, 0.8), rgba(7, 2, 21, 0.8)),
-    repeating-linear-gradient(
-      transparent, 
-      transparent 2px, 
-      var(--dark-grid-color) 2px, 
-      var(--dark-grid-color) 3px
-    );
-  background-size: 100% 100%, clamp(30px, 5vw, 50px) clamp(30px, 5vw, 50px);
-  pointer-events: none;
-  z-index: -1;
-}
-
-.app {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-}
-
-.gradient-text{
-  background: linear-gradient(to right, #06B6D4, #9333EA);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Events Page Styles */
 .events-page {
   position: relative;
   height: 100vh;
@@ -69,21 +6,159 @@ body::before {
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  background: var(--dark-bg);
 }
 
 .events-page::-webkit-scrollbar {
   display: none;
 }
 
-/* Header Styles */
+/* Smaller Cyberpunk Back Button */
+.cyber-back-button {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid var(--electric-blue);
+  color: var(--electric-blue);
+  padding: 0.6rem 1rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  text-transform: uppercase;
+}
+
+.back-button-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.cyber-back-button .frame-corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+}
+
+.cyber-back-button .frame-corner.top-left {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid var(--vivid-orange);
+  border-left: 1px solid var(--vivid-orange);
+}
+
+.cyber-back-button .frame-corner.top-right {
+  top: -1px;
+  right: -1px;
+  border-top: 1px solid var(--vivid-orange);
+  border-right: 1px solid var(--vivid-orange);
+}
+
+.cyber-back-button .frame-corner.bottom-left {
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 1px solid var(--synergy-pink);
+  border-left: 1px solid var(--synergy-pink);
+}
+
+.cyber-back-button .frame-corner.bottom-right {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid var(--synergy-pink);
+  border-right: 1px solid var(--synergy-pink);
+}
+
+.back-icon {
+  width: 14px;
+  height: 14px;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 3px var(--electric-blue));
+}
+
+.back-text {
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.button-glow-effect {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--electric-blue), transparent);
+  transition: left 0.5s ease;
+  opacity: 0.3;
+}
+
+.cyber-back-button:hover {
+  background: rgba(0, 212, 255, 0.15);
+  border-color: var(--bright-yellow);
+  color: var(--bright-yellow);
+  box-shadow: 
+    0 0 15px rgba(0, 212, 255, 0.5),
+    inset 0 0 15px rgba(0, 212, 255, 0.15);
+  transform: translateX(-3px);
+}
+
+.cyber-back-button:hover .back-icon {
+  color: var(--bright-yellow);
+  filter: drop-shadow(0 0 8px var(--bright-yellow));
+  transform: translateX(-2px);
+}
+
+.cyber-back-button:hover .button-glow-effect {
+  left: 100%;
+}
+
+.cyber-back-button:hover .frame-corner.top-left,
+.cyber-back-button:hover .frame-corner.top-right {
+  border-color: var(--neon-green);
+  box-shadow: 0 0 3px var(--neon-green);
+}
+
+.cyber-back-button:hover .frame-corner.bottom-left,
+.cyber-back-button:hover .frame-corner.bottom-right {
+  border-color: var(--neon-green);
+  box-shadow: 0 0 3px var(--neon-green);
+}
+
+/* Cyberpunk glitch effect for back button */
+.cyber-back-button:active {
+  animation: button-glitch 0.3s ease;
+}
+
+@keyframes button-glitch {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-1px) skew(-1deg); }
+  40% { transform: translateX(1px) skew(1deg); }
+  60% { transform: translateX(-1px) skew(-1deg); }
+  80% { transform: translateX(1px) skew(1deg); }
+  100% { transform: translateX(0); }
+}
+
+/* Events Header with Matrix Background */
 .events-header {
   position: relative;
-  height: var(--header-height);
+  height: 25vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
   overflow: hidden;
-  padding: 1rem;
+  border-bottom: 2px solid var(--electric-blue);
 }
 
 .matrix-canvas {
@@ -92,452 +167,216 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.8;
+  opacity: 0.6;
   z-index: 1;
+}
+
+.events-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 212, 255, 0.05) 2px,
+      rgba(0, 212, 255, 0.05) 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 212, 255, 0.05) 2px,
+      rgba(0, 212, 255, 0.05) 4px
+    );
+  z-index: 2;
 }
 
 .header-content {
   position: relative;
   z-index: 3;
   text-align: center;
-  max-width: min(800px, 90vw);
-  padding: 0 1rem;
-  width: 100%;
+  max-width: 800px;
+  padding: 0 2rem;
 }
 
-.logo-container {
-  position: relative;
-  margin-bottom: clamp(0.5rem, 3vw, 1.5rem);
-}
-
-.animated-icons {
-  display: flex;
-  justify-content: center;
-  gap: var(--header-gap);
-  margin-bottom: clamp(1rem, 4vw, 2rem);
-  flex-wrap: wrap;
-}
-
-.icon {
-  width: var(--icon-size);
-  height: var(--icon-size);
-  color: var(--neon-blue);
-  filter: drop-shadow(0 0 10px var(--neon-blue));
-  transition: transform 0.3s ease;
-}
-
-.icon:hover {
-  transform: scale(1.1);
-}
-
-.icon-1 {
-  animation: float 3s ease-in-out infinite;
-}
-
-.icon-2 {
-  animation: float 3s ease-in-out infinite 1s;
-}
-
-.icon-3 {
-  animation: float 3s ease-in-out infinite 2s;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-
-.gradient-text {
-  background: linear-gradient(45deg, #06B6D4, #9333EA, #06B6D4, #9333EA);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: gradientFlow 3s ease-in-out infinite;
-  font-size: var(--header-font-size);
-}
-
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Combined gradient and glitch effect */
-.gradient-glitch {
-  position: relative;
-  font-size: var(--header-font-size);
-  background: linear-gradient(45deg, #06B6D4, #9333EA, #06B6D4, #9333EA);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: gradientFlow 3s ease-in-out infinite, glitch-skew 1s infinite linear alternate-reverse;
-}
-
-.gradient-glitch::before,
-.gradient-glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-.gradient-glitch::before {
-  color: var(--neon-pink);
-  animation: glitch-effect 3s infinite;
-}
-
-.gradient-glitch::after {
-  color: var(--neon-blue);
-  animation: glitch-effect 2s infinite reverse;
-}
-
-/* Glitch Effect Styles */
-.glitch-container {
-  position: relative;
-  display: inline-block;
-}
-
-.glitch {
-  font-size: var(--header-font-size);
+.events-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 6rem;
   font-weight: 900;
   margin: 0;
-  padding: 0;
-  background: linear-gradient(to right, #06B6D4, #9333EA);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color:transparent;
-  text-shadow: 0 0 20px var(--neon-blue);
-  mix-blend-mode: screen;
-  position: relative;
-  letter-spacing: clamp(2px, 1vw, 5px);
-  animation: glitch-skew 1s infinite linear alternate-reverse;
-  line-height: 0.9;
-}
-
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-.glitch::before {
-  
-  color: var(--neon-pink);
-  animation: glitch-effect 3s infinite;
-}
-
-.glitch::after {
-  color: var(--neon-blue);
-  animation: glitch-effect 2s infinite reverse;
-}
-
-@keyframes glitch-effect {
-  0% {
-    left: -3px;
-    top: -3px;
-  }
-  25% {
-    left: 3px;
-    top: 0px;
-  }
-  50% {
-    left: -2px;
-    top: 2px;
-  }
-  75% {
-    left: 0px;
-    top: -1px;
-  }
-  100% {
-    left: 2px;
-    top: -2px;
-  }
-}
-
-@keyframes glitch-skew {
-  0% {
-    transform: skew(0deg);
-  }
-  10% {
-    transform: skew(0deg);
-  }
-  11% {
-    transform: skew(5deg);
-  }
-  12% {
-    transform: skew(0deg);
-  }
-  50% {
-    transform: skew(0deg);
-  }
-  51% {
-    transform: skew(-5deg);
-  }
-  52% {
-    transform: skew(0deg);
-  }
-  100% {
-    transform: skew(0deg);
-  }
-}
-
-/* Events Container */
-.events-container {
-  position: relative;
-  padding: clamp(1rem, 3vw, 2rem) 0;
-  z-index: 4;
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Orbitron', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-button {
-  cursor: pointer;
-  font-family: 'Share Tech Mono', monospace;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-}
-
-/* Scan line effect */
-.scan-line {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    transparent 50%,
-    rgba(0, 240, 255, 0.02) 50%
-  );
-  background-size: 100% 4px;
-  z-index: 999;
-  pointer-events: none;
-  opacity: 0.3;
-}
-
-/* Scrollbar styles */
-::-webkit-scrollbar {
-  width: 6px;
-  background: rgba(0, 0, 0, 0.2);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--neon-blue);
-  border-radius: 10px;
-}
-
-/* Utility classes */
-.neon-text {
-  text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
-}
-
-.neon-border {
+  text-shadow: 0 0 20px var(--vivid-orange);
+  color: var(--vivid-orange);
   position: relative;
 }
 
-.neon-border::before {
+/* Cyberpunk corner decorations for title */
+.events-title::before {
   content: '';
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  border: 1px solid var(--neon-blue);
-  box-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
-  z-index: -1;
+  top: -15px;
+  left: -15px;
+  width: 40px;
+  height: 40px;
+  border-top: 3px solid var(--electric-blue);
+  border-left: 3px solid var(--electric-blue);
+  box-shadow: 0 0 10px var(--electric-blue);
 }
 
-/* Screen effect overlay */
-.screen-effect {
-  position: fixed;
-  top: 0;
-  left: 0;
+.events-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  width: 40px;
+  height: 40px;
+  border-bottom: 3px solid var(--synergy-pink);
+  border-right: 3px solid var(--synergy-pink);
+  box-shadow: 0 0 10px var(--synergy-pink);
+}
+
+/* Events container */
+.events-container {
+  position: relative;
+  padding: 2rem 0;
+  z-index: 4;
+  background: var(--dark-bg);
+}
+
+/* Cyberpunk section dividers */
+.section-divider {
   width: 100%;
-  height: 100%;
-  background: 
-    linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)),
-    url('data:image/svg+xml;utf8,<svg viewBox="0 0 2 2" xmlns="http://www.w3.org/2000/svg"><path d="M1 2V0h1v1H0v1z" fill="rgba(0,240,255,0.02)"/></svg>');
-  background-size: 100% 100%, 2px 2px;
-  pointer-events: none;
-  z-index: 10;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--electric-blue),
+    var(--hot-pink),
+    var(--electric-blue),
+    transparent
+  );
+  margin: 4rem 0;
+  position: relative;
 }
 
-/* Responsive Breakpoints */
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  width: 10px;
+  height: 12px;
+  background: var(--electric-blue);
+  box-shadow: 0 0 10px var(--electric-blue);
+}
 
-/* Large Desktop (1200px and up) */
-@media (min-width: 1200px) {
+.section-divider::before {
+  left: 20%;
+}
+
+.section-divider::after {
+  right: 20%;
+}
+
+@media (max-width: 1200px) {
+  .events-title {
+    font-size: 5rem;
+  }
+}
+
+@media (max-width: 992px) {
   .events-header {
-    height: 40vh;
+    height: 20vh;
   }
   
-  .header-content {
-    max-width: 1000px;
+  .events-title {
+    font-size: 4rem;
+  }
+  
+  .cyber-back-button {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.65rem;
+  }
+  
+  .back-icon {
+    width: 12px;
+    height: 12px;
   }
 }
 
-/* Desktop (992px to 1199px) */
-@media (min-width: 992px) and (max-width: 1199px) {
-  .events-header {
-    height: 38vh;
-  }
-}
-
-/* Tablet (768px to 991px) */
-@media (min-width: 768px) and (max-width: 991px) {
-  .events-header {
-    height: 35vh;
-  }
-  
-  .animated-icons {
-    gap: 1.5rem;
-  }
-  
-  .header-content {
-    padding: 0 1.5rem;
-  }
-}
-
-/* Mobile Large (576px to 767px) */
-@media (min-width: 576px) and (max-width: 767px) {
-  .events-header {
-    height: 30vh;
-    padding: 0.5rem;
-  }
-  
-  .animated-icons {
-    gap: 1rem;
-  }
-  
-  .header-content {
-    padding: 0 1rem;
-  }
-  
-  .glitch {
-    letter-spacing: 3px;
-  }
-}
-
-/* Mobile Small (575px and below) */
-@media (max-width: 575px) {
-  .events-header {
-    height: 28vh;
-    padding: 0.5rem;
-  }
-  
-  .header-content {
-    padding: 0 0.5rem;
-  }
-  
-  .animated-icons {
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
-  
-  .glitch {
-    letter-spacing: 2px;
-  }
-  
-  .logo-container {
-    margin-bottom: 0.5rem;
-  }
-}
-
-/* Ultra Small Mobile (320px to 480px) */
-@media (max-width: 480px) {
-  .events-header {
-    height: 25vh;
-  }
-  
-  .animated-icons {
-    gap: 0.5rem;
-  }
-  
-  .glitch {
-    letter-spacing: 1px;
-  }
-}
-
-/* Landscape orientation adjustments */
-@media (max-height: 600px) and (orientation: landscape) {
-  .events-header {
-    height: 60vh;
-  }
-  
-  :root {
-    --header-font-size: clamp(3rem, 6vw, 6rem);
-  }
-}
-
-/* High DPI displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .matrix-canvas {
-    image-rendering: pixelated;
-  }
-}
-
-/* Reduced motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .glitch {
-    animation: none;
-  }
-  
-  .icon-1, .icon-2, .icon-3 {
-    animation: none;
-  }
-  
-  .glitch::before, .glitch::after {
-    animation: none;
-  }
-}
-
-/* Dark mode support (if system preference changes) */
-@media (prefers-color-scheme: light) {
-  /* Keep dark theme for cyberpunk aesthetic */
-  body {
-    background-color: var(--dark-bg);
-    color: var(--light-text);
-  }
-}
-
-/* Focus and accessibility improvements */
 @media (max-width: 768px) {
-  button, a, [tabindex] {
-    min-height: 44px;
-    min-width: 44px;
+  .events-header {
+    height: 18vh;
+  }
+  
+  .events-title {
+    font-size: 3.5rem;
+  }
+  
+  .cyber-back-button {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.6rem;
+    gap: 0.4rem;
+  }
+  
+  .back-icon {
+    width: 11px;
+    height: 11px;
+  }
+  
+  .events-container {
+    padding: 1.5rem 0;
+  }
+  
+  .events-title::before,
+  .events-title::after {
+    width: 30px;
+    height: 30px;
   }
 }
 
-/* Print styles (hidden for this type of content) */
-@media print {
-  .events-page {
-    display: none;
+@media (max-width: 576px) {
+  .events-header {
+    height: 15vh;
+  }
+  
+  .events-title {
+    font-size: 3rem;
+  }
+  
+  .cyber-back-button {
+    top: 0.8rem;
+    left: 0.8rem;
+    padding: 0.3rem 0.6rem;
+    gap: 0.3rem;
+  }
+  
+  .cyber-back-button .frame-corner {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .back-icon {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .events-title::before,
+  .events-title::after {
+    width: 25px;
+    height: 25px;
+    top: -10px;
+    left: -10px;
+  }
+  
+  .events-title::after {
+    bottom: -10px;
+    right: -10px;
   }
 }
-
-

@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;700&display=swap');
+
+:root {
+  --electric-blue: #00d4ff;
+  --hot-pink: #ff0080;
+  --bright-cyan: #00ffff;
+  --vivid-orange: #ff6600;
+  --neon-green: #00ff88;
+  --electric-purple: #8800ff;
+  --bright-yellow: #ffff00;
+  --synergy-pink: #ff1493;
+  --synergy-blue: #0099ff;
+  --dark-bg: #070215;
+  --darker-bg: #0a0a1a;
+  --light-text: #f1f1f9;
+  --grid-color: rgba(0, 212, 255, 0.15);
+  --dark-grid-color: rgba(0, 212, 255, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background-color: var(--dark-bg);
+  color: var(--light-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(rgba(7, 2, 21, 0.8), rgba(7, 2, 21, 0.8)),
+    repeating-linear-gradient(transparent, transparent 2px, var(--dark-grid-color) 2px, var(--dark-grid-color) 3px);
+  background-size: 100% 100%, 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.app {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button {
+  cursor: pointer;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+}
+
+/* Animated gradient text effect */
+.gradient-text {
+  background: linear-gradient(45deg, var(--electric-blue), var(--hot-pink), var(--bright-cyan), var(--electric-purple));
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientFlow 3s ease-in-out infinite;
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Cyberpunk glitch effect */
+.cyber-glitch {
+  position: relative;
+  color: var(--bright-yellow);
+  text-shadow: 0 0 10px var(--bright-yellow);
+  animation: cyber-flicker 2s infinite linear;
+}
+
+.cyber-glitch::before,
+.cyber-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.cyber-glitch::before {
+  color: var(--synergy-pink);
+  animation: cyber-glitch-1 0.5s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.cyber-glitch::after {
+  color: var(--electric-blue);
+  animation: cyber-glitch-2 0.5s infinite;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+@keyframes cyber-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 0 0 10px var(--bright-yellow), 0 0 20px var(--bright-yellow);
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+@keyframes cyber-glitch-1 {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-2px);
+  }
+  40% {
+    transform: translateX(-2px);
+  }
+  60% {
+    transform: translateX(2px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes cyber-glitch-2 {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(2px);
+  }
+  40% {
+    transform: translateX(2px);
+  }
+  60% {
+    transform: translateX(-2px);
+  }
+  80% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Cyberpunk border effects */
+.cyber-border {
+  position: relative;
+  border: 2px solid var(--electric-blue);
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.cyber-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--electric-blue), var(--hot-pink), var(--electric-blue));
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0.7;
+  filter: blur(1px);
+}
+
+/* Cyberpunk button styles */
+.cyber-button {
+  background: transparent;
+  border: 2px solid var(--bright-yellow);
+  color: var(--bright-yellow);
+  padding: 1rem 2rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.cyber-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--bright-yellow), transparent);
+  transition: left 0.5s ease;
+}
+
+.cyber-button:hover {
+  background: var(--bright-yellow);
+  color: var(--dark-bg);
+  box-shadow: 0 0 20px var(--bright-yellow);
+  text-shadow: none;
+}
+
+.cyber-button:hover::before {
+  left: 100%;
+}
+
+/* Scan line effect */
+.scan-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 212, 255, 0.03) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--electric-blue);
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--electric-blue);
+}
+
+/* Utility classes */
+.neon-text {
+  text-shadow: 0 0 5px var(--electric-blue), 0 0 10px var(--electric-blue);
+}
+
+.neon-border {
+  position: relative;
+}
+
+.neon-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 1px solid var(--electric-blue);
+  box-shadow: 0 0 5px var(--electric-blue), 0 0 10px var(--electric-blue);
+  z-index: -1;
+}
+
+/* Screen effect overlay */
+.screen-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)),
+    url('data:image/svg+xml;utf8,<svg viewBox="0 0 2 2" xmlns="http://www.w3.org/2000/svg"><path d="M1 2V0h1v1H0v1z" fill="rgba(0,212,255,0.03)"/></svg>');
+  background-size: 100% 100%, 2px 2px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  body::before {
+    background-size: 100% 100%, 30px 30px;
+  }
+}

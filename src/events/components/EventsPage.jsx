@@ -1,51 +1,23 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react';
 import DaySection from './DaySection';
 import CustomScrollbar from './CustomScrollbar';
-import eventsData from '../data/events.json';
+import { events } from '../data/events.json';
 import EventModal from './EventModal';
-import FloatingElements from "../../home/components/FloatingElements";
 import '../styles/EventsPage.css';
-import { CircuitBoard, Cpu, GithubIcon, ArrowLeft, ChevronLeft } from 'lucide-react';
-import CyberpunkHeader from './Header';
+import { ArrowLeft } from 'lucide-react';
+import '../styles/main.css';
 
 const EventsPage = () => {
   const [activeDay, setActiveDay] = useState(1);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-  const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
   
-  const sectionRefs = useRef([null, null, null]);
+  const sectionRefs = useRef([]);
   const pageRef = useRef(null);
   const canvasRef = useRef(null);
-  const animationFrameRef = useRef(null);
 
-
-
-  // Handle back navigation
-  const handleBack = useCallback(() => {
-    window.history.back();
-  }, []);
-
-  // Detect if device is mobile
-  const checkIfMobile = useCallback(() => {
-    const mobile = window.innerWidth <= 768 || 
-                  ('ontouchstart' in window) || 
-                  (navigator.maxTouchPoints > 0);
-    setIsMobile(mobile);
-  }, []);
-
-  // Handle window resize
-  const handleResize = useCallback(() => {
-    checkIfMobile();
-    const newWidth = window.innerWidth;
-    const newHeight = Math.min(window.innerHeight * 0.4, 400);
-    setCanvasSize({ width: newWidth, height: newHeight });
-  }, [checkIfMobile]);
-
-  // Optimized matrix effect for mobile
+  // Matrix rain effect
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -53,23 +25,21 @@ const EventsPage = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    canvas.width = canvasSize.width || window.innerWidth;
-    canvas.height = canvasSize.height || Math.min(window.innerHeight * 0.4, 400);
+    canvas.width = window.innerWidth;
+    canvas.height = 400; // Header height
 
-    // Adjust performance based on device type
-    const fontSize = isMobile ? 16 : 14;
-    const animationSpeed = isMobile ? 80 : 50;
-    const columns = Math.floor(canvas.width / fontSize);
-    const drops = Array(columns).fill(1);
-    const chars = '01';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
 
     ctx.font = `${fontSize}px monospace`;
 
     const matrix = () => {
-      ctx.fillStyle = isMobile ? 'rgba(0, 0, 0, 0.08)' : 'rgba(0, 0, 0, 0.05)';
+      ctx.fillStyle = 'rgba(7, 2, 21, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = '#0F0';
+      ctx.fillStyle = '#00d4ff';
       drops.forEach((y, i) => {
         const char = chars[Math.floor(Math.random() * chars.length)];
         const x = i * fontSize;
@@ -82,405 +52,134 @@ const EventsPage = () => {
       });
     };
 
-    const startAnimation = () => {
-      matrix();
-      animationFrameRef.current = setTimeout(startAnimation, animationSpeed);
+    const interval = setInterval(matrix, 100);
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      drops.length = Math.floor(canvas.width / fontSize);
+      drops.fill(1);
     };
 
-    startAnimation();
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      if (animationFrameRef.current) {
-        clearTimeout(animationFrameRef.current);
-      }
+      clearInterval(interval);
+      window.removeEventListener('resize', handleResize);
     };
-  }, [isMobile, canvasSize]);
+  }, []);
 
-  // Optimized scroll handler - restored original performance
-  const handleScroll = useCallback(() => {
-    if (!pageRef.current) return;
-    
-    const scrollPosition = pageRef.current.scrollTop;
-    const scrollHeight = pageRef.current.scrollHeight - pageRef.current.clientHeight;
-    const progress = Math.min(scrollPosition / scrollHeight, 1);
-    setScrollProgress(progress);
-    
-    // Update active day based on scroll position
-    sectionRefs.current.forEach((ref, index) => {
-      if (ref) {
-        const { offsetTop } = ref;
-        const offset = isMobile ? 100 : 200;
-        if (scrollPosition >= offsetTop - offset) {
-          setActiveDay(index + 1);
+  const handleScroll = () => {
+    if (pageRef.current) {
+      const scrollPosition = pageRef.current.scrollTop;
+      const scrollHeight = pageRef.current.scrollHeight - pageRef.current.clientHeight;
+      const progress = scrollPosition / scrollHeight;
+      setScrollProgress(progress);
+      
+      sectionRefs.current.forEach((ref, index) => {
+        if (ref) {
+          const { offsetTop } = ref;
+          if (scrollPosition >= offsetTop - 200) {
+            setActiveDay(index + 1);
+          }
         }
-      }
-    });
-  }, [isMobile]);
+      });
+    }
+  };
 
-  // Smooth scroll to day section
-  const scrollToDay = useCallback((day) => {
+  const scrollToDay = (day) => {
     const ref = sectionRefs.current[day - 1];
-    if (ref && pageRef.current) {
-      const offset = isMobile ? 20 : 50;
-      pageRef.current.scrollTo({
-        top: ref.offsetTop - offset,
+    if (ref) {
+      pageRef.current?.scrollTo({
+        top: ref.offsetTop - 150,
         behavior: 'smooth'
       });
     }
-  }, [isMobile]);
+  };
 
-  // Modal handlers with smooth animations
-  const openEventModal = useCallback((event) => {
+  const openEventModal = (event) => {
     setSelectedEvent(event);
     setIsModalOpen(true);
-    if (isMobile) {
-      document.body.style.overflow = 'hidden';
-    }
-  }, [isMobile]);
+  };
 
-  const closeEventModal = useCallback(() => {
+  const closeEventModal = () => {
     setIsModalOpen(false);
-    if (isMobile) {
-      document.body.style.overflow = 'auto';
-    }
     setTimeout(() => setSelectedEvent(null), 300);
-  }, [isMobile]);
+  };
 
-  // Initialize responsive behavior
+  const handleBackClick = () => {
+    // Navigate back to home or previous page
+    window.history.back();
+  };
+
   useEffect(() => {
-    checkIfMobile();
-    handleResize();
-
-    const pageElement = pageRef.current;
-    if (pageElement) {
-      pageElement.addEventListener('scroll', handleScroll);
+    const currentPageRef = pageRef.current;
+    if (currentPageRef) {
+      currentPageRef.addEventListener('scroll', handleScroll);
     }
     
-    const throttledResize = (() => {
-      let timeoutId = null;
-      return () => {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(handleResize, 150);
-      };
-    })();
-
-    window.addEventListener('resize', throttledResize);
-    window.addEventListener('orientationchange', throttledResize);
-    
     return () => {
-      window.removeEventListener('resize', throttledResize);
-      window.removeEventListener('orientationchange', throttledResize);
-      if (pageElement) {
-        pageElement.removeEventListener('scroll', handleScroll);
+      if (currentPageRef) {
+        currentPageRef.removeEventListener('scroll', handleScroll);
       }
     };
-  }, [handleScroll,handleResize, checkIfMobile]);
-
-  // Handle touch events for better mobile interaction
-  useEffect(() => {
-    if (!isMobile) return;
-
-    const handleTouchStart = (e) => {
-      const touch = e.touches[0];
-      if (touch) {
-        // Could implement swipe navigation here
-      }
-    };
-
-    const handleTouchMove = (e) => {
-      if (e.touches.length === 1) {
-        e.preventDefault();
-      }
-    };
-
-    document.addEventListener('touchstart', handleTouchStart, { passive: true });
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
-
-    return () => {
-      document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchmove', handleTouchMove);
-    };
-  }, [isMobile]);
-
-  // Animation variants for staggered entrance
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3
-      }
-    }
-  };
-
-  const sectionVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 50,
-      scale: 0.95
-    },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-        mass: 1
-      }
-    }
-  };
-
-  const buttonVariants = {
-    initial: { scale: 1, rotate: 0 },
-    hover: { 
-      scale: 1.05, 
-      rotate: -5,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10
-      }
-    },
-    tap: { 
-      scale: 0.95,
-      rotate: 0,
-      transition: {
-        type: "spring",
-        stiffness: 600,
-        damping: 15
-      }
-    }
-  };
-
-  const iconVariants = {
-    hover: {
-      rotate: 360,
-      scale: 1.1,
-      transition: {
-        duration: 0.6,
-        ease: "easeInOut"
-      }
-    }
-  };
+  }, []);
 
   return (
-    <motion.div 
-      className="events-page" 
-      ref={pageRef}
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-    >
-      <FloatingElements/>
-      
-  {/* Cyberpunk Back Button - Super Simplified */}
-  <motion.button
-    onClick={handleBack}
-    className={`
-      fixed top-4 left-4 z-50
-      ${isMobile ? 'w-12 h-12' : 'w-14 h-14'}
-      bg-black/80 backdrop-blur-sm
-      border-2 border-cyan-400/50
-      rounded-lg
-      transition-all duration-300 ease-out
-      shadow-lg shadow-cyan-400/20
-      cursor-pointer
-      ${isMobile ? 'touch-manipulation' : ''}
-      overflow-hidden
-      flex items-center justify-center
-      group
-      
-      hover:border-cyan-300 
-      hover:bg-cyan-400/10
-      hover:shadow-cyan-400/40
-      hover:shadow-lg
-      
-      active:border-cyan-200 
-      active:bg-cyan-400/20
-    `}
-    variants={buttonVariants}
-    initial="initial"
-    whileHover="hover"
-    whileTap="tap"
-    aria-label="Go back"
+    <div className="events-page" ref={pageRef}>
+      {/* Smaller Cyberpunk Back Button */}
+      <button className="cyber-back-button" onClick={handleBackClick}>
+        <div className="back-button-frame">
+          <div className="frame-corner top-left"></div>
+          <div className="frame-corner top-right"></div>
+          <div className="frame-corner bottom-left"></div>
+          <div className="frame-corner bottom-right"></div>
+        </div>
+        <ArrowLeft className="back-icon" />
+        <span className="back-text">BACK</span>
+        <div className="button-glow-effect"></div>
+      </button>
 
-    style={{zIndex:110}}
-  >
-    {/* Icon */}
-    <motion.div variants={iconVariants}>
-      {isMobile ? (
-        <ChevronLeft
-          className="w-7 h-7 text-cyan-300 group-hover:text-white transition-colors duration-300"
-          strokeWidth={2.5}
-        />
-      ) : (
-        <ArrowLeft
-          className="w-7 h-7 text-cyan-300 group-hover:text-white transition-colors duration-300"
-          strokeWidth={2}
-        />
-      )}
-    </motion.div>
-    
-    {/* Simple background glow on hover */}
-    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 to-purple-500/0 group-hover:from-cyan-500/20 group-hover:to-purple-500/20 transition-all duration-500 rounded-lg" />
-    
-    {/* Pulse effect */}
-    <div className="absolute inset-0 bg-cyan-400/0 group-hover:bg-cyan-400/10 transition-all duration-300 rounded-lg group-hover:animate-pulse" />
-  </motion.button>
-
-        {/* <canvas 
-          ref={canvasRef} 
-          className="matrix-canvas"
-          style={{ 
-            width: '100%', 
-            height: '100%',
-            imageRendering: isMobile ? 'pixelated' : 'auto'
-          }}
-        /> */}
-
-      {/* <motion.header 
-        className="events-header"
-      >
-        <motion.div 
-          className="header-content"
-          variants={sectionVariants}
-        >
-          <div className="logo-container">
-            <motion.div 
-              className="animated-icons"
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 200,
-                damping: 15,
-                delay: 0.5
-              }}
-            >
-              <motion.div
-                whileHover={{ rotate: 360, scale: 1.2 }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-              >
-                <CircuitBoard 
-                  className="icon icon-1" 
-                  aria-label="Circuit Board Icon"
-                />
-              </motion.div>
-              <motion.div
-                whileHover={{ rotate: -360, scale: 1.2 }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-              >
-                <Cpu 
-                  className="icon icon-2" 
-                  aria-label="CPU Icon"
-                />
-              </motion.div>
-              <motion.div
-                whileHover={{ rotate: 360, scale: 1.2 }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-              >
-                <GithubIcon 
-                  className="icon icon-3" 
-                  aria-label="GitHub Icon"
-                />
-              </motion.div>
-            </motion.div>
-            <motion.div 
-              className="glitch-container"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 20,
-                delay: 0.8
-              }}
-            >
-              <motion.h1 
-                className="gradient-text font-SDGlitch" 
-                data-text="EVENTS" 
-                style={{ fontFamily: "CyberAlert" }}
-                role="banner"
-                whileHover={{
-                  textShadow: [
-                    "0 0 20px #06b6d4",
-                    "0 0 40px #06b6d4",
-                    "0 0 20px #06b6d4"
-                  ]
-                }}
-                transition={{ duration: 0.5 }}
-              >
-                EVENTS
-              </motion.h1>
-            </motion.div>
-          </div>
-        </motion.div>
-      </motion.header> */}
-
-      <CyberpunkHeader isMobile={isMobile}/>
+      {/* Events Header with Matrix Background */}
+      <header className="events-header">
+        <canvas ref={canvasRef} className="matrix-canvas"></canvas>
+        <div className="header-content">
+          <h1 className="events-title cyber-glitch gradient-text" data-text="EVENTS" style={{fontFamily:"CyberAlert",fontSize:"l"}}>
+            EVENTS
+          </h1>
+        </div>
+      </header>
       
       <CustomScrollbar 
         progress={scrollProgress} 
         activeDay={activeDay} 
-        onDayClick={scrollToDay}
-        isMobile={isMobile}
+        onDayClick={scrollToDay} 
       />
       
-      <motion.div 
-        className="events-container"
-        variants={containerVariants}
-      >
-        {eventsData.events.map((dayData, index) => (
-          <motion.div
+      <div className="events-container">
+        {events.map((dayData, index) => (
+          <DaySection 
             key={dayData.day}
-            variants={sectionVariants}
-            viewport={{ once: true, margin: "-100px" }}
-            whileInView="visible"
-            initial="hidden"
-          >
-            <DaySection 
-              id={dayData.day}
-              ref={(el) => sectionRefs.current[index] = el}
-              dayData={dayData}
-              onEventClick={openEventModal}
-              isActive={activeDay === dayData.day}
-              isMobile={isMobile}
-            />
-          </motion.div>
-        ))}
-      </motion.div>
-
-      <AnimatePresence mode="wait">
-        {selectedEvent && (
-          <EventModal 
-            event={selectedEvent} 
-            isOpen={isModalOpen} 
-            onClose={closeEventModal}
-            isMobile={isMobile}
+            ref={el => {
+              sectionRefs.current[index] = el;
+            }}
+            dayData={dayData}
+            onEventClick={openEventModal}
+            isActive={activeDay === dayData.day}
           />
-        )}
-      </AnimatePresence>
+        ))}
+      </div>
       
-      {/* Add screen effect overlay for enhanced cyberpunk feel */}
-      <div className="screen-effect" />
-      
-      {/* Add scan line effect with motion */}
-      <motion.div 
-        className="scan-line"
-        animate={{
-          y: [0, window.innerHeight, 0]
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "linear",
-          repeatDelay: 2
-        }}
-      />
-    </motion.div>
+      {selectedEvent && (
+        <EventModal 
+          event={selectedEvent} 
+          isOpen={isModalOpen} 
+          onClose={closeEventModal} 
+        />
+      )}
+
+      {/* Scan line effect */}
+      <div className="scan-line"></div>
+    </div>
   );
 };
 

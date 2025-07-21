@@ -1,9 +1,10 @@
 .day-section {
   position: relative;
-  min-height: 50vh;
-  padding: 4rem 2rem 4rem 6rem;
+  min-height: 80vh;
+  padding: 3rem 2rem 3rem 6rem;
   opacity: 0.7;
   transition: opacity 0.5s ease;
+  background: var(--dark-bg);
 }
 
 .day-section.active {
@@ -16,19 +17,19 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 1px;
+  height: 2px;
   background: linear-gradient(
     to right,
     transparent,
-    var(--neon-blue),
-    var(--neon-pink),
+    var(--electric-blue),
+    var(--hot-pink),
     transparent
   );
   opacity: 0.5;
 }
 
 .day-header {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   position: relative;
 }
 
@@ -51,27 +52,42 @@
 }
 
 .day-number {
-  font-size: 8rem;
-  font-weight: 100;
-  color: transparent;
-  -webkit-text-stroke: 2px var(--neon-blue);
+  font-size: 6rem;
+  font-weight: 900;
   letter-spacing: 4px;
   position: relative;
   transform-style: preserve-3d;
-  animation: glitch-number 5s infinite;
+  font-family: 'Orbitron', sans-serif;
+  color: var(--vivid-orange);
+  text-shadow: 
+    0 0 10px var(--vivid-orange),
+    0 0 20px var(--vivid-orange),
+    0 0 40px var(--vivid-orange);
 }
 
-.gradient-day-number{
-  background: linear-gradient(45deg, #06B6D4, #9333EA, #06B6D4, #9333EA);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-size: 8rem;
-  font-weight: 100;
-  transform-style: preserve-3d;
-  animation: glitch-number 5s infinite;
-  letter-spacing: 4px;
+/* Cyberpunk corner decorations */
+.day-number::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 30px;
+  height: 30px;
+  border-top: 3px solid var(--electric-blue);
+  border-left: 3px solid var(--electric-blue);
+  box-shadow: 0 0 10px var(--electric-blue);
+}
+
+.day-number::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  width: 30px;
+  height: 30px;
+  border-bottom: 3px solid var(--synergy-pink);
+  border-right: 3px solid var(--synergy-pink);
+  box-shadow: 0 0 10px var(--synergy-pink);
 }
 
 .day-number-glow {
@@ -82,7 +98,7 @@
   height: 100%;
   background: radial-gradient(
     circle at center,
-    var(--neon-blue) 0%,
+    var(--vivid-orange) 0%,
     transparent 70%
   );
   opacity: 0;
@@ -95,34 +111,7 @@
     transform: translateY(0) rotateX(0deg);
   }
   50% {
-    transform: translateY(-20px) rotateX(5deg);
-  }
-}
-
-@keyframes glitch-number {
-  0%, 100% {
-    transform: none;
-    text-shadow: none;
-  }
-  10% {
-    transform: skew(-15deg);
-    text-shadow: -2px 0 var(--neon-pink), 2px 2px var(--neon-blue);
-  }
-  11% {
-    transform: none;
-    text-shadow: none;
-  }
-  50% {
-    transform: none;
-    text-shadow: none;
-  }
-  51% {
-    transform: skew(15deg);
-    text-shadow: 2px 0 var(--neon-green), -2px -2px var(--neon-blue);
-  }
-  52% {
-    transform: none;
-    text-shadow: none;
+    transform: translateY(-15px) rotateX(3deg);
   }
 }
 
@@ -133,58 +122,91 @@
   }
   50% {
     opacity: 0.4;
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 }
 
 .events-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
   position: relative;
   z-index: 2;
 }
 
 @media (max-width: 1200px) {
   .events-grid {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
   
   .day-number {
-    font-size: 10rem;
+    font-size: 5rem;
   }
 }
 
 @media (max-width: 992px) {
   .day-section {
-    padding: 3rem 2rem 4rem 4rem;
+    padding: 2.5rem 2rem 3rem 4rem;
+    min-height: 70vh;
   }
   
   .day-number {
-    font-size: 9rem;
+    font-size: 4.5rem;
+  }
+  
+  .day-header {
+    margin-bottom: 2.5rem;
   }
 }
 
 @media (max-width: 768px) {
   .day-section {
-    padding: 2rem 1rem 4rem 3rem;
+    padding: 2rem 1rem 3rem 3rem;
+    min-height: 60vh;
   }
   
   .day-number {
-    font-size: 8rem;
+    font-size: 4rem;
   }
   
   .events-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  
+  .day-header {
+    margin-bottom: 2rem;
   }
 }
 
 @media (max-width: 576px) {
   .day-section {
-    padding: 2rem 1rem 3rem 2.5rem;
+    padding: 1.5rem 1rem 2.5rem 2.5rem;
+    min-height: 50vh;
   }
   
   .day-number {
-    font-size: 7rem;
+    font-size: 3rem;
+  }
+  
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .day-number::before,
+  .day-number::after {
+    width: 20px;
+    height: 20px;
+    top: -10px;
+    left: -10px;
+  }
+  
+  .day-number::after {
+    bottom: -10px;
+    right: -10px;
+  }
+  
+  .day-header {
+    margin-bottom: 1.5rem;
   }
 }

@@ -58,64 +58,37 @@ const EventCard = ({ event, onClick, delay }) => {
     >
       <div className="event-card-border"></div>
       
-      {/* Image Section with Lazy Loading */}
-      <div 
-        ref={imageRef}
-        className="event-image"
-        style={{
-          backgroundImage: imageLoaded ? `url(${event.image})` : 'none'
-        }}
-      >
-        {/* Category moved to be over the image */}
-        <div className="event-category" style={{fontFamily:"OrbitronRegular"}}>{event.category.toUpperCase()}</div>
-      </div>
-      
-      {/* Content Section */}
-      <div className="event-card-content">
-        {/* Blurred background image with Lazy Loading */}
+      {/* Event Poster Section */}
+      <div className="event-poster-section">
         <div 
-          className="event-content-bg"
+          ref={imageRef}
+          className="event-image"
           style={{
             backgroundImage: imageLoaded ? `url(${event.image})` : 'none'
           }}
         ></div>
-        
-        {/* Retro animated background elements */}
-        <div className="retro-animations">
-          <div className="grid-lines"></div>
-          <div className="scanning-line"></div>
-          <div className="floating-squares">
-            <div className="square"></div>
-            <div className="square"></div>
-            <div className="square"></div>
-            <div className="square"></div>
+        <div className="event-category" style={{fontFamily:"OrbitronRegular"}}>
+          {event.category.toUpperCase()}
+        </div>
+      </div>
+      
+      {/* Event Details Section */}
+      <div className="event-details-section">
+        <h3 className="event-name gradient-text" style={{fontFamily:"CyberAlert"}}>
+          {event.name}
+        </h3>
+        <div className="event-details">
+          <div className="event-time" style={{fontFamily:"CyberAlert"}}>
+            {event.time}
           </div>
-          <div className="neon-particles">
-            <div className="particle"></div>
-            <div className="particle"></div>
-            <div className="particle"></div>
-            <div className="particle"></div>
-            <div className="particle"></div>
-            <div className="particle"></div>
-          </div>
-          <div className="retro-circles">
-            <div className="circle"></div>
-            <div className="circle"></div>
-            <div className="circle"></div>
+          <div className="event-location" style={{fontFamily:"CyberAlert"}}>
+            {event.venue}
           </div>
         </div>
-        
-        {/* Content overlay */}
-        <div className="event-content-overlay">
-          <h3 className="event-name" style={{fontFamily:"CyberAlert"}}>{event.name}</h3>
-          <div className="event-details">
-            <div className="event-time" style={{fontFamily:"CyberAlert"}}>{event.time}</div>
-            <div className="event-location" style={{fontFamily:"CyberAlert"}}>{event.venue}</div>
-          </div>
-          <div className="event-hover-info">
-            <span style={{fontFamily:"CyberAlert"}}>Click for details</span>
-          </div>
-        </div>
+      </div>
+
+      <div className="event-hover-info">
+        <span style={{fontFamily:"CyberAlert"}}>Click for details</span>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./HomePage.css";
+import FaqSection from './FaqSection';
 
 const SynergyHomepage = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 17, hours: 0, minutes: 0 });
@@ -510,7 +511,11 @@ const SynergyHomepage = () => {
         </div>
       </div>
     </section>
-
+      
+          {/* FAQ Section */}
+    <section className="py-20 bg-gradient-to-b from-[#0a0a0a] via-[#0f0f0f] to-black text-white">
+      <FaqSection />
+    </section>
 
       {/* Footer */}
       <footer className="bg-blue-600 py-12">
@@ -555,7 +560,10 @@ const SynergyHomepage = () => {
         </div>
       </footer>
     </div>
+    
   );
+  
 };
+
 
 export default SynergyHomepage;

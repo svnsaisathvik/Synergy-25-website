@@ -19,10 +19,11 @@ const TeamMember = ({ member, index }) => {
 
   return (
     <div
-      ref={ref}
-      className="group relative rounded-lg overflow-hidden transition-all duration-500 hover:scale-105 hover:z-10 animate-float"
-      style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
-    >
+  ref={ref}
+  className="group relative w-full max-w-[280px] sm:max-w-[290px] rounded-lg overflow-hidden transition-all duration-500 hover:scale-105 hover:z-10 animate-float"
+  style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
+>
+
       {/* Neon Border */}
       <div className="absolute inset-0 rounded-lg border-2 border-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-border-glow" />
 

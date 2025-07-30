@@ -113,16 +113,91 @@ const SpecialEvents = () => {
   const accentColors = getAccentColor(currentEvent.accent);
 
   return (
-    <section className="px-6 md:px-8 py-16 bg-gray-900/10 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-          <span 
-            className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent" 
-            style={{ fontFamily: "CyberAlert" }}
-          >
-            Special Events
-          </span>
-        </h2>
+    <section className="px-6 md:px-8 py-16 bg-gray-900/10 overflow-hidden relative">
+      
+      {/* Cool Background Effects */}
+      <div className="absolute inset-0 cyberpunk-bg">
+        {/* Matrix Rain */}
+        <div className="matrix-rain"></div>
+        
+        {/* Circuit Board Pattern */}
+        <div className="circuit-pattern"></div>
+        
+        {/* Floating Hexagons */}
+        <div className="hex-background">
+          {[...Array(15)].map((_, i) => (
+            <div
+              key={i}
+              className="hex-particle"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 10}s`,
+                animationDuration: `${8 + Math.random() * 4}s`
+              }}
+            ></div>
+          ))}
+        </div>
+        
+        {/* Digital Grid */}
+        <div className="digital-grid"></div>
+        
+        {/* Scan Lines */}
+        <div className="scan-lines-bg"></div>
+        
+        {/* Particle Stream */}
+        <div className="particle-stream">
+          {[...Array(8)].map((_, i) => (
+            <div
+              key={i}
+              className="stream-particle"
+              style={{
+                left: `${10 + i * 12}%`,
+                animationDelay: `${i * 0.5}s`
+              }}
+            ></div>
+          ))}
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        
+        {/* Enhanced Cyberpunk Heading */}
+        <div className="text-center mb-16 relative">
+          <div className="inline-block relative cyberpunk-title-container">
+            
+            {/* Glitch Background */}
+            <div className="glitch-bg"></div>
+            
+            {/* Main Title */}
+            <h2 
+              className="text-3xl md:text-4xl font-bold cyberpunk-title relative z-10"
+              style={{ fontFamily: "Orbitron, monospace" }}
+              data-text="SPECIAL EVENTS"
+            >
+              <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                SPECIAL EVENTS
+              </span>
+            </h2>
+            
+            {/* Corner Brackets */}
+            <div className="absolute -top-4 -left-8 w-8 h-8 border-t-2 border-l-2 border-cyan-400 corner-glow animate-pulse"></div>
+            <div className="absolute -top-4 -right-8 w-8 h-8 border-t-2 border-r-2 border-purple-500 corner-glow animate-pulse"></div>
+            <div className="absolute -bottom-4 -left-8 w-8 h-8 border-b-2 border-l-2 border-purple-500 corner-glow animate-pulse"></div>
+            <div className="absolute -bottom-4 -right-8 w-8 h-8 border-b-2 border-r-2 border-cyan-400 corner-glow animate-pulse"></div>
+            
+            {/* Status Bars */}
+            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 status-bar"></div>
+            <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-purple-500 to-cyan-400 status-bar"></div>
+            
+            {/* System Status */}
+            <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 text-xs font-mono text-cyan-400">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <span>[SYSTEM_ACTIVE]</span>
+              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+            </div>
+          </div>
+        </div>
         
         <div 
           className={`relative min-h-[500px] md:min-h-[600px] rounded-3xl border border-gray-700/50 bg-gradient-to-br from-gray-900/80 to-gray-800/60 backdrop-blur-xl overflow-hidden transition-all duration-300 ${
@@ -369,8 +444,159 @@ const SpecialEvents = () => {
         </div>
       </div>
       
-      {/* Custom Styles */}
+      {/* Enhanced Custom Styles */}
       <style jsx>{`
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        /* Background Effects */
+        .cyberpunk-bg {
+          background: radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.03) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 70%, rgba(138, 43, 226, 0.03) 0%, transparent 50%),
+                      radial-gradient(circle at 50% 90%, rgba(236, 72, 153, 0.02) 0%, transparent 50%);
+        }
+        
+        .matrix-rain {
+          position: absolute;
+          inset: 0;
+          background-image: 
+            radial-gradient(2px 2px at 20px 30px, rgba(0, 255, 255, 0.4), transparent),
+            radial-gradient(2px 2px at 40px 70px, rgba(138, 43, 226, 0.3), transparent),
+            radial-gradient(1px 1px at 90px 40px, rgba(236, 72, 153, 0.3), transparent),
+            radial-gradient(1px 1px at 130px 80px, rgba(59, 130, 246, 0.2), transparent);
+          background-repeat: repeat;
+          background-size: 150px 150px;
+          animation: matrix-fall 20s linear infinite;
+          opacity: 0.15;
+        }
+        
+        .circuit-pattern {
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(90deg, transparent 24%, rgba(0, 255, 255, 0.1) 25%, rgba(0, 255, 255, 0.1) 26%, transparent 27%),
+            linear-gradient(0deg, transparent 24%, rgba(138, 43, 226, 0.1) 25%, rgba(138, 43, 226, 0.1) 26%, transparent 27%);
+          background-size: 100px 100px;
+          animation: circuit-drift 30s linear infinite;
+          opacity: 0.08;
+        }
+        
+        .hex-background {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        
+        .hex-particle {
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          background: rgba(0, 255, 255, 0.3);
+          clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+          animation: hex-float 10s ease-in-out infinite;
+        }
+        
+        .digital-grid {
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+          background-size: 80px 80px;
+          animation: grid-pulse 15s ease-in-out infinite;
+          opacity: 0.2;
+        }
+        
+        .scan-lines-bg {
+          position: absolute;
+          inset: 0;
+          background: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 255, 255, 0.02) 2px,
+            rgba(0, 255, 255, 0.02) 4px
+          );
+          animation: scan-move 3s linear infinite;
+        }
+        
+        .particle-stream {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        
+        .stream-particle {
+          position: absolute;
+          width: 2px;
+          height: 20px;
+          background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.8), transparent);
+          animation: stream-flow 4s linear infinite;
+        }
+        
+        /* Enhanced Title Styles */
+        .cyberpunk-title-container {
+          position: relative;
+          padding: 20px 40px;
+        }
+        
+        .glitch-bg {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(45deg, rgba(0, 255, 255, 0.05), rgba(138, 43, 226, 0.05));
+          animation: glitch-bg 3s ease-in-out infinite;
+          border-radius: 8px;
+        }
+        
+        .cyberpunk-title {
+          position: relative;
+          text-shadow: 
+            0 0 5px rgba(0, 255, 255, 0.5),
+            0 0 10px rgba(138, 43, 226, 0.3),
+            0 0 15px rgba(236, 72, 153, 0.2),
+            0 0 20px rgba(59, 130, 246, 0.1);
+          animation: title-glow 2s ease-in-out infinite alternate;
+        }
+        
+        .cyberpunk-title::before,
+        .cyberpunk-title::after {
+          content: attr(data-text);
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0.8;
+          font-family: "Orbitron, monospace";
+        }
+        
+        .cyberpunk-title::before {
+          background: linear-gradient(90deg, #ff0080, #ff0080);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          z-index: -1;
+          animation: glitch-1 2s infinite linear alternate-reverse;
+        }
+        
+        .cyberpunk-title::after {
+          background: linear-gradient(90deg, #00f0ff, #00f0ff);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          z-index: -2;
+          animation: glitch-2 3s infinite linear alternate-reverse;
+        }
+        
+        .corner-glow {
+          box-shadow: 0 0 10px currentColor;
+        }
+        
+        .status-bar {
+          animation: status-pulse 2s ease-in-out infinite;
+          box-shadow: 0 0 10px currentColor;
+        }
+        
+        /* Existing styles */
         .grid-pattern {
           background-image: 
             linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
@@ -386,6 +612,86 @@ const SpecialEvents = () => {
             0 0 20px var(--accent-glow),
             0 0 30px var(--accent-glow),
             inset 0 0 10px var(--accent-glow);
+        }
+        
+        /* Animations */
+        @keyframes matrix-fall {
+          0% { transform: translateY(-150px); }
+          100% { transform: translateY(calc(100vh + 150px)); }
+        }
+        
+        @keyframes circuit-drift {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(100px, 100px); }
+        }
+        
+        @keyframes hex-float {
+          0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+          50% { transform: translateY(-30px) rotate(180deg); opacity: 0.8; }
+        }
+        
+        @keyframes grid-pulse {
+          0%, 100% { opacity: 0.1; }
+          50% { opacity: 0.3; }
+        }
+        
+        @keyframes scan-move {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(4px); }
+        }
+        
+        @keyframes stream-flow {
+          0% { transform: translateY(-100vh); opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { transform: translateY(100vh); opacity: 0; }
+        }
+        
+        @keyframes glitch-bg {
+          0%, 100% { transform: translate(0); filter: hue-rotate(0deg); }
+          20% { transform: translate(-1px, 1px); filter: hue-rotate(90deg); }
+          40% { transform: translate(-1px, -1px); filter: hue-rotate(180deg); }
+          60% { transform: translate(1px, 1px); filter: hue-rotate(270deg); }
+          80% { transform: translate(1px, -1px); filter: hue-rotate(360deg); }
+        }
+        
+        @keyframes title-glow {
+          0% { 
+            text-shadow: 
+              0 0 5px rgba(0, 255, 255, 0.5),
+              0 0 10px rgba(138, 43, 226, 0.3),
+              0 0 15px rgba(236, 72, 153, 0.2);
+          }
+          100% { 
+            text-shadow: 
+              0 0 10px rgba(0, 255, 255, 0.8),
+              0 0 20px rgba(138, 43, 226, 0.6),
+              0 0 30px rgba(236, 72, 153, 0.4),
+              0 0 40px rgba(59, 130, 246, 0.2);
+          }
+        }
+        
+        @keyframes glitch-1 {
+          0% { clip-path: inset(20% 0 60% 0); }
+          20% { clip-path: inset(15% 0 70% 0); }
+          40% { clip-path: inset(10% 0 80% 0); }
+          60% { clip-path: inset(30% 0 50% 0); }
+          80% { clip-path: inset(40% 0 40% 0); }
+          100% { clip-path: inset(50% 0 30% 0); }
+        }
+        
+        @keyframes glitch-2 {
+          0% { clip-path: inset(60% 0 20% 0); }
+          20% { clip-path: inset(70% 0 15% 0); }
+          40% { clip-path: inset(80% 0 10% 0); }
+          60% { clip-path: inset(50% 0 30% 0); }
+          80% { clip-path: inset(40% 0 40% 0); }
+          100% { clip-path: inset(30% 0 50% 0); }
+        }
+        
+        @keyframes status-pulse {
+          0%, 100% { opacity: 0.6; transform: scaleY(1); }
+          50% { opacity: 1; transform: scaleY(1.2); }
         }
         
         @keyframes grid-move {
@@ -414,20 +720,6 @@ const SpecialEvents = () => {
         @keyframes progress {
           0% { width: 0%; }
           100% { width: 100%; }
-        }
-        
-        @keyframes cyberpunk-glitch {
-          0% { transform: translate(0); filter: hue-rotate(0deg); }
-          10% { transform: translate(-2px, 2px); filter: hue-rotate(90deg); }
-          20% { transform: translate(-2px, -2px); filter: hue-rotate(180deg); }
-          30% { transform: translate(2px, 2px); filter: hue-rotate(270deg); }
-          40% { transform: translate(2px, -2px); filter: hue-rotate(360deg); }
-          50% { transform: translate(-2px, 2px); filter: hue-rotate(450deg); }
-          60% { transform: translate(-2px, -2px); filter: hue-rotate(540deg); }
-          70% { transform: translate(2px, 2px); filter: hue-rotate(630deg); }
-          80% { transform: translate(2px, -2px); filter: hue-rotate(720deg); }
-          90% { transform: translate(-2px, 2px); filter: hue-rotate(810deg); }
-          100% { transform: translate(0); filter: hue-rotate(900deg); }
         }
       `}</style>
     </section>

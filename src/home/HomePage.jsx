@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./HomePage.css";
-import FaqSection from './FaqSection';
+import FaqSection from './components/FaqSection';
 
 const SynergyHomepage = () => {
   const [timeLeft, setTimeLeft] = useState(getTimeRemaining());

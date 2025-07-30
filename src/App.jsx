@@ -3,7 +3,7 @@ import {Routes,Route,BrowserRouter} from "react-router-dom";
 
 const EventPage = lazy(()=>import("./events/components/EventsPage"));
 const TeamsPage = lazy(()=>import("./team/components/TeamPage"));
-const HomePage  = lazy(()=>import("./home/HomePage"));
+const HomePage  = lazy(()=>import("./home/HomePage1"));
 const ErrorPage = lazy(()=>import("./events/components/Error"));
 
 

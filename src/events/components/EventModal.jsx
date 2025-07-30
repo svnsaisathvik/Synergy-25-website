@@ -45,6 +45,7 @@ const EventModal = ({ event, isOpen, onClose }) => {
   if (!event) return null
 
   return (
+    <section id={event.id}>
     <div className={`hud-modal-overlay ${isOpen ? "open" : ""}`}>
       <div ref={modalRef} className={`hud-modal ${isOpen ? "open" : ""} ${loaded ? "loaded" : ""}`}>
         {/* HUD Frame */}
@@ -222,6 +223,7 @@ const EventModal = ({ event, isOpen, onClose }) => {
         </div>
       </div>
     </div>
+</section>
   )
 }
 

@@ -1,0 +1,102 @@
+import React, { useState } from "react";
+import "../styles/FaqFlip.css";
+
+const faqs = [{
+    question: "How will I get updates of the events?",
+    answer: "You can get updates of each event by contacting one of the SPOCS of the event or by following @synergy_iiitb on Instagram.",
+    icon: "📡"
+}, {
+    question: "Do we need to pay for any events?",
+    answer: "No, This year all events are free for everyone who registers.",
+    icon: "💰"
+}, {
+    question: "Do we need to pay for any workshops/talks?",
+    answer: "No, This year all workshops & talks are free for everyone who attends.",
+    icon: "🎓"
+}, {
+    question: "What are the steps to register?",
+    answer: "Choose your event and fill out the Google Form/Unstop Registration. Note: All IIIT-Bangalore students should register through college email id.",
+    icon: "📝"
+}, {
+    question: "Are there sponsorship opportunities for businesses or organisations?",
+    answer: "Yes, there are many. You can mail us at synergy@iiitb.ac.in Or connect on our socials for more details.",
+    icon: "🤝"
+}, {
+    question: "Are there any Workshop opportunities for businesses or individuals?",
+    answer: "Yes, there are many. You can mail us at synergy@iiitb.ac.in Or connect on our socials for more details.",
+    icon: "🔧"
+}];
+
+export default function FaqSection() {
+  const [flippedIndex, setFlippedIndex] = useState(null);
+
+  const handleFlip = (index) => {
+    setFlippedIndex(flippedIndex === index ? null : index);
+  };
+
+  return (
+    <div className="faq-section">
+      {/* Cyberpunk Background Elements */}
+      <div className="cyber-grid"></div>
+      <div className="floating-circuits">
+        <div className="circuit circuit-1"></div>
+        <div className="circuit circuit-2"></div>
+        <div className="circuit circuit-3"></div>
+      </div>
+      
+      <div className="faq-container">
+        <div className="faq-header">
+          <div className="header-decoration">
+            <div className="cyber-bracket left">[</div>
+            <h2 className="faq-title">
+              <span className="glitch-text" data-text="FAQ">FAQ</span>
+              <span className="subtitle">Frequently Asked Questions</span>
+            </h2>
+            <div className="cyber-bracket right">]</div>
+          </div>
+          <div className="header-line"></div>
+        </div>
+
+        <div className="faq-grid">
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              className={`faq-card ${flippedIndex === index ? "flipped" : ""}`}
+              onClick={() => handleFlip(index)}
+            >
+              <div className="cyber-frame">
+                <div className="frame-corner tl"></div>
+                <div className="frame-corner tr"></div>
+                <div className="frame-corner bl"></div>
+                <div className="frame-corner br"></div>
+              </div>
+              
+              <div className="flip-inner">
+                <div className="flip-front">
+                  <div className="card-content">
+                    <div className="question-icon">{faq.icon}</div>
+                    <div className="question-text">{faq.question}</div>
+                    <div className="flip-indicator">→</div>
+                  </div>
+                  <div className="scan-line"></div>
+                </div>
+                
+                <div className="flip-back">
+                  <div className="card-content">
+                    <div className="answer-text">{faq.answer}</div>
+                    <div className="back-indicator">←</div>
+                  </div>
+                  <div className="data-streams">
+                    <div className="stream stream-1"></div>
+                    <div className="stream stream-2"></div>
+                    <div className="stream stream-3"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

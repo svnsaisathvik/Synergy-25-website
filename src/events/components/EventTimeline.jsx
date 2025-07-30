@@ -1,256 +1,331 @@
-import React, { useState, useEffect, useRef } from 'react';
-import FloatingComponent from "./FloatingComponentsEvents";
-import events from "../data/events.json"
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import events from "../data/events.json";
 
-const eventData = events.events;
-
-const Timeline = () => {
+const EventTimeline = () => {
   const [day, setDay] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isInView, setIsInView] = useState(false);
   const scrollContainerRef = useRef(null);
-
-  // Get events for current day
+  const timelineRef = useRef(null);
+  const isInitialScrollDone = useRef(false);
+  const eventData = events.events;
   const currentDayEvents = eventData[day]?.list || [];
-  const days = eventData.map((dayData, index) => `day${index + 1}`);
+  const days = eventData.map((_, index) => `day${index + 1}`);
 
-  // Create circular array by duplicating events for seamless scrolling
-  const getCircularEvents = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const currentTimelineRef = timelineRef.current;
+    if (currentTimelineRef) {
+      observer.observe(currentTimelineRef);
+    }
+
+    return () => {
+      if (currentTimelineRef) {
+        observer.unobserve(currentTimelineRef);
+      }
+    };
+  }, []);
+
+  const getCircularEvents = useCallback(() => {
     if (currentDayEvents.length === 0) return [];
-    
-    // Create multiple copies for smooth circular scrolling
-    const copies = 3; // Show 3 copies of the array
+    const copies = 3;
     const circularEvents = [];
-    
     for (let i = 0; i < copies; i++) {
       currentDayEvents.forEach((event, index) => {
         circularEvents.push({
           ...event,
           circularId: `${event.id}-copy-${i}`,
           originalIndex: index,
-          copyIndex: i
         });
       });
     }
-    
     return circularEvents;
-  };
+  }, [currentDayEvents]);
 
   const circularEvents = getCircularEvents();
   const originalLength = currentDayEvents.length;
-  const middleCopyStartIndex = originalLength; // Start of middle copy
+  const middleCopyStartIndex = originalLength;
+
+  const scrollToCard = useCallback((circularIndex, smooth = true) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const cardElement = container.children[circularIndex];
+    if (cardElement) {
+      cardElement.scrollIntoView({
+        behavior: smooth ? 'smooth' : 'auto',
+        inline: 'center',
+        block: 'nearest'
+      });
+    }
+  }, []);
 
   const handleDayClick = (selectedDay) => {
+    if (selectedDay === day) return;
     setDay(selectedDay);
     setActiveIndex(0);
-    // Reset to center copy after day change
-    setTimeout(() => {
-      if (scrollContainerRef.current) {
-        const targetIndex = middleCopyStartIndex;
-        scrollToCard(targetIndex, false); // No smooth scroll for reset
-        setActiveIndex(0);
-      }
-    }, 100);
   };
 
   const handleCardClick = (circularIndex) => {
     const originalIndex = circularIndex % originalLength;
     setActiveIndex(originalIndex);
-    scrollToCard(circularIndex);
   };
 
   const handleArrowClick = (direction) => {
-    const newOriginalIndex = direction === 'left' 
-      ? (activeIndex - 1 + originalLength) % originalLength
-      : (activeIndex + 1) % originalLength;
-    
-    // Find the closest instance of this card to current scroll position
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const cardWidth = window.innerWidth >= 768 ? 384 : 320;
-    const gap = window.innerWidth >= 768 ? 32 : 20;
-    const cardWithGap = cardWidth + gap;
-    const currentScrollCenter = container.scrollLeft + container.clientWidth / 2;
-    const currentCenterIndex = Math.round((currentScrollCenter - cardWidth / 2) / cardWithGap);
-
-    // Find the target card index in the circular array
-    let targetCircularIndex;
+    if (originalLength === 0) return;
+    let newActiveIndex = activeIndex;
     if (direction === 'left') {
-      targetCircularIndex = currentCenterIndex - 1;
+      newActiveIndex = (activeIndex - 1 + originalLength) % originalLength;
     } else {
-      targetCircularIndex = currentCenterIndex + 1;
+      newActiveIndex = (activeIndex + 1) % originalLength;
     }
-
-    setActiveIndex(newOriginalIndex);
-    scrollToCard(targetCircularIndex);
+    setActiveIndex(newActiveIndex);
   };
 
-  const scrollToCard = (circularIndex, smooth = true) => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const cardWidth = window.innerWidth >= 768 ? 384 : 320;
-    const gap = window.innerWidth >= 768 ? 32 : 20;
-    const cardWithGap = cardWidth + gap;
-    const containerWidth = container.clientWidth;
-    
-    // Calculate scroll position to center the card
-    const targetScrollLeft = (circularIndex * cardWithGap) - (containerWidth - cardWidth) / 2;
-    
-    container.scrollTo({
-      left: Math.max(0, targetScrollLeft),
-      behavior: smooth ? 'smooth' : 'auto'
-    });
-  };
-
-  // Initialize scroll position when component mounts or day changes
   useEffect(() => {
-    if (circularEvents.length > 0) {
-      setTimeout(() => {
-        // Start at the middle copy
-        const initialIndex = middleCopyStartIndex + activeIndex;
-        scrollToCard(initialIndex, false);
-      }, 100);
+    if (isInView && originalLength > 0 && scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const targetCircularIndex = middleCopyStartIndex + activeIndex;
+      const cardElement = container.children[targetCircularIndex];
+
+      if (cardElement) {
+        if (!isInitialScrollDone.current) {
+          isInitialScrollDone.current = true;
+          const containerWidth = container.offsetWidth;
+          const cardWidth = cardElement.offsetWidth;
+          const cardOffsetLeft = cardElement.offsetLeft;
+          const scrollLeft = cardOffsetLeft - (containerWidth / 2) + (cardWidth / 2);
+          container.scrollLeft = scrollLeft;
+        } else {
+          scrollToCard(targetCircularIndex, true);
+        }
+      }
     }
-  }, [day]);
+  }, [activeIndex, day, originalLength, middleCopyStartIndex, scrollToCard, isInView]);
 
-  // Handle infinite scroll wraparound
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container || originalLength === 0) return;
-
-    const handleScroll = () => {
-      const cardWidth = window.innerWidth >= 768 ? 384 : 320;
-      const gap = window.innerWidth >= 768 ? 32 : 20;
-      const cardWithGap = cardWidth + gap;
-      const scrollLeft = container.scrollLeft;
-      const containerWidth = container.clientWidth;
-      const maxScroll = container.scrollWidth - containerWidth;
-
-      // Calculate which card is in center
-      const centerPosition = scrollLeft + containerWidth / 2;
-      const currentCenterIndex = Math.round((centerPosition - cardWidth / 2) / cardWithGap);
-      const clampedIndex = Math.max(0, Math.min(circularEvents.length - 1, currentCenterIndex));
-      
-      // Update active index based on original index
-      const newActiveIndex = clampedIndex % originalLength;
-      if (newActiveIndex !== activeIndex) {
-        setActiveIndex(newActiveIndex);
-      }
-
-      // Handle wraparound - if we're near the edges, jump to equivalent position
-      const threshold = cardWithGap * 2; // 2 cards from edge
-      
-      if (scrollLeft < threshold) {
-        // Near beginning, jump to end of first copy (middle section)
-        const newScrollLeft = scrollLeft + (originalLength * cardWithGap);
-        container.scrollTo({ left: newScrollLeft, behavior: 'auto' });
-      } else if (scrollLeft > maxScroll - threshold) {
-        // Near end, jump to beginning of last copy (middle section)
-        const newScrollLeft = scrollLeft - (originalLength * cardWithGap);
-        container.scrollTo({ left: newScrollLeft, behavior: 'auto' });
-      }
-    };
-
-    let isScrolling;
-    const debouncedHandleScroll = () => {
-      clearTimeout(isScrolling);
-      isScrolling = setTimeout(handleScroll, 50);
-    };
-
-    container.addEventListener('scroll', debouncedHandleScroll);
-    return () => container.removeEventListener('scroll', debouncedHandleScroll);
-  }, [activeIndex, originalLength, circularEvents.length]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-purple-900 text-white overflow-hidden relative">
+    <div ref={timelineRef} style={{
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: '#000',
+      color: 'white',
+      position: 'relative',
+      fontFamily: "'Orbitron', monospace",
+      overflow: 'hidden'
+    }}>
       {/* Background Effects */}
-      <FloatingComponent/>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent animate-pulse"></div>
-        <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-400/30 to-transparent animate-pulse" style={{ animationDelay: '300ms' }}></div>
-        <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent animate-pulse" style={{ animationDelay: '700ms' }}></div>
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        zIndex: 0
+      }}>
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `
+            linear-gradient(30deg, transparent 24%, rgba(0, 255, 255, 0.1) 25%, rgba(0, 255, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.1) 75%, rgba(0, 255, 255, 0.1) 76%, transparent 77%),
+            linear-gradient(-30deg, transparent 24%, rgba(255, 0, 255, 0.1) 25%, rgba(255, 0, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(255, 0, 255, 0.1) 75%, rgba(255, 0, 255, 0.1) 76%, transparent 77%)
+          `,
+          backgroundSize: '50px 86.6px',
+          animation: 'hexFlow 20s linear infinite'
+        }}></div>
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: `
+            radial-gradient(circle at 25% 25%, rgba(0, 255, 255, 0.2) 0%, transparent 50%),
+            radial-gradient(circle at 75% 75%, rgba(255, 0, 255, 0.2) 0%, transparent 50%)
+          `,
+          animation: 'circuitPulse 3s ease-in-out infinite alternate'
+        }}></div>
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 py-8 lg:py-16">
-        
-        {/* Timeline Title */}
-        <div className="text-center mb-8 lg:mb-12">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-4 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent tracking-wider" style={{ fontFamily: "CyberAlert" }}>
+      {/* Scan Lines Effect */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.4))',
+        backgroundSize: '100% 4px',
+        animation: 'flicker 0.15s infinite',
+        pointerEvents: 'none',
+        zIndex: 5
+      }}></div>
+
+      <div style={{
+        position: 'relative',
+        zIndex: 10,
+        width: '100%',
+        maxWidth: '1280px',
+        margin: '0 auto',
+        padding: '1.5rem'
+      }}>
+        {/* Title */}
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <h1 style={{
+            fontSize: 'clamp(2rem, 6vw, 3.5rem)',
+            fontWeight: 900,
+            background: 'linear-gradient(90deg, #0ff, #f0f, #0ff)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            color: 'transparent',
+            textTransform: 'uppercase',
+            position: 'relative',
+            textShadow: '0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #f0f, 0 0 40px #f0f',
+            fontFamily: "'Orbitron', monospace",
+            margin: 0,
+            marginBottom: '1rem',
+            backgroundSize: '200% 100%',
+            animation: 'titleGradientFlow 3s ease-in-out infinite alternate'
+          }}>
             EVENT TIMELINE
           </h1>
-          <div className="w-32 h-1 bg-gradient-to-r from-cyan-400 to-purple-600 mx-auto"></div>
+          <div style={{
+            width: '150px',
+            height: '3px',
+            background: 'linear-gradient(90deg, #0ff, #f0f, #0ff)',
+            margin: '0 auto',
+            borderRadius: '2px'
+          }}></div>
         </div>
 
-        {/* Poster Display */}
-        <div className="relative mb-8 lg:mb-12">
-          {/* Left Scroll Button */}
-          <button
+        {/* Day Selector */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+          <div style={{
+            position: 'relative',
+            display: 'flex',
+            background: 'rgba(0, 0, 0, 0.7)',
+            borderRadius: '9999px',
+            padding: '0.25rem',
+            border: '1px solid rgba(0, 255, 255, 0.3)',
+            backdropFilter: 'blur(10px)',
+            boxShadow: '0 0 20px rgba(0, 255, 255, 0.2)'
+          }}>
+            <div style={{
+              position: 'absolute',
+              height: 'calc(100% - 8px)',
+              top: '4px',
+              width: `calc(${100 / days.length}% - 4px)`,
+              left: `calc(${day * (100 / days.length)}% + 6px)`,
+              background: 'linear-gradient(45deg, #0ff, #f0f)',
+              borderRadius: '9999px',
+              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              boxShadow: '0 0 20px rgba(0, 255, 255, 0.5)'
+            }}></div>
+            {days.map((d, index) => (
+              <button
+                key={d}
+                style={{
+                  position: 'relative',
+                  zIndex: 10,
+                  padding: '0.5rem 1.5rem',
+                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                  color: day === index ? '#000' : '#fff',
+                  textTransform: 'uppercase',
+                  borderRadius: '9999px',
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontFamily: "'Orbitron', monospace",
+                  transition: 'all 0.3s'
+                }}
+                onClick={() => handleDayClick(index)}
+              >
+                Day {index + 1}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Navigation and Events */}
+        <div style={{ position: 'relative', marginBottom: '2rem' }}>
+          {/* Left Arrow */}
+          <button 
             onClick={() => handleArrowClick('left')}
-            className="absolute left-2 md:left-6 top-1/2 transform -translate-y-1/2 z-30 group"
-            style={{ fontFamily: "CyberAlert" }}
+            className="timeline-nav-arrow timeline-nav-arrow-left"
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '1rem',
+              transform: 'translateY(-50%)',
+              zIndex: 40,
+              width: '3rem',
+              height: '3rem',
+              background: 'rgba(0, 0, 0, 0.9)',
+              border: '2px solid #0ff',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#0ff',
+              cursor: 'pointer',
+              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              boxShadow: '0 0 15px rgba(0, 255, 255, 0.4)'
+            }}
           >
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
-              <div className="relative w-14 h-14 md:w-20 md:h-20 bg-gradient-to-r from-gray-900 via-black to-gray-900 backdrop-blur-sm border-2 border-cyan-400/50 rounded-full flex items-center justify-center text-white hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300 group-hover:scale-105">
-                <div className="absolute inset-1 bg-gradient-to-r from-cyan-400/10 to-purple-600/10 rounded-full"></div>
-                <svg className="relative z-10 w-6 h-6 md:w-8 md:h-8 group-hover:scale-110 transition-transform duration-200 drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
-                </svg>
-                {/* Circuit pattern */}
-                <div className="absolute inset-2 opacity-20">
-                  <svg className="w-full h-full" viewBox="0 0 40 40">
-                    <circle cx="20" cy="20" r="15" fill="none" stroke="url(#buttonGradient)" strokeWidth="0.5"/>
-                    <circle cx="20" cy="20" r="2" fill="url(#buttonGradient)"/>
-                    <defs>
-                      <linearGradient id="buttonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#06B6D4"/>
-                        <stop offset="100%" stopColor="#9333EA"/>
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-              </div>
-            </div>
+            <svg style={{ width: '1.5rem', height: '1.5rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
+            </svg>
           </button>
 
-          {/* Right Scroll Button */}
-          <button
+          {/* Right Arrow */}
+          <button 
             onClick={() => handleArrowClick('right')}
-            className="absolute right-2 md:right-6 top-1/2 transform -translate-y-1/2 z-30 group"
-            style={{ fontFamily: "CyberAlert" }}
+            className="timeline-nav-arrow timeline-nav-arrow-right"
+            style={{
+              position: 'absolute',
+              top: '50%',
+              right: '1rem',
+              transform: 'translateY(-50%)',
+              zIndex: 40,
+              width: '3rem',
+              height: '3rem',
+              background: 'rgba(0, 0, 0, 0.9)',
+              border: '2px solid #0ff',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#0ff',
+              cursor: 'pointer',
+              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              boxShadow: '0 0 15px rgba(0, 255, 255, 0.4)'
+            }}
           >
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
-              <div className="relative w-14 h-14 md:w-20 md:h-20 bg-gradient-to-r from-gray-900 via-black to-gray-900 backdrop-blur-sm border-2 border-cyan-400/50 rounded-full flex items-center justify-center text-white hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300 group-hover:scale-105">
-                <div className="absolute inset-1 bg-gradient-to-r from-cyan-400/10 to-purple-600/10 rounded-full"></div>
-                <svg className="relative z-10 w-6 h-6 md:w-8 md:h-8 group-hover:scale-110 transition-transform duration-200 drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
-                </svg>
-                {/* Circuit pattern */}
-                <div className="absolute inset-2 opacity-20">
-                  <svg className="w-full h-full" viewBox="0 0 40 40">
-                    <circle cx="20" cy="20" r="15" fill="none" stroke="url(#buttonGradient2)" strokeWidth="0.5"/>
-                    <circle cx="20" cy="20" r="2" fill="url(#buttonGradient2)"/>
-                    <defs>
-                      <linearGradient id="buttonGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#06B6D4"/>
-                        <stop offset="100%" stopColor="#9333EA"/>
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-              </div>
-            </div>
+            <svg style={{ width: '1.5rem', height: '1.5rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+            </svg>
           </button>
 
+          {/* Events Container */}
           <div 
             ref={scrollContainerRef}
-            className="flex items-center gap-5 md:gap-8 overflow-x-auto pb-6 px-4 md:px-8 lg:px-16 scroll-smooth"
+            className="timeline-scroll-container"
             style={{
-              scrollSnapType: 'x mandatory',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1.5rem',
+              overflowX: 'auto',
+              overflowY: 'visible',
+              padding: '4rem',
               scrollbarWidth: 'none',
-              msOverflowStyle: 'none'
+              msOverflowStyle: 'none',
+              WebkitOverflowScrolling: 'touch',
+              position: 'relative',
+              scrollSnapType: 'x mandatory',
+              justifyContent: 'flex-start'
             }}
           >
             {circularEvents.map((event, circularIndex) => {
@@ -262,6 +337,7 @@ const Timeline = () => {
               );
 
               return (
+                <a href={"/events#"+event.id}>
                 <EventPoster
                   key={event.circularId}
                   event={event}
@@ -269,229 +345,465 @@ const Timeline = () => {
                   distance={distance}
                   onClick={() => handleCardClick(circularIndex)}
                 />
+                </a>
               );
             })}
           </div>
         </div>
-
-        {/* Day Selection */}
-        <div className="flex justify-center mb-6">
-          <div className="relative bg-gradient-to-r from-cyan-400/20 to-purple-600/20 p-1 rounded-full border border-cyan-400/30">
-            <div className="relative flex items-center bg-black/50 rounded-full backdrop-blur-sm">
-              <div
-                className="absolute h-10 bg-gradient-to-r from-cyan-400/30 to-purple-600/30 border border-cyan-400/50 rounded-full transition-all duration-300 ease-out"
-                style={{ 
-                  width: `calc(${100 / days.length}% - 4px)`,
-                  left: `calc(${day * (100 / days.length)}% + 6px)`,
-                }}
-              />
-              {days.map((d, index) => (
-                <button
-                  key={d}
-                  className={`relative z-10 px-8 py-3 text-sm md:text-base font-bold transition-all duration-300 hover:scale-105 ${
-                    day === index ? "bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent" : "text-white/70 hover:text-cyan-300"
-                  }`}
-                  style={{ fontFamily: "CyberAlert" }}
-                  onClick={() => handleDayClick(index)}
-                >
-                  Day {index + 1}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
         
         {/* Navigation Dots */}
-        <div className="flex justify-center gap-3 mb-6">
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', marginBottom: '2rem' }}>
           {currentDayEvents.map((_, index) => (
             <button
               key={index}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === activeIndex 
-                  ? 'bg-gradient-to-r from-cyan-400 to-purple-600 scale-125 shadow-lg shadow-cyan-400/50' 
-                  : 'bg-white/30 hover:bg-white/50'
-              }`}
-              onClick={() => {
-                setActiveIndex(index);
-                // Find current center and navigate to closest instance of target
-                const container = scrollContainerRef.current;
-                if (container) {
-                  const cardWidth = window.innerWidth >= 768 ? 384 : 320;
-                  const gap = window.innerWidth >= 768 ? 32 : 20;
-                  const cardWithGap = cardWidth + gap;
-                  const currentScrollCenter = container.scrollLeft + container.clientWidth / 2;
-                  const currentCenterIndex = Math.round((currentScrollCenter - cardWidth / 2) / cardWithGap);
-                  
-                  // Find closest copy of target event
-                  const targetCircularIndex = middleCopyStartIndex + index;
-                  scrollToCard(targetCircularIndex);
-                }
+              style={{
+                width: '0.875rem',
+                height: '0.875rem',
+                borderRadius: '50%',
+                background: 'transparent',
+                position: 'relative',
+                cursor: 'pointer',
+                border: 'none',
+                padding: 0
               }}
-            />
+              onClick={() => setActiveIndex(index)}
+            >
+              <div style={{
+                position: 'absolute',
+                inset: index === activeIndex ? 0 : '25%',
+                borderRadius: '50%',
+                background: index === activeIndex ? '#0ff' : 'rgba(255, 255, 255, 0.3)',
+                transition: 'all 0.3s ease',
+                boxShadow: index === activeIndex ? '0 0 8px #0ff' : 'none'
+              }}></div>
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                border: `1px solid ${index === activeIndex ? '#0ff' : 'rgba(255, 255, 255, 0.2)'}`,
+                borderRadius: '50%',
+                transition: 'all 0.3s ease',
+                transform: index === activeIndex ? 'scale(1.4)' : 'scale(1)',
+                boxShadow: index === activeIndex ? '0 0 12px rgba(0, 255, 255, 0.5)' : 'none'
+              }}></div>
+            </button>
           ))}
+        </div>
+
+        {/* Status Display */}
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+            padding: '0.5rem 1.25rem',
+            background: 'rgba(0, 0, 0, 0.7)',
+            border: '1px solid rgba(0, 255, 255, 0.3)',
+            borderRadius: '9999px',
+            backdropFilter: 'blur(10px)',
+            fontFamily: "'Orbitron', monospace"
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+              <div style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                background: '#0f0',
+                boxShadow: '0 0 8px #0f0',
+                animation: 'pulse 2s infinite'
+              }}></div>
+              <span style={{ fontSize: '0.6875rem', fontWeight: 600, color: '#0f0' }}>SYSTEM ONLINE</span>
+            </div>
+            <div style={{ width: '1px', height: '0.875rem', background: 'rgba(0, 255, 255, 0.3)' }}></div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+              <div style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                background: '#0ff',
+                boxShadow: '0 0 8px #0ff',
+                animation: 'pulse 2s infinite'
+              }}></div>
+              <span style={{ fontSize: '0.6875rem', fontWeight: 600, color: '#0ff' }}>
+                EVENT {activeIndex + 1}/{originalLength}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <style jsx>{`
-        ::-webkit-scrollbar {
-          display: none;
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        @keyframes hexFlow {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-86.6px); }
+        }
+        
+        @keyframes circuitPulse {
+          0% { opacity: 0.3; }
+          100% { opacity: 0.6; }
+        }
+        
+        @keyframes flicker {
+          0% { opacity: 0.8; }
+          50% { opacity: 0.6; }
+          100% { opacity: 0.8; }
+        }
+        
+        @keyframes pulse {
+          0% { opacity: 1; }
+          50% { opacity: 0.5; }
+          100% { opacity: 1; }
+        }
+        
+        @keyframes titleGradientFlow {
+          0% { 
+            background-position: 0% 50%;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8));
+          }
+          100% { 
+            background-position: 100% 50%;
+            filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.8));
+          }
+        }
+
+        @media (max-width: 768px) {
+            .timeline-nav-arrow {
+                top: 0;
+                transform: translateY(0);
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+            .timeline-nav-arrow-left {
+                left: 1rem;
+            }
+            .timeline-nav-arrow-right {
+                right: 1rem;
+            }
+            .timeline-scroll-container {
+                padding: 5rem 1rem 4rem 1rem !important;
+            }
         }
       `}</style>
     </div>
   );
 };
 
-const EventPoster = ({ 
-  event, 
-  isActive, 
-  distance, 
-  onClick
-}) => {
+const EventPoster = ({ event, isActive, distance, onClick }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    if (!isActive) {
+      setIsFlipped(false);
+    }
+  }, [isActive]);
 
   const handleMouseEnter = () => {
+    setIsHovered(true);
     if (isActive) {
       setIsFlipped(true);
     }
   };
 
   const handleMouseLeave = () => {
+    setIsHovered(false);
     setIsFlipped(false);
   };
+  
+  const scale = isActive ? 1.15 : distance === 1 ? 0.9 : 0.75;
+  const opacity = isActive ? 1 : distance === 1 ? 0.7 : 0.4;
+  const zIndex = isActive ? 30 : distance === 1 ? 20 : 10;
 
   return (
     <div
-      className="flex-shrink-0 cursor-pointer transition-all duration-500 group"
       style={{
+        flexShrink: 0,
+        cursor: 'pointer',
+        position: 'relative',
+        width: '240px',
         scrollSnapAlign: 'center',
-        transform: `scale(${isActive ? 1 : distance === 1 ? 0.85 : 0.7})`,
-        opacity: isActive ? 1 : distance === 1 ? 0.8 : 0.5,
-        zIndex: isActive ? 20 : distance === 1 ? 10 : 0
+        minHeight: '400px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        transform: `scale(${scale}) ${isActive ? 'translateY(-10px)' : ''}`,
+        opacity,
+        zIndex,
+        transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
       }}
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="flex flex-col items-center">
-        {/* Poster Container with Flip Animation */}
-        <div 
-          className="relative w-80 md:w-96 h-96 md:h-[500px] mb-4 transition-transform duration-700"
-          style={{
-            perspective: '1000px',
-            transformStyle: 'preserve-3d'
-          }}
-        >
-          <div 
-            className="relative w-full h-full transition-transform duration-700"
-            style={{
-              transformStyle: 'preserve-3d',
-              transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
-            }}
-          >
-            {/* Front of Poster */}
-            <div 
-              className="absolute inset-0"
-              style={{ backfaceVisibility: 'hidden' }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/50 to-purple-600/50 rounded-2xl p-1 shadow-2xl shadow-cyan-400/20 group-hover:shadow-cyan-400/40 transition-shadow duration-300">
-                <div className="relative w-full h-full rounded-xl overflow-hidden bg-black">
-                  {/* Poster Image */}
-                  <img 
-                    src={event.image} 
-                    alt={event.name}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  
-                  {/* Glowing border effect on hover */}
-                  <div className="absolute inset-0 rounded-xl border-2 border-transparent bg-gradient-to-r from-cyan-400/0 to-purple-600/0 group-hover:from-cyan-400/60 group-hover:to-purple-600/60 transition-all duration-500 pointer-events-none"></div>
-                  
-                  {/* Scan lines effect */}
-                  <div className="absolute inset-0 opacity-20 pointer-events-none">
-                    <div className="h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent absolute top-1/4 left-0 right-0 animate-pulse"></div>
-                    <div className="h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent absolute top-3/4 left-0 right-0 animate-pulse" style={{ animationDelay: '150ms' }}></div>
-                  </div>
-                </div>
-              </div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{
+          position: 'relative',
+          width: '15rem',
+          height: '20rem',
+          perspective: '1200px',
+          margin: '0 auto'
+        }}>
+          {isActive && (
+            <div style={{
+              position: 'absolute',
+              inset: '-15px',
+              border: '2px solid rgba(0, 255, 255, 0.3)',
+              borderRadius: '1.25rem',
+              zIndex: -1,
+              animation: 'activePulse 2s ease-in-out infinite',
+              boxShadow: '0 0 25px rgba(0, 255, 255, 0.2)'
+            }}></div>
+          )}
+          
+          <div style={{
+            position: 'relative',
+            width: '100%',
+            height: '100%',
+            transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+            transformStyle: 'preserve-3d',
+            transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
+          }}>
+            {/* Front of card */}
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              backfaceVisibility: 'hidden',
+              borderRadius: '0.875rem',
+              overflow: 'hidden',
+              border: '2px solid transparent',
+              background: 'linear-gradient(#000, #000) padding-box, linear-gradient(45deg, #0ff, #f0f, #0ff) border-box'
+            }}>
+              <img 
+                src={event.image} 
+                alt={event.name}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                  borderRadius: '0.75rem'
+                }}
+              />
+              
+              {/* Hover overlay */}
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%)',
+                zIndex: 2,
+                opacity: isHovered ? 1 : 0,
+                transition: 'opacity 0.3s ease',
+                borderRadius: '0.75rem'
+              }}></div>
+              
+              {/* Glow effect */}
+              <div style={{
+                position: 'absolute',
+                inset: '-3px',
+                background: 'linear-gradient(45deg, #0ff, #f0f, #0ff)',
+                borderRadius: '0.875rem',
+                zIndex: -1,
+                opacity: isHovered ? 0.7 : 0,
+                filter: 'blur(12px)',
+                transition: 'opacity 0.4s ease'
+              }}></div>
             </div>
 
-            {/* Back of Poster - Event Details */}
-            <div 
-              className="absolute inset-0"
-              style={{ 
-                backfaceVisibility: 'hidden',
-                transform: 'rotateY(180deg)'
-              }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/50 to-purple-600/50 rounded-2xl p-1 shadow-2xl shadow-purple-400/20">
-                <div className="relative w-full h-full rounded-xl overflow-hidden bg-gradient-to-br from-cyan-900/95 via-blue-900/95 to-black backdrop-blur-sm">
-                  <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-center text-center">
-                    {/* Event Title */}
-                    <h3 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-4 tracking-wide" style={{ fontFamily: "CyberAlert" }}>
-                      {event.name}
-                    </h3>
-                    
-                    {/* Event Details */}
-                    <div className="space-y-2 text-cyan-300 text-sm md:text-base font-bold" style={{ fontFamily: "OrbitronBold" }}>
-                    {event.about && (
-                        <div className="flex justify-center items-center gap-2">
-                          <div className="w-2 h-2 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-pulse"></div>
-                          <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent font-bold">{event.about}</span>
-                        </div>
-                      )}
-                      <div className="flex justify-center items-center gap-2" style={{fontFamily:"OrbitronBold"}}>
-                        <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-full animate-pulse"></div>
-                        <span className="font-bold" style={{fontFamily:"OrbitronBold"}}>Time: {event.time}</span>
-                      </div>
+            {/* Back of card */}
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              backfaceVisibility: 'hidden',
+              borderRadius: '0.875rem',
+              overflow: 'hidden',
+              border: '2px solid transparent',
+              background: 'linear-gradient(135deg, #0a0a23 0%, #1a1a3a 100%)',
+              transform: 'rotateY(180deg)',
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
+              <div style={{
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100%',
+                padding: '1.5rem',
+                zIndex: 1,
+                textAlign: 'center'
+              }}>
+                <h3 style={{
+                  fontSize: '1.25rem',
+                  fontWeight: 700,
+                  color: '#0ff',
+                  textTransform: 'uppercase',
+                  marginBottom: '1rem',
+                  textAlign: 'center',
+                  textShadow: '0 0 8px rgba(0, 255, 255, 0.5)',
+                  fontFamily: "'Orbitron', monospace",
+                  lineHeight: 1.2,
+                  wordWrap: 'break-word'
+                }}>
+                  {event.name}
+                </h3>
+                
+                <div style={{
+                  fontFamily: "'Orbitron', monospace",
+                  color: '#fff',
+                  width: '100%',
+                  flex: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.75rem'
+                }}>
+                  {event.about && (
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.375rem',
+                      padding: '0.375rem 0.5rem',
+                      background: 'rgba(0, 0, 0, 0.3)',
+                      borderRadius: '0.375rem',
+                      border: '1px solid rgba(0, 255, 255, 0.1)',
+                      minHeight: '2rem'
+                    }}>
+                      <div style={{
+                        width: '6px',
+                        height: '6px',
+                        borderRadius: '50%',
+                        background: 'linear-gradient(45deg, #ff6b00, #ffa500)',
+                        flexShrink: 0
+                      }}></div>
+                      <span style={{
+                        fontWeight: 600,
+                        fontSize: '0.8rem',
+                        textAlign: 'center',
+                        lineHeight: 1.3,
+                        flex: 1,
+                        wordWrap: 'break-word',
+                        overflowWrap: 'break-word',
+                        background: 'linear-gradient(45deg, #ff6b00, #ffa500)',
+                        WebkitBackgroundClip: 'text',
+                        backgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        color: '#ffa500'
+                      }}>
+                        {event.about}
+                      </span>
                     </div>
-                    
-                  </div>
+                  )}
                   
-                  {/* Circuit Pattern Background */}
-                  <div className="absolute inset-0 opacity-10 pointer-events-none">
-                    <svg className="w-full h-full" viewBox="0 0 100 100">
-                      <path d="M10,10 L90,10 L90,90 L10,90 Z" fill="none" stroke="url(#circuitGradient)" strokeWidth="0.5"/>
-                      <circle cx="20" cy="20" r="1.5" fill="url(#circuitGradient)"/>
-                      <circle cx="80" cy="20" r="1.5" fill="url(#circuitGradient)"/>
-                      <circle cx="20" cy="80" r="1.5" fill="url(#circuitGradient)"/>
-                      <circle cx="80" cy="80" r="1.5" fill="url(#circuitGradient)"/>
-                      <circle cx="50" cy="50" r="2" fill="url(#circuitGradient)"/>
-                      <path d="M20,20 L80,80 M80,20 L20,80" stroke="url(#circuitGradient)" strokeWidth="0.3"/>
-                      <defs>
-                        <linearGradient id="circuitGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="#06B6D4"/>
-                          <stop offset="100%" stopColor="#9333EA"/>
-                        </linearGradient>
-                      </defs>
-                    </svg>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.375rem',
+                    padding: '0.375rem 0.5rem',
+                    background: 'rgba(0, 0, 0, 0.3)',
+                    borderRadius: '0.375rem',
+                    border: '1px solid rgba(0, 255, 255, 0.1)',
+                    minHeight: '2rem'
+                  }}>
+                    <div style={{
+                      width: '6px',
+                      height: '6px',
+                      borderRadius: '50%',
+                      background: 'linear-gradient(45deg, #00ffff, #0080ff)',
+                      flexShrink: 0
+                    }}></div>
+                    <span style={{
+                      fontWeight: 600,
+                      fontSize: '0.8rem',
+                      textAlign: 'center',
+                      lineHeight: 1.3,
+                      flex: 1,
+                      wordWrap: 'break-word',
+                      overflowWrap: 'break-word'
+                    }}>
+                      Time: {event.time}
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Active indicator */}
           {isActive && (
-            <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
-              <div className="w-4 h-4 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-full animate-pulse shadow-lg shadow-cyan-400/50"></div>
+            <div style={{
+              position: 'absolute',
+              top: '-1.25rem',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              zIndex: 10
+            }}>
+              <div style={{
+                width: '1rem',
+                height: '1rem',
+                background: '#0ff',
+                borderRadius: '50%',
+                position: 'relative',
+                animation: 'activePulse 1.5s infinite',
+                boxShadow: '0 0 15px #0ff'
+              }}></div>
             </div>
           )}
         </div>
 
-        {/* Event Name */}
-        <div className="text-center px-4">
-          <h3 className="text-xl md:text-2xl font-bold text-white mb-2 leading-tight tracking-wide" style={{ fontFamily: "CyberAlert" }}>
+        <div style={{ textAlign: 'center', paddingLeft: '1rem', paddingRight: '1rem', marginTop: '1.5rem' }}>
+          <h3 style={{
+            fontSize: isActive ? '1.125rem' : '1rem',
+            fontWeight: 700,
+            color: isActive ? '#0ff' : '#fff',
+            textTransform: 'uppercase',
+            textShadow: isActive ? '0 0 15px rgba(0, 255, 255, 0.8)' : '0 0 8px rgba(0, 255, 255, 0.3)',
+            transition: 'all 0.4s ease',
+            fontFamily: "'Orbitron', monospace",
+            lineHeight: 1.2,
+            textAlign: 'center',
+            margin: 0,
+            wordWrap: 'break-word',
+            overflowWrap: 'break-word',
+            maxWidth: '240px',
+            minHeight: '1.5rem'
+          }}>
             {event.name}
           </h3>
+          
           {isActive && !isFlipped && (
-            <div className="text-sm bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent" style={{ fontFamily: "SDGlitch" }}>
-              {event.time}
+            <div style={{ marginTop: '0.5rem' }}>
+              <div style={{
+                width: '45px',
+                height: '1.5px',
+                background: 'linear-gradient(90deg, transparent, #0ff, transparent)',
+                margin: '0.5rem auto'
+              }}></div>
+              <div style={{
+                fontSize: '0.875rem',
+                color: '#0ff',
+                fontFamily: "'Orbitron', monospace",
+                fontWeight: 600,
+                textAlign: 'center',
+                margin: 0
+              }}>
+                {event.time}
+              </div>
             </div>
           )}
         </div>
       </div>
+
+      <style>{`
+        @keyframes activePulse {
+          0% { transform: scale(1); opacity: 0.5; }
+          50% { transform: scale(1.02); opacity: 0.8; }
+          100% { transform: scale(1); opacity: 0.5; }
+        }
+      `}</style>
     </div>
   );
 };
 
-export default Timeline;
+export default EventTimeline;

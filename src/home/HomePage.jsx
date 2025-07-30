@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./HomePage.css";
 import FaqSection from './FaqSection';
-
 const SynergyHomepage = () => {
   const [timeLeft, setTimeLeft] = useState(getTimeRemaining());
   const [isLoaded, setIsLoaded] = useState(false);
@@ -68,6 +67,17 @@ const SynergyHomepage = () => {
     />
   );
 };
+const sponsorLogos = [
+  '/logo.png',
+  '/logo.png',
+  '/logo.png',
+   '/logo.png',
+    '/logo.png',
+     '/logo.png',
+      '/logo.png',
+       '/logo.png'
+
+];
 const neonPink = "linear-gradient(135deg, #FF4E9B 0%, #B100E8 100%)";
   const neonCyan = "linear-gradient(135deg, #00F0FF 0%, #008BFF 100%)";
   const neonPurple = "linear-gradient(135deg, #D200FF 0%, #7800FF 100%)";
@@ -102,123 +112,77 @@ const neonPink = "linear-gradient(135deg, #FF4E9B 0%, #B100E8 100%)";
       `}</style>
 
      {/* Navigation */}
-<nav className="relative z-50 bg-[#0a0a23] bg-opacity-95 backdrop-blur-sm">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex items-center justify-between h-16">
-      {/* Logo + Title */}
-      <div className="flex items-center space-x-3">
-        <img
-          src="/logo.png"
-          alt="Synergy 2025 Logo"
-          className="h-10 w-auto object-contain"
-        />
-        {/* Optional: text beside logo */}
-        {/* <span className="text-2xl font-bold text-white anurati-font">SYNERGY'25</span> */}
-      </div>
-
-      {/* Navigation Links */}
-      <div className="flex space-x-6">
-        <a
-          href="/events"
-          className="text-gray-300 hover:text-pink-400 transition duration-200 font-semibold text-lg quicksand-font"
-        >
-          Events
-        </a>
-        <a href="#about" className="text-white hover:text-cyan-400 transition duration-200 font-medium text-lg quicksand-font">About</a>
-
-        <a
-          href="#faq"
-          className="text-gray-300 hover:text-pink-400 transition duration-200 font-semibold text-lg quicksand-font"
-        >
-          FAQ
-        </a>
-        <a
-          href="#contact-us"
-          className="text-gray-300 hover:text-pink-400 transition duration-200 font-semibold text-lg quicksand-font"
-        >
-          Contact Us
-        </a>
-        <a
-          href="/teams"
-          className="text-gray-300 hover:text-pink-400 transition duration-200 font-semibold text-lg quicksand-font"
-        >
-          Team
-        </a>
-      </div>
-    </div>
-  </div>
-</nav>
-
+     <Navbar />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img 
-            src="landing.png" 
-            alt="Background" 
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Animated Blocks - More casual positioning around the text */}
-        <div className="absolute inset-0">
-          {/* Casual blocks around SYNERGY text */}
-         
-          {/* Casual blocks around 2025 text */}
-          <AnimatedBlock delay={0}   initialX={900} initialY={500} finalX={200} finalY={360} gradient={neonPink}   size="w-16 h-16" scrollY={scrollY} isLoaded={isLoaded} />
-      <AnimatedBlock delay={200} initialX={800} initialY={400} finalX={320} finalY={300} gradient={neonCyan}   size="w-20 h-20" scrollY={scrollY} isLoaded={isLoaded} />
-      <AnimatedBlock delay={400} initialX={1000} initialY={450} finalX={400} finalY={380} gradient={neonPurple} size="w-18 h-18" scrollY={scrollY} isLoaded={isLoaded} />
-      <AnimatedBlock delay={600} initialX={850} initialY={370} finalX={280} finalY={260} gradient={neonOrange} size="w-14 h-14" scrollY={scrollY} isLoaded={isLoaded} />
-      <AnimatedBlock delay={800} initialX={1100} initialY={530} finalX={500} finalY={420} gradient={neonGreen}  size="w-16 h-16" scrollY={scrollY} isLoaded={isLoaded} />
-        
-        </div>
-
-        {/* Central Logo */}
-        <div className="relative z-20 text-center">
-          <div className="mb-12">
-            <div className="relative inline-block">
-              {/* Synergy Text - Always visible */}
-              <div className="relative">
-                <div className="text-8xl font-bold mb-4 tracking-wider anurati-font">
-                  <span className="text-white">SYNERGY</span>
-                </div>
-                <div className="text-6xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent anurati-font">
-                  2025
-                </div>
-              </div>
-            </div>
-          </div>
-
-</div>
-
-          {/* Countdown Timer */}
-          {/* Countdown Timer */}
-<div className={`mb-8 transition-all duration-1000 delay-2000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-  <div className="flex justify-center items-center space-x-12 bg-gradient-to-r from-slate-800/50 to-slate-700/50 backdrop-blur-sm rounded-2xl px-8 py-6 border border-slate-600/30">
-    
-    {/* Days */}
-    <div className="text-center">
-      <div className="text-sm text-gray-400">Days</div>
-      <div className="text-5xl font-bold text-white trebuchet-font">{timeLeft.days}</div>
-    </div>
-
-    {/* Hours */}
-    <div className="text-center">
-      <div className="text-sm text-gray-400">Hours</div>
-      <div className="text-5xl font-bold text-white trebuchet-font">{timeLeft.hours.toString().padStart(2, '0')}</div>
-    </div>
-
-    {/* Minutes */}
-    <div className="text-center">
-      <div className="text-sm text-gray-400">Minutes</div>
-      <div className="text-5xl font-bold text-white trebuchet-font">{timeLeft.minutes.toString().padStart(2, '0')}</div>
-    </div>
+<section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  {/* Background Image */}
+  <div className="absolute inset-0 -z-10">
+    <img 
+      src="landing.png" 
+      alt="Background" 
+      className="w-full h-full object-cover object-center"
+    />
   </div>
 
-  <div className="text-4xl font-bold text-white mt-4 trebuchet-font">to go</div>
+  {/* Animated Blocks */}
+  <div className="absolute inset-0 pointer-events-none">
+    <AnimatedBlock delay={0}   initialX={900} initialY={500} finalX={200} finalY={360} gradient={neonPink}   size="w-12 h-12 md:w-16 md:h-16" scrollY={scrollY} isLoaded={isLoaded} />
+    <AnimatedBlock delay={200} initialX={800} initialY={400} finalX={320} finalY={300} gradient={neonCyan}   size="w-16 h-16 md:w-20 md:h-20" scrollY={scrollY} isLoaded={isLoaded} />
+    <AnimatedBlock delay={400} initialX={1000} initialY={450} finalX={400} finalY={380} gradient={neonPurple} size="w-14 h-14 md:w-18 md:h-18" scrollY={scrollY} isLoaded={isLoaded} />
+    <AnimatedBlock delay={600} initialX={850} initialY={370} finalX={280} finalY={260} gradient={neonOrange} size="w-12 h-12 md:w-14 md:h-14" scrollY={scrollY} isLoaded={isLoaded} />
+    <AnimatedBlock delay={800} initialX={1100} initialY={530} finalX={500} finalY={420} gradient={neonGreen}  size="w-14 h-14 md:w-16 md:h-16" scrollY={scrollY} isLoaded={isLoaded} />
+  </div>
+
+  {/* Central Logo */}
+   <div className="relative z-20 text-center px-4">
+    <div className="mb-10 sm:mb-12">
+     <div className="anurati-font max-w-[90vw] mx-auto overflow-hidden">
+  <div className="anurati-font mx-auto max-w-[90vw] px-2 overflow-hidden">
+      <h1 className="font-bold tracking-widest text-white text-[12vw] sm:text-[6vw] md:text-[5vw] lg:text-[4.5vw] xl:text-[4vw] leading-[1.1]">
+        SYNERGY
+      </h1>
+    </div>
+
+        <div className="text-[7vw] sm:text-4xl md:text-5xl lg:text-6xl bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-bold">
+  2025
 </div>
-      </section>
+
+      </div>
+    </div>
+
+    {/* Countdown Timer */}
+    <div className={`transition-all duration-1000 delay-2000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+      <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 bg-gradient-to-r from-slate-800/50 to-slate-700/50 backdrop-blur-sm rounded-2xl px-6 py-5 sm:px-8 sm:py-6 border border-slate-600/30">
+        
+        {/* Days */}
+        <div className="text-center">
+          <div className="text-sm text-gray-400">Days</div>
+          <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white trebuchet-font">{timeLeft.days}</div>
+        </div>
+
+        {/* Hours */}
+        <div className="text-center">
+          <div className="text-sm text-gray-400">Hours</div>
+          <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white trebuchet-font">
+            {timeLeft.hours.toString().padStart(2, '0')}
+          </div>
+        </div>
+
+        {/* Minutes */}
+        <div className="text-center">
+          <div className="text-sm text-gray-400">Minutes</div>
+          <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white trebuchet-font">
+            {timeLeft.minutes.toString().padStart(2, '0')}
+          </div>
+        </div>
+      </div>
+
+      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-4 trebuchet-font">to go</div>
+    </div>
+  </div>
+</section>
+
       {/* Events Section */}
       <section id="events" className="py-20 relative">
         <div className="max-w-7xl mx-auto px-4 text-center">
@@ -500,7 +464,9 @@ const neonPink = "linear-gradient(135deg, #FF4E9B 0%, #B100E8 100%)";
     <section  id="faq" className="py-20 bg-gradient-to-b from-[#0a0a0a] via-[#0f0f0f] to-black text-white">
       <FaqSection />
     </section>
-
+ <section id="sponsors">
+        <Sponsors sponsors={sponsorLogos} />
+      </section>
       {/* Footer */}
 <footer  id = "contact-us"className="bg-[#0a0a23] py-12 border-t border-purple-800">
   <div className="max-w-7xl mx-auto px-4">

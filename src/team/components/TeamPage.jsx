@@ -9,7 +9,7 @@ const TeamPage = () => {
 
   return (
     <div
-      className="relative min-h-screen bg-gradient-to-br from-[#090418] via-[#0F0B30] to-[#060620] overflow-hidden text-white font-['CyberAlert'] bg-[url('/image.png')] bg-cover bg-center opacity-90"
+      className="relative min-h-screen bg-gradient-to-br from-[#090418] via-[#0A071B] to-[#060620] overflow-hidden text-white font-['CyberAlert'] bg-[url('/image.png')] bg-cover bg-center opacity-90"
     >
       <div className="relative z-10 container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row">

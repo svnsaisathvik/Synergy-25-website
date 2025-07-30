@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./HomePage.css";
-import FaqSection from './components/FaqSection';
+import FaqSection from './FaqSection';
 
 const SynergyHomepage = () => {
   const [timeLeft, setTimeLeft] = useState(getTimeRemaining());
@@ -434,23 +434,13 @@ const neonPink = "linear-gradient(135deg, #FF4E9B 0%, #B100E8 100%)";
           </div>
 
           {/* Event Posters Grid */}
-          <div className="grid grid-cols-6 gap-4 mb-12">
-            {[...Array(12)].map((_, i) => (
-              <div
-                key={i}
-                className="aspect-[3/4] bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300 cursor-pointer group overflow-hidden"
-              >
-                <div className="w-full h-full flex flex-col items-center justify-center p-4 group-hover:scale-105 transition-transform duration-300">
-                  <div className="text-red-500 font-bold text-lg mb-2 trebuchet-font">DECEPTIVE</div>
-                  <div className="text-white text-sm text-center mb-2 quicksand-font">AI VS REALITY</div>
-                  <div className="text-xs text-gray-300 text-center quicksand-font">DEEP FAKE CHALLENGE</div>
-                  <div className="flex-1 flex items-end">
-                    <div className="text-xs text-gray-400 quicksand-font">REAL-TIME EVENT</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <CardCarousel3D
+  cards={[...Array(6)].map((_, i) => ({
+    title: `DECEPTIVE ${i + 1}`,
+    description: 'AI VS REALITY\nDEEP FAKE CHALLENGE',
+    linkText: 'REAL-TIME EVENT',
+  }))}
+/>
         </div>
       </section>
 {/* About Section */}

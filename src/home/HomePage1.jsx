@@ -1,321 +1,222 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import "./styles/HomePage1.css";
 import FaqSection from './components/FaqSection';
 import EventTimeline from '../events/components/EventTimeline';
 import SpecialEvents from "./components/SpecialEvents";
 import AboutSection from "./components/AboutSection";
+import Navbar from "./components/Navigation";
+import Footer from "./components/Footer";
+
+// Register the GSAP ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
+
+// Define block configurations for different screen sizes
+const blockConfigs = {
+  desktop: [
+    { id: 'd1', finalX: '-25vw', finalY: '-20vh', size: 'w-24 h-24', gradient: 'linear-gradient(135deg, #FF4E9B 0%, #B100E8 100%)' },
+    { id: 'd2', finalX: '28vw', finalY: '-15vh', size: 'w-20 h-20', gradient: 'linear-gradient(135deg, #00F0FF 0%, #008BFF 100%)' },
+    { id: 'd3', finalX: '-30vw', finalY: '25vh', size: 'w-16 h-16', gradient: 'linear-gradient(135deg, #D200FF 0%, #7800FF 100%)' },
+    { id: 'd4', finalX: '32vw', finalY: '20vh', size: 'w-28 h-28', gradient: 'linear-gradient(135deg, #FF9F1C 0%, #FF3C00 100%)' },
+    { id: 'd5', finalX: '-35vw', finalY: '0vh', size: 'w-12 h-12', gradient: 'linear-gradient(135deg, #00FFAE 0%, #00FFC2 100%)' },
+    { id: 'd6', finalX: '20vw', finalY: '30vh', size: 'w-20 h-20', gradient: 'linear-gradient(135deg, #FF4E9B 0%, #B100E8 100%)' },
+  ],
+  mobile: [
+    { id: 'm1', finalX: '-40vw', finalY: '-20vh', size: 'w-16 h-16', gradient: 'linear-gradient(135deg, #FF4E9B 0%, #B100E8 100%)' },
+    { id: 'm2', finalX: '42vw', finalY: '-15vh', size: 'w-20 h-20', gradient: 'linear-gradient(135deg, #00F0FF 0%, #008BFF 100%)' },
+    { id: 'm3', finalX: '-45vw', finalY: '25vh', size: 'w-12 h-12', gradient: 'linear-gradient(135deg, #D200FF 0%, #7800FF 100%)' },
+    { id: 'm4', finalX: '48vw', finalY: '20vh', size: 'w-24 h-24', gradient: 'linear-gradient(135deg, #FF9F1C 0%, #FF3C00 100%)' },
+  ]
+};
+
+// --- Countdown Timer Logic ---
+function getTimeRemaining() {
+  const targetDate = new Date("2025-11-07T00:00:00");
+  const now = new Date();
+  const total = targetDate - now;
+
+  if (total <= 0) {
+    return { days: 0, hours: 0, minutes: 0 };
+  }
+
+  const days = Math.floor(total / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((total / (1000 * 60)) % 60);
+
+  return { days, hours, minutes };
+}
+
 
 const SynergyHomepage = () => {
   const [timeLeft, setTimeLeft] = useState(getTimeRemaining());
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+  const containerRef = useRef(null);
+  const heroRef = useRef(null);
+  const titleRef = useRef(null);
+  const timerRef = useRef(null);
+  const blocksRef = useRef([]);
 
-  function getTimeRemaining() {
-    const targetDate = new Date("2025-11-07T00:00:00");
-    const now = new Date();
-    const total = targetDate - now;
-
-    if (total <= 0) {
-      return { days: 0, hours: 0, minutes: 0 };
-    }
-
-    const days = Math.floor(total / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((total / (1000 * 60)) % 60);
-
-    return { days, hours, minutes };
-  }
-
+  // Effect for countdown timer
   useEffect(() => {
-    // Clean up any lingering styles on component mount
-    document.body.style.overflow = 'auto';
-    document.documentElement.style.overflow = 'auto';
-    
-    const timer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 2000);
-
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-
     const countdownTimer = setInterval(() => {
       setTimeLeft(getTimeRemaining());
     }, 60000); // Update every minute
 
-    return () => {
-      clearTimeout(timer);
-      clearInterval(countdownTimer);
-      window.removeEventListener("scroll", handleScroll);
-      // Clean up on unmount
-      document.body.style.overflow = 'auto';
-      document.documentElement.style.overflow = 'auto';
-    };
+    return () => clearInterval(countdownTimer);
   }, []);
 
-  const AnimatedBlock = ({ delay, initialX, initialY, finalX, finalY, gradient, size, scrollY, isLoaded }) => {
-    const [position, setPosition] = useState({ x: initialX, y: initialY });
 
-    useEffect(() => {
-      if (isLoaded) {
-        setTimeout(() => {
-          setPosition({ x: finalX, y: finalY });
-        }, delay);
-      }
-    }, [isLoaded, delay, finalX, finalY]);
+  // GSAP animations
+  useGSAP(() => {
+    let mm = gsap.matchMedia();
 
-    const translateY = position.y - scrollY * 0.5;
-    const translateString = `translate(${position.x}px, ${translateY}px)`;
+    const createAnimations = (blocks, isDesktop) => {
+      gsap.set(blocks, { xPercent: -50, yPercent: -50, left: '50%', top: '50%', scale: isDesktop ? 1.2 : 1.5 });
+      gsap.set([titleRef.current, timerRef.current], { opacity: 0, scale: 0.95 });
 
-    return (
-      <div
-        className={`absolute rounded-lg ${size}`}
-        style={{
-          background: gradient,
-          transform: translateString,
-          transition: "transform 1s ease-out",
-          boxShadow: "0 0 20px rgba(255, 0, 255, 0.5), 0 0 30px rgba(0, 255, 255, 0.3)",
-        }}
-      />
-    );
-  };
+      const tl = gsap.timeline({
+        delay: 0.5,
+        onComplete: () => {
+          ScrollTrigger.create({
+            trigger: heroRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1,
+            animation: gsap.to(blocks, { y: '80vh', ease: 'none' }),
+          });
+        }
+      });
+      
+      // 1. Enhanced Cyberpunk Glitch Effect
+      tl.to(blocks, {
+        x: () => `random(-25, 25)`,
+        y: () => `random(-25, 25)`,
+        skewX: () => `random(-20, 20)`,
+        opacity: () => `random(0.4, 0.9)`,
+        filter: 'blur(3px)',
+        duration: 0.01,
+        repeat: 2,
+        ease: 'power3.inOut',
+        stagger: { each: 0.05, from: 'center' },
+      })
+      .to(blocks, { filter: 'blur(0px)', skewX: 0, duration: 0.2 }, "-=0.1");
 
-  const neonPink = "linear-gradient(135deg, #FF4E9B 0%, #B100E8 100%)";
-  const neonCyan = "linear-gradient(135deg, #00F0FF 0%, #008BFF 100%)";
-  const neonPurple = "linear-gradient(135deg, #D200FF 0%, #7800FF 100%)";
-  const neonOrange = "linear-gradient(135deg, #FF9F1C 0%, #FF3C00 100%)";
-  const neonGreen = "linear-gradient(135deg, #00FFAE 0%, #00FFC2 100%)";
+      // 2. Move blocks to final positions and reveal content
+      tl.to(blocks, {
+          x: (i) => blockConfigs[isDesktop ? 'desktop' : 'mobile'][i].finalX,
+          y: (i) => blockConfigs[isDesktop ? 'desktop' : 'mobile'][i].finalY,
+          scale: 1,
+          opacity: 0.85,
+          duration: 1,
+          ease: 'power2.out',
+          stagger: { each: 0.1, from: 'random' },
+        }, ">-0.2")
+        .to([titleRef.current, timerRef.current], {
+          opacity: 1,
+          scale: 1,
+          duration: 1.2,
+          ease: 'power2.out',
+          stagger: 0.2,
+        }, "<0.5");
+    };
+
+    mm.add("(min-width: 768px)", () => {
+      createAnimations(blocksRef.current.slice(0, blockConfigs.desktop.length), true);
+    });
+
+    mm.add("(max-width: 767px)", () => {
+      createAnimations(blocksRef.current.slice(blockConfigs.desktop.length), false);
+    });
+
+  }, { scope: containerRef });
 
   return (
-    <div className="homepage-container">
-      {/* Load Fonts */}
+    <div ref={containerRef} className="homepage-container">
+      {/* Styles */}
       <style jsx>{`
+        /* Font imports remain the same */
         @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
-        
         @font-face {
           font-family: 'Anurati';
-          src: url('../../public/fonts/Anurati-Regular.otf') format('opentype');
+          src: url('/fonts/Anurati-Regular.otf') format('opentype');
           font-weight: normal;
           font-style: normal;
         }
-        
-        .anurati-font {
-          font-family: 'Anurati', 'Trebuchet MS', 'Arial Black', sans-serif;
-          font-weight: normal;
-          letter-spacing: 0.1em;
-        }
-        
-        .quicksand-font {
-          font-family: 'Quicksand', sans-serif;
-        }
-        
-        .trebuchet-font {
-          font-family: 'Trebuchet MS', sans-serif;
-        }
-        
-        .orbitron-font {
-          font-family: 'Orbitron', monospace;
-        }
-
-        /* Homepage specific styles to prevent layout conflicts */
+        .anurati-font { font-family: 'Anurati', 'Trebuchet MS', sans-serif; letter-spacing: 0.1em; }
+        .trebuchet-font { font-family: 'Trebuchet MS', sans-serif; }
         .homepage-container {
-          min-height: 100vh;
           background: #000;
           color: white;
           width: 100%;
           overflow-x: hidden;
           position: relative;
         }
-
-        .homepage-section {
-          position: relative;
-          width: 100%;
-          z-index: 1;
-        }
-
-        .homepage-section-content {
-          position: relative;
-          z-index: 2;
-          width: 100%;
-          box-sizing: border-box;
+        .animated-block {
+          filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.4)) drop-shadow(0 0 15px rgba(255, 0, 255, 0.5));
         }
       `}</style>
-
-      {/* Navigation */}
-      <nav className="relative z-50 bg-[#0a0a23] bg-opacity-95 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo + Title */}
-            <div className="flex items-center space-x-3">
-              <img
-                src="/logo.png"
-                alt="Synergy 2025 Logo"
-                className="h-10 w-auto object-contain"
-              />
-            </div>
-
-            {/* Navigation Links */}
-            <div className="flex space-x-6">
-              <a
-                href="/events"
-                className="text-gray-300 hover:text-pink-400 transition duration-200 font-semibold text-lg quicksand-font"
-              >
-                Events
-              </a>
-              <a href="#about" className="text-white hover:text-cyan-400 transition duration-200 font-medium text-lg quicksand-font">About</a>
-              <a
-                href="#faq"
-                className="text-gray-300 hover:text-pink-400 transition duration-200 font-semibold text-lg quicksand-font"
-              >
-                FAQ
-              </a>
-              <a
-                href="#contact-us"
-                className="text-gray-300 hover:text-pink-400 transition duration-200 font-semibold text-lg quicksand-font"
-              >
-                Contact Us
-              </a>
-              <a
-                href="/teams"
-                className="text-gray-300 hover:text-pink-400 transition duration-200 font-semibold text-lg quicksand-font"
-              >
-                Team
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
+      
+      <Navbar />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
+      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden p-4">
         <div className="absolute inset-0">
-          <img 
-            src="landing.png" 
-            alt="Background" 
-            className="w-full h-full object-cover"
-          />
+          <img src="landing.png" alt="Background" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-black/30"></div> {/* Dark overlay for readability */}
         </div>
 
         {/* Animated Blocks */}
-        <div className="absolute inset-0">
-          <AnimatedBlock delay={0}   initialX={900} initialY={500} finalX={200} finalY={360} gradient={neonPink}   size="w-16 h-16" scrollY={scrollY} isLoaded={isLoaded} />
-          <AnimatedBlock delay={200} initialX={800} initialY={400} finalX={320} finalY={300} gradient={neonCyan}   size="w-20 h-20" scrollY={scrollY} isLoaded={isLoaded} />
-          <AnimatedBlock delay={400} initialX={1000} initialY={450} finalX={400} finalY={380} gradient={neonPurple} size="w-18 h-18" scrollY={scrollY} isLoaded={isLoaded} />
-          <AnimatedBlock delay={600} initialX={850} initialY={370} finalX={280} finalY={260} gradient={neonOrange} size="w-14 h-14" scrollY={scrollY} isLoaded={isLoaded} />
-          <AnimatedBlock delay={800} initialX={1100} initialY={530} finalX={500} finalY={420} gradient={neonGreen}  size="w-16 h-16" scrollY={scrollY} isLoaded={isLoaded} />
+        <div className="absolute inset-0 z-10">
+           {blockConfigs.desktop.map((block, i) => (
+             <div key={block.id} ref={el => blocksRef.current[i] = el} className={`animated-block absolute rounded-lg ${block.size} hidden md:block`} style={{ background: block.gradient }}/>
+           ))}
+           {blockConfigs.mobile.map((block, i) => (
+             <div key={block.id} ref={el => blocksRef.current[blockConfigs.desktop.length + i] = el} className={`animated-block absolute rounded-lg ${block.size} md:hidden`} style={{ background: block.gradient }} />
+           ))}
         </div>
 
-        {/* Central Logo */}
-        <div className="relative z-20 text-center">
-          <div className="mb-12">
-            <div className="relative inline-block">
-              {/* Synergy Text - Always visible */}
-              <div className="relative">
-                <div className="text-8xl font-bold mb-4 tracking-wider anurati-font">
-                  <span className="text-white">SYNERGY</span>
-                </div>
-                <div className="text-6xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent anurati-font">
-                  2025
-                </div>
+        {/* Central Content */}
+        <div className="relative z-20 text-center flex flex-col items-center">
+          {/* Title */}
+          <div ref={titleRef} className="mb-8 md:mb-12">
+              <div className="text-[10vw] md:text-8xl font-bold mb-2 md:mb-4 tracking-wider anurati-font text-white">
+                SYNERGY
               </div>
-            </div>
+              <div className="text-[7vw] md:text-6xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent anurati-font">
+                2025
+              </div>
           </div>
 
           {/* Countdown Timer */}
-          <div className={`mb-8 transition-all duration-1000 delay-2000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="flex justify-center items-center space-x-12 bg-gradient-to-r from-slate-800/50 to-slate-700/50 backdrop-blur-sm rounded-2xl px-8 py-6 border border-slate-600/30">
-              
-              {/* Days */}
+          <div ref={timerRef}>
+            <div className="flex justify-center items-center space-x-4 md:space-x-8 bg-black/40 backdrop-blur-sm rounded-2xl px-6 md:px-8 py-4 md:py-6 border border-slate-600/50">
               <div className="text-center">
-                <div className="text-sm text-gray-400">Days</div>
-                <div className="text-5xl font-bold text-white trebuchet-font">{timeLeft.days}</div>
+                <div className="text-[4vw] md:text-5xl font-bold text-white trebuchet-font">{timeLeft.days}</div>
+                <div className="text-xs md:text-sm text-gray-300 tracking-widest">DAYS</div>
               </div>
-
-              {/* Hours */}
               <div className="text-center">
-                <div className="text-sm text-gray-400">Hours</div>
-                <div className="text-5xl font-bold text-white trebuchet-font">{timeLeft.hours.toString().padStart(2, '0')}</div>
+                <div className="text-[4vw] md:text-5xl font-bold text-white trebuchet-font">{timeLeft.hours.toString().padStart(2, '0')}</div>
+                <div className="text-xs md:text-sm text-gray-300 tracking-widest">HOURS</div>
               </div>
-
-              {/* Minutes */}
               <div className="text-center">
-                <div className="text-sm text-gray-400">Minutes</div>
-                <div className="text-5xl font-bold text-white trebuchet-font">{timeLeft.minutes.toString().padStart(2, '0')}</div>
+                <div className="text-[4vw] md:text-5xl font-bold text-white trebuchet-font">{timeLeft.minutes.toString().padStart(2, '0')}</div>
+                <div className="text-xs md:text-sm text-gray-300 tracking-widest">MINUTES</div>
               </div>
             </div>
-
-            <div className="text-4xl font-bold text-white mt-4 trebuchet-font">to go</div>
+            <div className="text-xl md:text-2xl font-bold text-white mt-4 trebuchet-font tracking-widest">TO GO</div>
           </div>
         </div>
       </section>
 
-      {/* Event Timeline Section - Properly isolated */}
-      <section className="homepage-section relative w-full bg-black">
-        <div className="homepage-section-content w-full" style={{ isolation: 'isolate' }}>
-          <EventTimeline/>
-        </div>
-      </section>
-
-      {/* About Section - Fixed spacing and alignment */}
-          <AboutSection/>
-
-      
-      {/* Special Events Section - Fixed spacing and alignment */}
-          <SpecialEvents/>
-
-      
-      {/* FAQ Section - Proper spacing */}
-      <section id="faq">
-          <FaqSection />
-      </section>
-
-      {/* Footer - Fixed spacing */}
-      <footer id="contact-us" className="relative w-full bg-[#0a0a23] py-12 border-t border-purple-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0">
-            
-            {/* IIITB Section */}
-            <div className="bg-white p-1 rounded-lg shadow-md">
-              <img
-                src="/IIITB-logo.png"
-                alt="IIIT Bangalore Logo"
-                className="h-12 w-auto object-contain bg-[#0a0a23]"
-              />
-            </div>
-
-            {/* Synergy Logo Section */}
-            <div className="flex items-center space-x-3">
-              <img
-                src="/logo.png"
-                alt="Synergy 2025 Logo"
-                className="h-10 w-auto object-contain"
-              />
-            </div>
-
-            {/* Contact Icons */}
-            <div>
-              <div className="text-white font-semibold mb-3 text-center md:text-left quicksand-font">CONTACT US</div>
-              <div className="flex space-x-4">
-                {['📧', '📱', '💼', '📞'].map((icon, idx) => (
-                  <div
-                    key={idx}
-                    className="w-9 h-9 bg-white rounded-full flex items-center justify-center hover:scale-110 transform transition-all duration-200 shadow-md"
-                  >
-                    <span className="text-blue-600 text-lg">{icon}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Footer Glow Divider */}
-          <div className="mt-10">
-            <div className="h-1.5 w-full bg-gradient-to-r from-pink-500 via-blue-500 to-purple-600 rounded-full opacity-60 blur-sm" />
-            <p className="text-center text-sm text-gray-400 mt-6">© 2025 Synergy. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      {/* Other Sections */}
+      <AboutSection />
+      <EventTimeline />
+      <SpecialEvents />
+      <FaqSection />
+      <Footer />
     </div>
   );
 };

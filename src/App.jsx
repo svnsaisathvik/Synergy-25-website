@@ -23,7 +23,7 @@ function App() {
           <Route path="/" element={<HomePage/>}></Route>
           <Route path="/events" element={<EventPage/>}></Route>
           <Route path="/teams" element={<TeamsPage/>}></Route>
-          <Route path="*" element={<Error/>}></Route>
+          <Route path="*" element={<ErrorPage/>}></Route>
         </Routes>
       </BrowserRouter>
     </>

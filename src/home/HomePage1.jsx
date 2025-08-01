@@ -10,9 +10,21 @@ import SpecialEvents from "./components/SpecialEvents";
 import AboutSection from "./components/AboutSection";
 import Navbar from "./components/Navigation";
 import Footer from "./components/Footer";
-
+import Sponsors from "./components/Sponsors";
 // Register the GSAP ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
+const sponsorLogos = [
+  "https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png",
+  "https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png",
+  "https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png",
+  "https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png",
+  "https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png",
+  "https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png",
+  "https://1000logos.net/wp-content/uploads/2021/10/Meta-Logo.png",
+  "https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png",
+  "https://1000logos.net/wp-content/uploads/2021/05/Intel-logo.png",
+];
+
 
 // Define block configurations for different screen sizes
 const blockConfigs = {
@@ -215,6 +227,9 @@ const SynergyHomepage = () => {
       <AboutSection />
       <EventTimeline />
       <SpecialEvents />
+       <section id="sponsors">
+        <Sponsors sponsors={sponsorLogos} />
+      </section>
       <FaqSection />
       <Footer />
     </div>

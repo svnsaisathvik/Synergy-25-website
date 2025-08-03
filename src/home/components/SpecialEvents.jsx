@@ -6,39 +6,38 @@ const SpecialEvents = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   // Sample special events data with cutout-style images
-  const specialEvents = [
-    {
-      id: 1,
-      heading: "AI & Machine Learning Summit",
-      description: "Dive deep into the future of artificial intelligence with industry experts and cutting-edge workshops. Experience hands-on demos, network with AI pioneers, and discover breakthrough technologies that will shape tomorrow.",
-      image: "https://assets-in.bmscdn.com/discovery-catalog/events/et00395817-cwnnyuflce-landscape.jpg", // Robot/AI themed
-      accent: "cyan"
-    },
-    {
-      id: 2,
-      heading: "Cybersecurity Championship",
-      description: "Test your skills in ethical hacking, penetration testing, and digital forensics competitions. Join elite hackers in real-world simulations and prove your cybersecurity expertise in our advanced challenge arena.",
-      image: "https://cdn.prod.website-files.com/63a71c562e3ccbc6f6a40f0f/67b98625472de816d0951c58_65bcbb02d38aec8f6ce1f1ab_L%2526D_Cyber%2526ITSecurity_Hero.png", // Hacker/cyber themed
-      accent: "purple"
-    },
-    {
-      id: 3,
-      heading: "Quantum Computing Workshop",
-      description: "Explore the revolutionary world of quantum computing and its applications. Learn from quantum researchers and experience the power of quantum algorithms in solving complex computational problems.",
-      image: "https://cdn.mos.cms.futurecdn.net/CBcmkyZ8v4tAc8PSDcEgvM.jpg", // Tech/quantum themed
-      accent: "blue"
-    },
-    {
-      id: 4,
-      heading: "Neural Interface Demo",
-      description: "Witness the future of human-computer interaction through brain-computer interfaces. Experience cutting-edge neurotechnology and see how thoughts can control digital environments in real-time.",
-      image: "src/team/assets/Organisers/sathvik.jpg", // Person/neural themed
-      accent: "pink"
-    }
-  ];
+const specialEvents = [
+  {
+    id: 1,
+    heading: "AI & Machine Learning Summit",
+    description: "Dive deep into the future of artificial intelligence with industry experts and cutting-edge workshops. Experience hands-on demos, network with AI pioneers, and discover breakthrough technologies that will shape tomorrow.",
+    image: "https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", // Speaker presenting in front of slides
+    accent: "cyan"
+  },
+  {
+    id: 2,
+    heading: "Cybersecurity Championship",
+    description: "Test your skills in ethical hacking, penetration testing, and digital forensics competitions. Join elite hackers in real-world simulations and prove your cybersecurity expertise in our advanced challenge arena.",
+    image: "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", // Dark room + tech ambience + speaker
+    accent: "purple"
+  },
+  {
+    id: 3,
+    heading: "Quantum Computing Workshop",
+    description: "Explore the revolutionary world of quantum computing and its applications. Learn from quantum researchers and experience the power of quantum algorithms in solving complex computational problems.",
+    image: "https://images.pexels.com/photos/1181356/pexels-photo-1181356.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", // Person at a chalkboard (conceptual, workshop vibe)
+    accent: "blue"
+  },
+  {
+    id: 4,
+    heading: "Neural Interface Demo",
+    description: "Witness the future of human-computer interaction through brain-computer interfaces. Experience cutting-edge neurotechnology and see how thoughts can control digital environments in real-time.",
+    image: "https://images.pexels.com/photos/3182763/pexels-photo-3182763.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", // Woman speaking with tech graphs behind
+    accent: "pink"
+  }
+];
 
   const currentEvent = specialEvents[currentEventIndex];
-
   // Auto-advance events every 5 seconds when not hovered
   useEffect(() => {
     if (!isHovered) {

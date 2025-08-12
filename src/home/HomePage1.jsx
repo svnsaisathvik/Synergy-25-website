@@ -11,48 +11,40 @@ import AboutSection from "./components/AboutSection";
 import Navbar from "./components/Navigation";
 import Footer from "./components/Footer";
 import Sponsors from "./components/Sponsors";
+
 // Register the GSAP ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
+
 const sponsorLogos = [
-  "https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png",
-  "https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png",
-  "https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png",
-  "https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png",
-  "https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png",
   "https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png",
   "https://1000logos.net/wp-content/uploads/2021/10/Meta-Logo.png",
   "https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png",
   "https://1000logos.net/wp-content/uploads/2021/05/Intel-logo.png",
 ];
 
-
-// Define block configurations for different screen sizes
 const blockConfigs = {
   desktop: [
-    { id: 'd1', finalX: '-25vw', finalY: '-20vh', size: 'w-24 h-24', gradient: 'linear-gradient(135deg, #FF4E9B 0%, #B100E8 100%)' },
-    { id: 'd2', finalX: '28vw', finalY: '-15vh', size: 'w-20 h-20', gradient: 'linear-gradient(135deg, #00F0FF 0%, #008BFF 100%)' },
-    { id: 'd3', finalX: '-30vw', finalY: '25vh', size: 'w-16 h-16', gradient: 'linear-gradient(135deg, #D200FF 0%, #7800FF 100%)' },
-    { id: 'd4', finalX: '32vw', finalY: '20vh', size: 'w-28 h-28', gradient: 'linear-gradient(135deg, #FF9F1C 0%, #FF3C00 100%)' },
-    { id: 'd5', finalX: '-35vw', finalY: '0vh', size: 'w-12 h-12', gradient: 'linear-gradient(135deg, #00FFAE 0%, #00FFC2 100%)' },
-    { id: 'd6', finalX: '20vw', finalY: '30vh', size: 'w-20 h-20', gradient: 'linear-gradient(135deg, #FF4E9B 0%, #B100E8 100%)' },
+    { id: 'd1', finalX: '-25vw', finalY: '-20vh', size: 'size-w-24-h-24', gradient: 'linear-gradient(135deg, #FF4E9B 0%, #B100E8 100%)' },
+    { id: 'd2', finalX: '28vw', finalY: '-15vh', size: 'size-w-20-h-20', gradient: 'linear-gradient(135deg, #00F0FF 0%, #008BFF 100%)' },
+    { id: 'd3', finalX: '-30vw', finalY: '25vh', size: 'size-w-16-h-16', gradient: 'linear-gradient(135deg, #D200FF 0%, #7800FF 100%)' },
+    { id: 'd4', finalX: '32vw', finalY: '20vh', size: 'size-w-28-h-28', gradient: 'linear-gradient(135deg, #FF9F1C 0%, #FF3C00 100%)' },
+    { id: 'd5', finalX: '-35vw', finalY: '0vh', size: 'size-w-12-h-12', gradient: 'linear-gradient(135deg, #00FFAE 0%, #00FFC2 100%)' },
+    { id: 'd6', finalX: '20vw', finalY: '30vh', size: 'size-w-20-h-20', gradient: 'linear-gradient(135deg, #FF4E9B 0%, #B100E8 100%)' },
   ],
   mobile: [
-    { id: 'm1', finalX: '-40vw', finalY: '-20vh', size: 'w-16 h-16', gradient: 'linear-gradient(135deg, #FF4E9B 0%, #B100E8 100%)' },
-    { id: 'm2', finalX: '42vw', finalY: '-15vh', size: 'w-20 h-20', gradient: 'linear-gradient(135deg, #00F0FF 0%, #008BFF 100%)' },
-    { id: 'm3', finalX: '-45vw', finalY: '25vh', size: 'w-12 h-12', gradient: 'linear-gradient(135deg, #D200FF 0%, #7800FF 100%)' },
-    { id: 'm4', finalX: '48vw', finalY: '20vh', size: 'w-24 h-24', gradient: 'linear-gradient(135deg, #FF9F1C 0%, #FF3C00 100%)' },
+    { id: 'm1', finalX: '-40vw', finalY: '-20vh', size: 'size-w-16-h-16', gradient: 'linear-gradient(135deg, #FF4E9B 0%, #B100E8 100%)' },
+    { id: 'm2', finalX: '42vw', finalY: '-15vh', size: 'size-w-20-h-20', gradient: 'linear-gradient(135deg, #00F0FF 0%, #008BFF 100%)' },
+    { id: 'm3', finalX: '-45vw', finalY: '25vh', size: 'size-w-12-h-12', gradient: 'linear-gradient(135deg, #D200FF 0%, #7800FF 100%)' },
+    { id: 'm4', finalX: '48vw', finalY: '20vh', size: 'size-w-24-h-24', gradient: 'linear-gradient(135deg, #FF9F1C 0%, #FF3C00 100%)' },
   ]
 };
 
-// --- Countdown Timer Logic ---
 function getTimeRemaining() {
   const targetDate = new Date("2025-11-07T00:00:00");
   const now = new Date();
   const total = targetDate - now;
 
-  if (total <= 0) {
-    return { days: 0, hours: 0, minutes: 0 };
-  }
+  if (total <= 0) return { days: 0, hours: 0, minutes: 0 };
 
   const days = Math.floor(total / (1000 * 60 * 60 * 24));
   const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
@@ -60,7 +52,6 @@ function getTimeRemaining() {
 
   return { days, hours, minutes };
 }
-
 
 const SynergyHomepage = () => {
   const [timeLeft, setTimeLeft] = useState(getTimeRemaining());
@@ -70,17 +61,11 @@ const SynergyHomepage = () => {
   const timerRef = useRef(null);
   const blocksRef = useRef([]);
 
-  // Effect for countdown timer
   useEffect(() => {
-    const countdownTimer = setInterval(() => {
-      setTimeLeft(getTimeRemaining());
-    }, 60000); // Update every minute
-
+    const countdownTimer = setInterval(() => setTimeLeft(getTimeRemaining()), 60000);
     return () => clearInterval(countdownTimer);
   }, []);
 
-
-  // GSAP animations
   useGSAP(() => {
     let mm = gsap.matchMedia();
 
@@ -101,7 +86,6 @@ const SynergyHomepage = () => {
         }
       });
       
-      // 1. Enhanced Cyberpunk Glitch Effect
       tl.to(blocks, {
         x: () => `random(-25, 25)`,
         y: () => `random(-25, 25)`,
@@ -115,7 +99,6 @@ const SynergyHomepage = () => {
       })
       .to(blocks, { filter: 'blur(0px)', skewX: 0, duration: 0.2 }, "-=0.1");
 
-      // 2. Move blocks to final positions and reveal content
       tl.to(blocks, {
           x: (i) => blockConfigs[isDesktop ? 'desktop' : 'mobile'][i].finalX,
           y: (i) => blockConfigs[isDesktop ? 'desktop' : 'mobile'][i].finalY,
@@ -146,84 +129,53 @@ const SynergyHomepage = () => {
 
   return (
     <div ref={containerRef} className="homepage-container">
-      {/* Styles */}
-      <style jsx>{`
-        /* Font imports remain the same */
-        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
-        @font-face {
-          font-family: 'Anurati';
-          src: url('/fonts/Anurati-Regular.otf') format('opentype');
-          font-weight: normal;
-          font-style: normal;
-        }
-        .anurati-font { font-family: 'Anurati', 'Trebuchet MS', sans-serif; letter-spacing: 0.1em; }
-        .trebuchet-font { font-family: 'Trebuchet MS', sans-serif; }
-        .homepage-container {
-          background: #000;
-          color: white;
-          width: 100%;
-          overflow-x: hidden;
-          position: relative;
-        }
-        .animated-block {
-          filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.4)) drop-shadow(0 0 15px rgba(255, 0, 255, 0.5));
-        }
-      `}</style>
-      
       <Navbar />
 
-      {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden p-4">
-        <div className="absolute inset-0">
-          <img src="landing.png" alt="Background" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black/30"></div> {/* Dark overlay for readability */}
+      <section ref={heroRef} className="hero-section">
+        <div className="hero-background-container">
+          <img src="landing.png" alt="Background" className="hero-background-image" />
+          <div className="hero-background-overlay"></div>
         </div>
 
-        {/* Animated Blocks */}
-        <div className="absolute inset-0 z-10">
+        <div className="animated-blocks-container">
            {blockConfigs.desktop.map((block, i) => (
-             <div key={block.id} ref={el => blocksRef.current[i] = el} className={`animated-block absolute rounded-lg ${block.size} hidden md:block`} style={{ background: block.gradient }}/>
+             <div key={block.id} ref={el => blocksRef.current[i] = el} className={`animated-block block-desktop ${block.size}`} style={{ background: block.gradient }}/>
            ))}
            {blockConfigs.mobile.map((block, i) => (
-             <div key={block.id} ref={el => blocksRef.current[blockConfigs.desktop.length + i] = el} className={`animated-block absolute rounded-lg ${block.size} md:hidden`} style={{ background: block.gradient }} />
+             <div key={block.id} ref={el => blocksRef.current[blockConfigs.desktop.length + i] = el} className={`animated-block block-mobile ${block.size}`} style={{ background: block.gradient }} />
            ))}
         </div>
 
-        {/* Central Content */}
-        <div className="relative z-20 text-center flex flex-col items-center">
-          {/* Title */}
-          <div ref={titleRef} className="mb-8 md:mb-12">
-              <div className="text-[10vw] md:text-8xl font-bold mb-2 md:mb-4 tracking-wider anurati-font text-white">
+        <div className="hero-content">
+          <div ref={titleRef} className="hero-title-container">
+              <div className="hero-title-synergy anurati-font">
                 SYNERGY
               </div>
-              <div className="text-[7vw] md:text-6xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent anurati-font">
+              <div className="hero-title-2025 anurati-font">
                 2025
               </div>
           </div>
 
-          {/* Countdown Timer */}
           <div ref={timerRef}>
-            <div className="flex justify-center items-center space-x-4 md:space-x-8 bg-black/40 backdrop-blur-sm rounded-2xl px-6 md:px-8 py-4 md:py-6 border border-slate-600/50">
-              <div className="text-center">
-                <div className="text-[4vw] md:text-5xl font-bold text-white trebuchet-font">{timeLeft.days}</div>
-                <div className="text-xs md:text-sm text-gray-300 tracking-widest">DAYS</div>
+            <div className="countdown-timer-box">
+              <div className="countdown-unit">
+                <div className="countdown-number trebuchet-font">{timeLeft.days}</div>
+                <div className="countdown-label">DAYS</div>
               </div>
-              <div className="text-center">
-                <div className="text-[4vw] md:text-5xl font-bold text-white trebuchet-font">{timeLeft.hours.toString().padStart(2, '0')}</div>
-                <div className="text-xs md:text-sm text-gray-300 tracking-widest">HOURS</div>
+              <div className="countdown-unit">
+                <div className="countdown-number trebuchet-font">{timeLeft.hours.toString().padStart(2, '0')}</div>
+                <div className="countdown-label">HOURS</div>
               </div>
-              <div className="text-center">
-                <div className="text-[4vw] md:text-5xl font-bold text-white trebuchet-font">{timeLeft.minutes.toString().padStart(2, '0')}</div>
-                <div className="text-xs md:text-sm text-gray-300 tracking-widest">MINUTES</div>
+              <div className="countdown-unit">
+                <div className="countdown-number trebuchet-font">{timeLeft.minutes.toString().padStart(2, '0')}</div>
+                <div className="countdown-label">MINUTES</div>
               </div>
             </div>
-            <div className="text-xl md:text-2xl font-bold text-white mt-4 trebuchet-font tracking-widest">TO GO</div>
+            <div className="countdown-togo trebuchet-font">TO GO</div>
           </div>
         </div>
       </section>
 
-      {/* Other Sections */}
       <AboutSection />
       <EventTimeline />
       <SpecialEvents />

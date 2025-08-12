@@ -1,5 +1,183 @@
-/* From Uiverse.io by kushagra_3246 */ 
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 
+@font-face {
+  font-family: 'Anurati';
+  src: url('/fonts/Anurati-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Font Utility Classes */
+.anurati-font {
+  font-family: 'Anurati', 'Trebuchet MS', sans-serif;
+}
+
+.trebuchet-font {
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+/* Main Container */
+.homepage-container {
+  background: #000;
+  color: white;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.hero-background-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.hero-background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-background-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Animated Blocks */
+.animated-blocks-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.animated-block {
+  position: absolute;
+  border-radius: 0.5rem;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.4)) drop-shadow(0 0 15px rgba(255, 0, 255, 0.5));
+}
+
+/* Block Sizes */
+.size-w-24-h-24 { width: 6rem; height: 6rem; }
+.size-w-20-h-20 { width: 5rem; height: 5rem; }
+.size-w-16-h-16 { width: 4rem; height: 4rem; }
+.size-w-28-h-28 { width: 7rem; height: 7rem; }
+.size-w-12-h-12 { width: 3rem; height: 3rem; }
+
+/* Block Visibility */
+.block-desktop { display: none; }
+.block-mobile { display: block; }
+
+@media (min-width: 768px) {
+  .block-desktop { display: block; }
+  .block-mobile { display: none; }
+}
+
+/* Central Content */
+.hero-content {
+  position: relative;
+  z-index: 20;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-title-container {
+  margin-bottom: 2rem;
+}
+
+.hero-title-synergy {
+  font-size: 10vw;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+  color: white;
+}
+
+.hero-title-2025 {
+  font-size: 7vw;
+  font-weight: 700;
+  background: linear-gradient(to right, #38bdf8, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (min-width: 768px) {
+  .hero-title-container { margin-bottom: 3rem; }
+  .hero-title-synergy { font-size: 6rem; margin-bottom: 1rem; }
+  .hero-title-2025 { font-size: 4.5rem; }
+}
+
+/* Countdown Timer */
+.countdown-timer-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  border: 1px solid rgba(100, 116, 139, 0.5);
+  gap: 1rem;
+}
+
+.countdown-unit {
+  text-align: center;
+}
+
+.countdown-number {
+  font-size: 4vw;
+  font-weight: 700;
+  color: white;
+}
+
+.countdown-label {
+  font-size: 0.75rem;
+  color: #d1d5db;
+  letter-spacing: 0.1em;
+}
+
+.countdown-togo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  margin-top: 1rem;
+  letter-spacing: 0.1em;
+}
+
+@media (min-width: 768px) {
+  .countdown-timer-box {
+    padding: 1.5rem 2rem;
+    gap: 2rem;
+  }
+  .countdown-number { font-size: 3rem; }
+  .countdown-label { font-size: 0.875rem; }
+  .countdown-togo { font-size: 1.5rem; }
+}
+
+/* --- Existing Hexagon Animation CSS (Unchanged) --- */
 .socket {
     width: 200px;
     height: 200px;

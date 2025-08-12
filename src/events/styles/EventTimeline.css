@@ -1042,3 +1042,882 @@
         font-size: 0.875rem;
     }
 }
+
+/* Keep all your existing CSS and add/modify these specific sections: */
+
+/* Hexagonal Animation Styles - Updated for proper centering */
+.socket {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Behind the poster */
+    opacity: 0.7;
+    pointer-events: none; /* Prevent interaction interference */
+}
+
+/* Ensure the carousel card slot has proper positioning context */
+.carousel-card-slot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Make sure the poster wrapper is positioned relative for z-index layering */
+.poster-wrapper {
+    flex-shrink: 0;
+    cursor: pointer;
+    position: relative;
+    width: 240px;
+    scroll-snap-align: center;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    z-index: 2; /* Above the hexagon animation */
+}
+
+/* Adjust hex-brick colors for better visibility behind poster */
+.hex-brick {
+    background: #0ff;
+    width: 30px;
+    height: 17px;
+    position: absolute;
+    top: 5px;
+    animation: fade00 2s infinite;
+    opacity: 0.8; /* Slightly more visible */
+}
+
+/* Enhanced fade animation for better visual effect */
+@keyframes fade00 {
+    0% { 
+        background: rgba(0, 255, 255, 0.6);
+        box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+    }
+    50% { 
+        background: rgba(255, 0, 255, 0.8);
+        box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+    }
+    100% { 
+        background: rgba(0, 255, 255, 0.6);
+        box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+    }
+}
+
+/* Enhanced pulse animation */
+@keyframes pulse00 {
+    0% { 
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% { 
+        transform: scale(0.01);
+        opacity: 0.3;
+    }
+    100% { 
+        transform: scale(1);
+        opacity: 0.7;
+    }
+}
+
+/* Add glow effect to center gel for better centering reference */
+.center-gel {
+    margin-left: -15px;
+    margin-top: -15px;
+    animation: pulse00 2s infinite;
+}
+
+.center-gel .hex-brick {
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+
+/* Responsive adjustments for different screen sizes */
+@media (max-width: 768px) {
+    .socket {
+        width: 160px;
+        height: 160px;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    
+    .poster-wrapper {
+        width: 192px;
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .socket {
+        width: 140px;
+        height: 140px;
+        transform: translate(-50%, -50%) scale(0.7);
+    }
+    
+    .poster-wrapper {
+        width: 160px;
+        min-height: 300px;
+    }
+}
+
+/* Additional enhancement: Add a subtle background glow to active cards */
+.carousel-card-slot.active::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+    animation: active-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes active-glow {
+    0% { 
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    100% { 
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* Add these new styles to your existing CSS file */
+
+/* Hexagon Background Container - Properly Centered */
+.hex-background-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  z-index: 1;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Updated Socket positioning for perfect centering */
+.socket {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin: 0 auto;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
+}
+
+/* Carousel Card Slot - Proper 3D positioning */
+.carousel-card-slot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Event Poster Wrapper - Enhanced positioning */
+.event-poster-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 240px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: transform 0.3s ease;
+}
+
+.event-poster-wrapper.active {
+  transform: scale(1.05);
+}
+
+/* Event Poster Container - 3D Flip Setup */
+.event-poster-container {
+  position: relative;
+  width: 15rem;
+  height: 20rem;
+  perspective: 1200px;
+  margin: 0 auto;
+}
+
+/* Card Flipper - 3D Transform */
+.card-flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.card-flipper.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* Card Faces - Front and Back */
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 0.875rem;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: linear-gradient(#000, #000) padding-box,
+              linear-gradient(45deg, #0ff, #f0f, #0ff) border-box;
+}
+
+.card-front {
+  z-index: 2;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, #0a0a23 0%, #1a1a3a 100%);
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+/* Card Image */
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0.75rem;
+}
+
+/* Card Hover Effects */
+.card-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 0.75rem;
+}
+
+.card-hover-overlay.is-hovered {
+  opacity: 1;
+}
+
+.card-glow-effect {
+  position: absolute;
+  inset: -3px;
+  background: linear-gradient(45deg, #0ff, #f0f, #0ff);
+  border-radius: 0.875rem;
+  z-index: -1;
+  opacity: 0;
+  filter: blur(12px);
+  transition: opacity 0.4s ease;
+}
+
+.card-glow-effect.is-hovered {
+  opacity: 0.7;
+}
+
+/* Card Back Content */
+.card-back-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 1.5rem;
+  z-index: 1;
+  text-align: center;
+}
+
+.card-back-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0ff;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+  line-height: 1.2;
+  font-family: 'Orbitron', monospace;
+}
+
+.card-details {
+  font-family: 'Orbitron', monospace;
+  color: #fff;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+  gap: 0.5rem;
+  padding: 0.375rem 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.375rem;
+  border: 1px solid rgba(0, 255, 255, 0.1);
+  min-height: 2rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.detail-icon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.detail-icon.about-icon {
+  background: linear-gradient(45deg, #ff6b00, #ffa500);
+  box-shadow: 0 0 6px #ffa500;
+}
+
+.detail-icon.time-icon {
+  background: linear-gradient(45deg, #00ffff, #0080ff);
+  box-shadow: 0 0 6px #00ffff;
+}
+
+.detail-text {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.detail-item .about-icon + .detail-text {
+  background: linear-gradient(45deg, #ff6b00, #ffa500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+.detail-item .time-icon + .detail-text {
+  background: linear-gradient(45deg, #00ffff, #0080ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+/* Event Info */
+.event-info {
+  text-align: center;
+  padding: 0 1rem;
+  margin-top: 1.5rem;
+}
+
+.event-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+  transition: all 0.4s ease;
+  line-height: 1.2;
+  margin: 0;
+  min-height: 1.5rem;
+  font-family: 'Orbitron', monospace;
+}
+
+.event-title.active {
+  color: #0ff;
+  text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+
+.event-time-display {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #0ff;
+  font-weight: 600;
+  font-family: 'Orbitron', monospace;
+}
+
+.time-divider {
+  width: 45px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, #0ff, transparent);
+  margin: 0.5rem auto;
+}
+
+.event-time {
+  animation: time-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes time-glow {
+  0% { text-shadow: 0 0 3px rgba(0, 255, 255, 0.5); }
+  100% { text-shadow: 0 0 15px rgba(0, 255, 255, 1); }
+}
+
+/* 3D Carousel Setup */
+.carousel-3d-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-scene {
+  width: 100%;
+  height: 100%;
+  perspective: 2000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.carousel-stage {
+  width: 240px;
+  height: 400px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+  --carousel-radius: 400px;
+}
+
+/* Enhanced Hexagon Animation */
+.hex-brick {
+  background: #0ff;
+  width: 30px;
+  height: 17px;
+  position: absolute;
+  top: 5px;
+  animation: fade00 2s infinite;
+  opacity: 0.9;
+  box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+@keyframes fade00 {
+  0% { 
+    background: rgba(0, 255, 255, 0.7);
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+  }
+  50% { 
+    background: rgba(255, 0, 255, 0.9);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
+  }
+  100% { 
+    background: rgba(0, 255, 255, 0.7);
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+  }
+}
+
+@keyframes pulse00 {
+  0% { 
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% { 
+    transform: scale(0.01);
+    opacity: 0.4;
+  }
+  100% { 
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+/* Center gel enhancement */
+.center-gel .hex-brick {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .socket {
+    width: 160px;
+    height: 160px;
+    transform: scale(0.8);
+  }
+  
+  .hex-background-container {
+    width: 240px;
+    height: 240px;
+  }
+  
+  .carousel-stage {
+    --carousel-radius: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .socket {
+    width: 140px;
+    height: 140px;
+    transform: scale(0.7);
+  }
+  
+  .hex-background-container {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .event-poster-container {
+    width: 12rem;
+    height: 16rem;
+  }
+  
+  .card-back-title {
+    font-size: 1rem;
+  }
+  
+  .detail-text {
+    font-size: 0.7rem;
+  }
+}
+
+/* Add these styles to your existing CSS file */
+
+/* Fixed Day Selector Spacing */
+.day-selector-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 3rem 0;
+  padding: 0 2rem;
+}
+
+.day-selector {
+  position: relative;
+  display: flex;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 1rem;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  min-width: 400px;
+  justify-content: space-between;
+}
+
+.day-selector-button {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #94a3b8;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  min-width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  flex: 1;
+}
+
+.day-selector-button:hover {
+  color: #0ff;
+  transform: translateY(-1px);
+}
+
+.day-selector-button.active {
+  color: #0ff;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+}
+
+.day-selector-highlight {
+  position: absolute;
+  top: 0.5rem;
+  height: calc(100% - 1rem);
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.1));
+  border-radius: 0.75rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  z-index: 1;
+}
+
+.day-button-text {
+  position: relative;
+  z-index: 3;
+}
+
+.day-button-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 255, 255, 0.05));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.day-selector-button:hover .day-button-glow {
+  opacity: 1;
+}
+
+/* Enhanced Hexagon Background Container */
+.hex-background-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  z-index: 1;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Multiple Hexagon Layers */
+.hex-background-layer-2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.5) rotate(30deg);
+  opacity: 0.6;
+  animation: hex-rotate-reverse 15s linear infinite;
+}
+
+.hex-background-layer-3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7) rotate(-45deg);
+  opacity: 0.4;
+  animation: hex-rotate-fast 8s linear infinite;
+}
+
+/* Different Socket Variations */
+.socket-2 {
+  width: 180px;
+  height: 180px;
+  opacity: 0.7;
+  filter: hue-rotate(60deg) drop-shadow(0 0 15px rgba(255, 0, 255, 0.3));
+}
+
+.socket-3 {
+  width: 140px;
+  height: 140px;
+  opacity: 0.5;
+  filter: hue-rotate(120deg) drop-shadow(0 0 10px rgba(0, 255, 0, 0.3));
+}
+
+/* Additional Animations */
+@keyframes hex-rotate-reverse {
+  0% { transform: translate(-50%, -50%) scale(1.5) rotate(30deg); }
+  100% { transform: translate(-50%, -50%) scale(1.5) rotate(-330deg); }
+}
+
+@keyframes hex-rotate-fast {
+  0% { transform: translate(-50%, -50%) scale(0.7) rotate(-45deg); }
+  100% { transform: translate(-50%, -50%) scale(0.7) rotate(315deg); }
+}
+
+/* Enhanced Card Flip Functionality */
+.event-poster-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 240px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.event-poster-wrapper.active {
+  transform: scale(1.05);
+}
+
+.event-poster-wrapper.active:hover {
+  transform: scale(1.08);
+}
+
+/* Card Flipper - Enhanced 3D Transform */
+.card-flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.card-flipper.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* Enhanced Card Back Styling */
+.card-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, #0a0a23 0%, #1a1a3a 100%);
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  border: 2px solid #0ff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.card-back-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 1.5rem;
+  z-index: 1;
+  text-align: center;
+}
+
+.card-back-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0ff;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 12px rgba(0, 255, 255, 0.8);
+  line-height: 1.2;
+  font-family: 'Orbitron', monospace;
+  animation: title-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes title-glow {
+  0% { text-shadow: 0 0 12px rgba(0, 255, 255, 0.8); }
+  100% { text-shadow: 0 0 20px rgba(0, 255, 255, 1); }
+}
+
+.card-details {
+  font-family: 'Orbitron', monospace;
+  color: #fff;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.detail-item {
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  min-height: 3rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+  background: rgba(0, 255, 255, 0.1);
+  border-color: rgba(0, 255, 255, 0.4);
+  transform: translateX(4px);
+}
+
+.detail-icon {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+  animation: icon-pulse 2s ease-in-out infinite;
+}
+
+@keyframes icon-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.detail-icon.about-icon {
+  background: linear-gradient(45deg, #ff6b00, #ffa500);
+  box-shadow: 0 0 8px #ffa500;
+}
+
+.detail-icon.time-icon {
+  background: linear-gradient(45deg, #00ffff, #0080ff);
+  box-shadow: 0 0 8px #00ffff;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .day-selector {
+    min-width: 300px;
+    gap: 0.25rem;
+    padding: 0.25rem;
+  }
+  
+  .day-selector-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    min-width: 60px;
+  }
+  
+  .hex-background-container {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .socket-2 {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .socket-3 {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .day-selector {
+    min-width: 280px;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .day-selector-button {
+    padding: 0.5rem;
+    min-width: auto;
+  }
+  
+  .day-selector-highlight {
+    height: calc(100% / 4 - 0.5rem);
+    width: calc(100% - 1rem);
+    left: 0.5rem;
+  }
+  
+  .hex-background-container {
+    width: 200px;
+    height: 200px;
+  }
+}

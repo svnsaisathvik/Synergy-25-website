@@ -25,6 +25,7 @@ const Navbar = () => {
           <a href="#faq" className="text-gray-300 hover:text-pink-400 transition font-semibold text-lg quicksand-font">FAQ</a>
           <a href="#contact-us" className="text-gray-300 hover:text-pink-400 transition font-semibold text-lg quicksand-font">Contact Us</a>
           <a href="/teams" className="text-gray-300 hover:text-pink-400 transition font-semibold text-lg quicksand-font">Team</a>
+          <a href="/sponsors" className="text-gray-300 hover:text-pink-400 transition font-semibold text-lg quicksand-font">Sponsors</a>
         </div>
 
         {/* Mobile */}

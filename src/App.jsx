@@ -5,7 +5,7 @@ const EventPage = lazy(()=>import("./events/components/EventsPage"));
 const TeamsPage = lazy(()=>import("./team/components/TeamPage"));
 const HomePage  = lazy(()=>import("./home/HomePage1"));
 const ErrorPage = lazy(()=>import("./events/components/Error"));
-
+const SponsorsPage = lazy(()=>import("./sponsors/SponsorsPage"));
 
 function LoadingPage(){
   return <>
@@ -23,6 +23,7 @@ function App() {
           <Route path="/" element={<HomePage/>}></Route>
           <Route path="/events" element={<EventPage/>}></Route>
           <Route path="/teams" element={<TeamsPage/>}></Route>
+          <Route path="/sponsors" element={<SponsorsPage/>}></Route>
           <Route path="*" element={<ErrorPage/>}></Route>
         </Routes>
       </BrowserRouter>

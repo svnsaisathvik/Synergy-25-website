@@ -149,12 +149,6 @@ const EventPoster = ({ event, isActive, onClick }) => {
       
       <div className="event-info">
         <h3 className={`event-title ${isActive ? 'active' : ''}`} style={{fontFamily:"CyberAlert"}}>{event.name}</h3>
-        {isActive && !isFlipped && (
-          <div className="event-time-display">
-            <div className="time-divider"></div>
-            <div className="event-time" style={{fontFamily:"CyberAlert"}}>{event.time}</div>
-          </div>
-        )}
       </div>
     </div>
   );
@@ -204,9 +198,11 @@ const EventTimeline = () => {
 
       <div className="timeline-content">
         {/* Title */}
-        <div className="timeline-title">
-          <h1 data-text="EVENT TIMELINE">EVENT TIMELINE</h1>
-          <div className="title-underline"></div>
+        <div className="timeline-title-section">
+          <div className="timeline-title">
+            <h1 data-text="EVENT TIMELINE">EVENT TIMELINE</h1>
+            <div className="title-underline"></div>
+          </div>
         </div>
 
         {/* Day Selector */}
@@ -299,18 +295,43 @@ const EventTimeline = () => {
         </div>
 
         {/* Navigation Dots */}
-        <div className="nav-dots">
-          {currentDayEvents.map((_, index) => (
-            <button
-              key={index}
-              className={`nav-dot ${index === activeIndex ? 'active' : ''}`}
-              onClick={() => setActiveIndex(index)}
-            >
-              <div className="dot-core"></div>
-              <div className="dot-ring"></div>
-            </button>
-          ))}
+        <div className="nav-dots-wrapper">
+          <div className="nav-dots">
+            {currentDayEvents.map((_, index) => (
+              <button
+                key={index}
+                className={`nav-dot ${index === activeIndex ? 'active' : ''}`}
+                onClick={() => setActiveIndex(index)}
+              >
+                <div className="dot-core"></div>
+                <div className="dot-ring"></div>
+              </button>
+            ))}
+          </div>
         </div>
+
+        {/* Event Action Section - Centralized for active events */}
+        {currentDayEvents.length > 0 && (
+          <div className="event-action-section">
+            <div className="active-event-time">
+              <div className="time-divider"></div>
+              <div className="event-time" style={{fontFamily:"CyberAlert"}}>
+                {currentDayEvents[activeIndex]?.time}
+              </div>
+            </div>
+            <div className="event-action-button">
+              <a 
+                href={`/events#${currentDayEvents[activeIndex]?.id}`}
+                className="go-to-event-btn"
+                style={{fontFamily:"CyberAlert"}}
+              >
+                <span className="btn-text">GO TO EVENT</span>
+                <div className="btn-glow"></div>
+                <div className="btn-border"></div>
+              </a>
+            </div>
+          </div>
+        )}
 
         {/* Status Display */}
         <div className="status-display-wrapper">

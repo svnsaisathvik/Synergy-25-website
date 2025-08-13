@@ -135,20 +135,6 @@ const EventModal = ({ event, isOpen, onClose }) => {
                 </div>
               </div>}
 
-              {/* Action buttons */}
-              <div className="action-buttons hud-section">
-                {event.registration_form.map((form)=>{ return <button onClick = {()=>{window.open(form.link, '_blank');}} className="hud-register-button">
-                  <span className="register-text" style={{fontFamily:"CyberAlert"}}>{form.info==""?"REGISTER NOW":form.info}</span>
-                  <div className="button-glow"></div>
-                  <div className="button-glitch-1"></div>
-                  <div className="button-glitch-2"></div>
-                </button>;})}
-                <button className="hud-rules-button" onClick = {()=>{window.open(event.rulespdf, '_blank');}}>
-                  <span className="rules-text" style={{fontFamily:"CyberAlert"}}>VIEW EVENT RULES</span>
-                  <div className="button-glow-blue"></div>
-                </button>
-              </div>
-
               {/* About section */}
               <div className="hud-section">
                 <div className="section-header">
@@ -218,6 +204,20 @@ const EventModal = ({ event, isOpen, onClose }) => {
                   </div>
                 </div>
               )}
+
+              {/* Action buttons */}
+              <div className="action-buttons hud-section">
+                <button className="hud-rules-button" onClick = {()=>{window.open(event.rulespdf, '_blank');}}>
+                  <span className="rules-text" style={{fontFamily:"CyberAlert"}}>VIEW EVENT RULES</span>
+                  <div className="button-glow-blue"></div>
+                </button>
+                {event.registration_form.map((form, index)=>{ return <button key={index} onClick = {()=>{window.open(form.link, '_blank');}} className="hud-register-button">
+                  <span className="register-text" style={{fontFamily:"CyberAlert"}}>{form.info==""?"REGISTER NOW":form.info}</span>
+                  <div className="button-glow"></div>
+                  <div className="button-glitch-1"></div>
+                  <div className="button-glitch-2"></div>
+                </button>;})}
+              </div>
             </div>
           </div>
         </div>

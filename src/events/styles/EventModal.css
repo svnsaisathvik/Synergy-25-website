@@ -866,6 +866,7 @@
   .hud-details-section {
     padding: 20px;
     flex: 1;
+    position: relative;
   }
 
   .hud-title-text {
@@ -927,12 +928,14 @@
     }
   }
 
-  /* Action buttons - prominent on mobile */
+  /* Action buttons - at bottom of content on mobile */
   .action-buttons {
-    order: 4;
+    order: 6;
+    display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    margin-top: 30px;
   }
 
   .hud-register-button,
@@ -982,6 +985,14 @@
     padding: 3px 10px;
   }
 
+  /* Action buttons for small screens */
+  .action-buttons {
+    padding: 0;
+    gap: 12px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+  }
+
   .hud-register-button,
   .hud-rules-button {
     font-size: 1rem;
@@ -1024,17 +1035,30 @@
     background: linear-gradient(to right, transparent, var(--neon-yellow), transparent);
   }
 
-  /* Enhanced mobile button styling */
-  .hud-register-button {
-    background: rgba(57, 255, 20, 0.1);
+  /* Enhanced mobile button styling for content buttons */
+  .action-buttons .hud-register-button {
+    background: rgba(57, 255, 20, 0.15);
     border-width: 3px;
-    box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+    border-color: var(--neon-green);
   }
 
-  .hud-rules-button {
-    background: rgba(0, 240, 255, 0.1);
+  .action-buttons .hud-rules-button {
+    background: rgba(0, 240, 255, 0.15);
     border-width: 3px;
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    border-color: var(--neon-cyan);
+  }
+
+  /* Enhanced hover effects for content buttons */
+  .action-buttons .hud-register-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 25px rgba(57, 255, 20, 0.6);
+  }
+
+  .action-buttons .hud-rules-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 25px rgba(0, 240, 255, 0.6);
   }
 
   /* Mobile-optimized section spacing */
@@ -1057,5 +1081,14 @@
 
   .list-text {
     font-size: 0.9rem;
+  }
+
+  /* Ensure modal content flows naturally */
+  .hud-details-section {
+    overflow-y: auto;
+  }
+
+  .hud-details-content {
+    min-height: auto;
   }
 }

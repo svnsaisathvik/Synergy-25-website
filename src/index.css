@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tailwindcss/preflight";
 @tailwind utilities;
 
 :root {
@@ -45,6 +44,13 @@ font-style: normal;
 @font-face {
 font-family: 'OrbitronRegular';
 src: url('/fonts/OrbitronRegular.ttf') format('truetype');
+font-weight: normal;
+font-style: normal;
+}
+
+@font-face {
+font-family: 'OrbitronRegular';
+src: url('/fonts/OrbitronRegular.ttf');
 font-weight: normal;
 font-style: normal;
 }

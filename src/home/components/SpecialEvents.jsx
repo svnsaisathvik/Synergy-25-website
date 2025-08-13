@@ -257,6 +257,7 @@ const SpecialEvents = () => {
                   className={`event-description ${
                     isTransitioning ? 'transitioning' : 'normal'
                   }`}
+                  style={{fontFamily: 'Orbitron, monospace'}}
                 >
                   {currentEvent.description}
                 </p>
@@ -386,6 +387,7 @@ const SpecialEvents = () => {
                   className={`mobile-event-description ${
                     isTransitioning ? 'transitioning' : 'normal'
                   }`}
+                  style={{fontFamily: 'Orbitron, monospace'}}
                 >
                   {currentEvent.description}
                 </p>

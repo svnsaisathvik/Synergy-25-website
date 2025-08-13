@@ -182,7 +182,9 @@ const SynergyHomepage = () => {
        <section id="sponsors">
         <Sponsors sponsors={sponsorLogos} />
       </section>
-      <FaqSection />
+      <section id="faq">
+        <FaqSection />
+      </section>
       <Footer />
     </div>
   );

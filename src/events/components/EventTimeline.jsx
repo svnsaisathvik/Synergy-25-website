@@ -141,15 +141,24 @@ const EventPoster = ({ event, isActive, onClick }) => {
                   <div className="detail-icon time-icon"></div>
                   <span className="detail-text" style={{fontFamily:"OrbitronBold"}}>{event.time}</span>
                 </div>
+                <div className="event-action-button">
+                  <a 
+                    href={`/events#${event.id}`}
+                    className="go-to-event-btn"
+                    style={{fontFamily:"CyberAlert"}}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <span className="btn-text">GO TO EVENT</span>
+                    <div className="btn-glow"></div>
+                    <div className="btn-border"></div>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
       
-      <div className="event-info">
-        <h3 className={`event-title ${isActive ? 'active' : ''}`} style={{fontFamily:"CyberAlert"}}>{event.name}</h3>
-      </div>
     </div>
   );
 };
@@ -309,29 +318,6 @@ const EventTimeline = () => {
             ))}
           </div>
         </div>
-
-        {/* Event Action Section - Centralized for active events */}
-        {currentDayEvents.length > 0 && (
-          <div className="event-action-section">
-            <div className="active-event-time">
-              <div className="time-divider"></div>
-              <div className="event-time" style={{fontFamily:"CyberAlert"}}>
-                {currentDayEvents[activeIndex]?.time}
-              </div>
-            </div>
-            <div className="event-action-button">
-              <a 
-                href={`/events#${currentDayEvents[activeIndex]?.id}`}
-                className="go-to-event-btn"
-                style={{fontFamily:"CyberAlert"}}
-              >
-                <span className="btn-text">GO TO EVENT</span>
-                <div className="btn-glow"></div>
-                <div className="btn-border"></div>
-              </a>
-            </div>
-          </div>
-        )}
 
         {/* Status Display */}
         <div className="status-display-wrapper">

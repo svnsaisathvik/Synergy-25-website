@@ -207,10 +207,10 @@ const EventModal = ({ event, isOpen, onClose }) => {
 
               {/* Action buttons */}
               <div className="action-buttons hud-section">
-                <button className="hud-rules-button" onClick = {()=>{window.open(event.rulespdf, '_blank');}}>
+                {/* <button className="hud-rules-button" onClick = {()=>{window.open(event.rulespdf, '_blank');}}>
                   <span className="rules-text" style={{fontFamily:"CyberAlert"}}>VIEW EVENT RULES</span>
                   <div className="button-glow-blue"></div>
-                </button>
+                </button> */}
                 {event.registration_form.map((form, index)=>{ return <button key={index} onClick = {()=>{window.open(form.link, '_blank');}} className="hud-register-button">
                   <span className="register-text" style={{fontFamily:"CyberAlert"}}>{form.info==""?"REGISTER NOW":form.info}</span>
                   <div className="button-glow"></div>

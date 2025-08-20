@@ -5,9 +5,6 @@ const SponsorsPage = () => {
   const titleSponsors = [
     {
       logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
-    },
-    {
-      logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
     }
   ];
 
@@ -130,11 +127,11 @@ const SponsorsPage = () => {
 
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-7xl font-black mb-6 relative">
+          <h1 className="lg:text-7xl text-6xl font-black mb-6 relative">
             <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-purple-500 bg-clip-text text-transparent animate-pulse" style={{fontFamily:"CyberAlert"}}>
               SPONSORS
             </span>
-            <div className="absolute -top-1 left-0 text-7xl font-black text-cyan-400 opacity-20 blur-sm" style={{fontFamily:"CyberAlert"}}>SPONSORS</div>
+            <div className="absolute -top-1 left-0 text-6xl lg:text-7xl font-black text-cyan-400 opacity-20 blur-sm" style={{fontFamily:"CyberAlert"}}>SPONSORS</div>
           </h1>
           <div className="flex justify-center items-center mb-6">
             <div className="w-20 h-1 bg-cyan-400 mr-2"></div>
@@ -147,13 +144,13 @@ const SponsorsPage = () => {
         <section className="mb-20">
           <div className="flex items-center mb-10">
             <div className="w-4 h-4 bg-cyan-400 mr-4 animate-ping"></div>
-            <h2 className="text-4xl font-bold text-cyan-400 tracking-wider" style={{fontFamily:"CyberAlert"}}>TITLE SPONSORS</h2>
+            <h2 className="lg:text-4xl text-3xl font-bold text-cyan-400 tracking-wider" style={{fontFamily:"CyberAlert"}}>TITLE SPONSORS</h2>
             <div className="flex-1 h-px bg-gradient-to-r from-cyan-400 to-transparent ml-4"></div>
           </div>
           <div className="grid md:grid-cols-2 gap-10">
             {titleSponsors.map((sponsor, index) => (
               <div key={index} className="group relative">
-                <div className="bg-gray-900/60 border-2 border-cyan-400 h-40 transform transition-all duration-500 hover:scale-105 hover:border-pink-500 hover:shadow-2xl hover:shadow-cyan-400/30 backdrop-blur-md relative overflow-hidden">
+                <div className="bg-gray-900/60 border-2 border-cyan-400 h-40 sm:w-110 transform transition-all duration-500 hover:scale-105 hover:border-pink-500 hover:shadow-2xl hover:shadow-cyan-400/30 backdrop-blur-md relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-4 h-4 bg-cyan-400"></div>
                   <div className="absolute top-0 right-0 w-4 h-4 bg-pink-500"></div>
                   <div className="absolute bottom-0 left-0 w-4 h-4 bg-purple-500"></div>
@@ -173,7 +170,7 @@ const SponsorsPage = () => {
         <section className="mb-20">
           <div className="flex items-center mb-10">
             <div className="w-4 h-4 bg-pink-500 mr-4 animate-ping"></div>
-            <h2 className="text-4xl font-bold text-pink-500 tracking-wider" style={{fontFamily:"CyberAlert"}}>PRESENTING SPONSORS</h2>
+            <h2 className="lg:text-4xl text-3xl font-bold text-pink-500 tracking-wider" style={{fontFamily:"CyberAlert"}}>PRESENTING SPONSORS</h2>
             <div className="flex-1 h-px bg-gradient-to-r from-pink-500 to-transparent ml-4"></div>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -194,7 +191,7 @@ const SponsorsPage = () => {
         <section className="mb-20">
           <div className="flex items-center mb-10">
             <div className="w-4 h-4 bg-purple-500 mr-4 animate-ping"></div>
-            <h2 className="text-4xl font-bold text-purple-500 tracking-wider" style={{fontFamily:"CyberAlert"}}>ASSOCIATE SPONSORS</h2>
+            <h2 className="lg:text-4xl text-3xl font-bold text-purple-500 tracking-wider" style={{fontFamily:"CyberAlert"}}>ASSOCIATE SPONSORS</h2>
             <div className="flex-1 h-px bg-gradient-to-r from-purple-500 to-transparent ml-4"></div>
           </div>
           <div className="grid md:grid-cols-4 gap-6">
@@ -213,7 +210,7 @@ const SponsorsPage = () => {
         <section className="mb-16">
           <div className="flex items-center mb-8">
             <div className="w-4 h-4 bg-yellow-400 mr-4 animate-ping"></div>
-            <h2 className="text-3xl font-bold text-yellow-400 tracking-wider" style={{fontFamily:"CyberAlert"}}>PARTNERS</h2>
+            <h2 className="lg:text-4xl text-3xl font-bold text-yellow-400 tracking-wider" style={{fontFamily:"CyberAlert"}}>PARTNERS</h2>
             <div className="flex-1 h-px bg-gradient-to-r from-yellow-400 to-transparent ml-4"></div>
           </div>
           <div className="relative overflow-hidden">

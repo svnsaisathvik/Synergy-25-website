@@ -12,7 +12,7 @@
                 "about": "Code in sync without a single word—trust, logic, and chaos collide. Only the sharpest duos can debug the silence.",
                 "image": "/images/posters/test.jpeg",
                 "rulespdf": "https://unstop.com/p/blind-swap-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543543",
-                "time": "7th Feb 09:00 AM",
+                "time": "7th Feb 9:00 AM",
                 "venue": "IIITB Campus",
                 "spocs": [
                   { "name": "SVN Sai Sathvik", "contact": "+917416226695" },
@@ -33,16 +33,16 @@
                 "prizePool": 25000,
                 "about": "Build, innovate, and solve — a 48-hour journey with the MERN stack.",
                 "image": "/images/posters/test.jpeg",
-                "rulespdf": "",
-                "time": "7th Feb 09:00 AM",
+                "rulespdf": "https://unstop.com/p/mernify-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544542",
+                "time": "7th Feb 9:00 AM",
                 "venue": "IIITB Campus",
                 "spocs": [
-                  { "name": "Synergy IIITB", "contact": "+919636853258" }
+                  { "name": "Harsh Gupta", "contact": "+917425876315" }
                 ],
                 "fee": "Free",
                 "registration_form": [
                   {
-                    "link": "",
+                    "link": "https://unstop.com/p/mernify-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544542",
                     "info": ""
                   }
                 ]
@@ -140,7 +140,7 @@
                 "about": "Click fast, think faster—race through Wikipedia one link at a time. No search, no shortcuts—just pure brain and browser power.",
                 "image": "/images/posters/test.jpeg",
                 "rulespdf": "https://unstop.com/p/wiki-race-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543569",
-                "time": "7th Feb 08:00 PM",
+                "time": "7th Feb 8:00 PM",
                 "venue": "IIITB Campus",
                 "spocs": [
                   { "name": "Jithamanyu Amara", "contact": "+918919862545" }
@@ -155,27 +155,6 @@
               },
               {
                 "id": 8,
-                "name": "Real-eyes",
-                "category": "Visual Analysis",
-                "prizePool": 5000,
-                "about": "Spot the real from the fake under pressure and prove your eyes don’t deceive you. Only the quickest and sharpest observers will win the challenge!",
-                "image": "/images/posters/test.jpeg",
-                "rulespdf": "https://unstop.com/p/real-eyes-synergy-25-international-institute-of-information-technology-iiit-bangalore-1539414",
-                "time": "7th Feb 9:00 PM",
-                "venue": "IIITB Campus",
-                "spocs": [
-                  { "name": "Synergy IIITB", "contact": "+919636853258" }
-                ],
-                "fee": "Free",
-                "registration_form": [
-                  {
-                    "link": "https://unstop.com/p/real-eyes-synergy-25-international-institute-of-information-technology-iiit-bangalore-1539414",
-                    "info": ""
-                  }
-                ]
-              },
-              {
-                "id": 9,
                 "name": "Cipher Chase",
                 "category": "hackathon",
                 "prizePool": 20000,
@@ -195,6 +174,27 @@
                     "info": ""
                   }
                 ]
+              },
+              {
+                "id": 9,
+                "name": "Neural.Net",
+                "category": "hackathon",
+                "prizePool": 35000,
+                "about": "Push the limits of intelligence and imagination as you race to craft breakthrough AI solutions.",
+                "image": "/images/posters/test.jpeg",
+                "rulespdf": "https://unstop.com/p/neuralnet-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544570",
+                "time": "Refer to Unstop",
+                "venue": "Online",
+                "spocs": [
+                  { "name": "Garv Rajput", "contact": "+919927743983" }
+                ],
+                "fee": "Free",
+                "registration_form": [
+                  {
+                    "link": "https://unstop.com/p/neuralnet-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544570",
+                    "info": ""
+                  }
+                ]
               }
             ]
           },          
@@ -210,7 +210,7 @@
                 "about": "From milestones to modern breakthroughs — tech trivia reimagined.",
                 "image": "/images/posters/test.jpeg",
                 "rulespdf": "https://unstop.com/p/triviaverse-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543498",
-                "time": "8th Feb 09:00 AM",
+                "time": "8th Feb 9:00 AM",
                 "venue": "IIITB Campus",
                 "spocs": [
                   { "name": "Siddharth Menon", "contact": "+919845084898" },
@@ -275,7 +275,7 @@
                 "about": "Click fast, think faster—race through Wikipedia one link at a time. No search, no shortcuts—just pure brain and browser power.",
                 "image": "/images/posters/test.jpeg",
                 "rulespdf": "https://unstop.com/p/wiki-race-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543569",
-                "time": "8th Feb 03:00 PM",
+                "time": "8th Feb 3:00 PM",
                 "venue": "IIITB Campus",
                 "spocs": [
                   { "name": "Jithamanyu Amara", "contact": "+918919862545" }
@@ -287,6 +287,27 @@
                     "info": ""
                   }
                 ]
+              },
+              {
+                "id": 14,
+                "name": "Real-eyes",
+                "category": "Visual Analysis",
+                "prizePool": 5000,
+                "about": "Spot the real from the fake under pressure and prove your eyes don’t deceive you. Only the quickest and sharpest observers will win the challenge!",
+                "image": "/images/posters/test.jpeg",
+                "rulespdf": "https://unstop.com/p/real-eyes-synergy-25-international-institute-of-information-technology-iiit-bangalore-1539414",
+                "time": "8th Feb 10:00 PM",
+                "venue": "IIITB Campus",
+                "spocs": [
+                  { "name": "Synergy IIITB", "contact": "+919636853258" }
+                ],
+                "fee": "Free",
+                "registration_form": [
+                  {
+                    "link": "https://unstop.com/p/real-eyes-synergy-25-international-institute-of-information-technology-iiit-bangalore-1539414",
+                    "info": ""
+                  }
+                ]
               }
             ]
           },          
@@ -295,7 +316,7 @@
             "date": "9th Feb",
             "list": [
               {
-                "id": 14,
+                "id": 15,
                 "name": "Bid & Build",
                 "category": "entrepreneurship",
                 "prizePool": 20000,
@@ -317,7 +338,7 @@
                 ]
               },
               {
-                "id": 15,
+                "id": 16,
                 "name": "Sensor Vault",
                 "category": "hackathon",
                 "prizePool": 5000,
@@ -338,7 +359,7 @@
                 ]
               },
               {
-                "id": 16,
+                "id": 17,
                 "name": "Op-Amp Wars",
                 "category": "hackathon",
                 "prizePool": 10000,
@@ -359,14 +380,14 @@
                 ]
               },
               {
-                 "id": 17,
+                 "id": 18,
                 "name": "Wiki-Race",
                 "category": "Online Navigation",
                 "prizePool": 7000,
                 "about": "Click fast, think faster—race through Wikipedia one link at a time. No search, no shortcuts—just pure brain and browser power.",
                 "image": "/images/posters/test.jpeg",
                 "rulespdf": "https://unstop.com/p/wiki-race-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543569",
-                "time": "9th Feb 01:00 PM",
+                "time": "9th Feb 1:00 PM",
                 "venue": "IIITB Campus",
                 "spocs": [
                   { "name": "Jithamanyu Amara", "contact": "+918919862545" }
@@ -375,27 +396,6 @@
                 "registration_form": [
                   {
                     "link": "https://unstop.com/p/wiki-race-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543569",
-                    "info": ""
-                  }
-                ]
-              },
-              {
-                "id": 18,
-                "name": "Neural.Net",
-                "category": "hackathon",
-                "prizePool": 35000,
-                "about": "Push the limits of intelligence and imagination as you race to craft breakthrough AI solutions.",
-                "image": "/images/posters/test.jpeg",
-                "rulespdf": "",
-                "time": "Refer to Unstop",
-                "venue": "Online",
-                "spocs": [
-                  { "name": "Garv Rajput", "contact": "+919927743983" }
-                ],
-                "fee": "Free",
-                "registration_form": [
-                  {
-                    "link": "",
                     "info": ""
                   }
                 ]

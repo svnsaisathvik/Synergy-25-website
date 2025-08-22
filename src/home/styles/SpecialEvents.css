@@ -395,7 +395,7 @@
 /* Text Content */
 .text-content {
   flex: 1;
-  padding: 2rem 3rem 2rem 4rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -433,6 +433,7 @@
 .event-title {
   font-size: 1.875rem;
   font-weight: 700;
+  width: 100%;
   color: #ffffff;
   line-height: 1.2;
   font-family: "CyberAlert", monospace;

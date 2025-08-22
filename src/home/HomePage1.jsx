@@ -184,7 +184,7 @@ const SynergyHomepage = () => {
       <EventTimeline />
       <SpecialEvents />
        <section id="sponsors">
-        <Sponsors sponsors={sponsorLogos} />
+        <Sponsors />
       </section>
       <section id="faq">
         <FaqSection />

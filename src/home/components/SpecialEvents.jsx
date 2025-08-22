@@ -238,7 +238,7 @@ const SpecialEvents = () => {
                 
                 {/* Event Title */}
                 <h3 
-                  className={`event-title cyber-alert-font ${
+                  className={`event-title cyber-alert-font flex ${
                     isTransitioning ? 'transitioning' : 'normal'
                   }`}
                 >

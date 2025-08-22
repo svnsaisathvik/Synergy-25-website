@@ -189,13 +189,6 @@ const SpecialEvents = () => {
             {/* Status Bars */}
             <div className="status-bar status-bar-top"></div>
             <div className="status-bar status-bar-bottom"></div>
-            
-            {/* System Status */}
-            <div className="system-status">
-              <div className="status-dot status-dot-green"></div>
-              <span>[SYSTEM_ACTIVE]</span>
-              <div className="status-dot status-dot-cyan"></div>
-            </div>
           </div>
         </div>
         

@@ -1,6 +1,6 @@
 import React from "react";
 import '../styles/Footer.css';
-
+import { Mail, Phone, Linkedin, Smartphone } from "lucide-react";
 export default function Footer(){
     return (
       <footer id="contact-us">
@@ -10,7 +10,7 @@ export default function Footer(){
             {/* IIITB Section */}
             <div className="footer-iiitb-logo">
               <img
-                src="/IIITB-logo.png"
+                src="/iiitb-logo-1.png"
                 alt="IIIT Bangalore Logo"
                 className="footer-iiitb-img"
               />
@@ -27,7 +27,7 @@ export default function Footer(){
 
             {/* Contact Icons */}
             <div className="footer-contact">
-              <div className="footer-contact-title quicksand-font">CONTACT US</div>
+              <div className="footer-contact-title quicksand-font">GET IN TOUCH</div>
               <div className="footer-contact-icons">
                 {['📧', '📱', '💼', '📞'].map((icon, idx) => (
                   <div

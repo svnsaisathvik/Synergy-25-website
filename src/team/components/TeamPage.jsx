@@ -9,16 +9,19 @@ const TeamPage = () => {
 
   return (
     <div
-      className="relative min-h-screen bg-gradient-to-br from-[#090418] via-[#0A071B] to-[#060620] overflow-hidden text-white font-['CyberAlert'] bg-[url('/image.png')] bg-cover bg-center opacity-90"
+      className="relative min-h-screen 
+                 bg-gradient-to-br from-[#090418] via-[#0A071B] to-[#060620] 
+                 overflow-hidden text-white font-['CyberAlert'] 
+                 bg-[url('/image.png')] bg-cover bg-bottom bg-no-repeat"
     >
-      <div className="relative z-10 container mx-auto px-4 py-8">
+      <div className="relative z-10 container mx-auto px-4 py-8 pb-80">
         <div className="flex flex-col md:flex-row">
           {/* Left Sidebar */}
           <div className="w-full md:w-1/4 mb-8 md:mb-0">
             <BackButton />
-            <SideNavigation 
-              activeCategory={activeCategory} 
-              setActiveCategory={setActiveCategory} 
+            <SideNavigation
+              activeCategory={activeCategory}
+              setActiveCategory={setActiveCategory}
             />
           </div>
 

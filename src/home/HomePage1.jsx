@@ -49,8 +49,8 @@ function getTimeRemaining() {
   const days = Math.floor(total / (1000 * 60 * 60 * 24));
   const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
   const minutes = Math.floor((total / (1000 * 60)) % 60);
-
-  return { days, hours, minutes };
+  const seconds = Math.floor((total / 1000) % 60);
+  return { days, hours, minutes,seconds };
 }
 
 const SynergyHomepage = () => {
@@ -62,7 +62,7 @@ const SynergyHomepage = () => {
   const blocksRef = useRef([]);
 
   useEffect(() => {
-    const countdownTimer = setInterval(() => setTimeLeft(getTimeRemaining()), 60000);
+    const countdownTimer = setInterval(() => setTimeLeft(getTimeRemaining()),1000);
     return () => clearInterval(countdownTimer);
   }, []);
 
@@ -169,6 +169,10 @@ const SynergyHomepage = () => {
               <div className="countdown-unit">
                 <div className="countdown-number trebuchet-font">{timeLeft.minutes.toString().padStart(2, '0')}</div>
                 <div className="countdown-label">MINUTES</div>
+              </div>
+              <div className="countdown-unit">
+                <div className="countdown-number trebuchet-font">{timeLeft.seconds.toString().padStart(2, '0')}</div>
+                <div className="countdown-label">SECONDS</div>
               </div>
             </div>
             <div className="countdown-togo trebuchet-font">TO GO</div>

@@ -70,28 +70,158 @@
               },
               {
                 "id": 4,
-                "name": "Gigabyte Show",
-                "category": "",
-                "prizePool": "NA",
-                "about": "Coming Soon",
+                "name": "Geoguessr - Esports Showdown",
+                "category": "Esports",
+                "prizePool": 9000,
+                "about": "Map the World, Master the Game.",
                 "image": "/images/posters/test.jpeg",
-                "rulespdf": "https://unstop.com/p/promptcraft-create-using-ai-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543486",
-                "time": "",
+                "rulespdf": "https://unstop.com/p/geoguessr-esports-showdown-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545614",
+                "time": "7th Nov 10:00 AM",
                 "venue": "IIITB Campus",
                 "spocs": [
-                  { "name": "", "contact": "" }
-                  
+                  { "name": "Sai Sathvik", "contact": "+919636853258" },
+                  { "name": "Shivansh Shah", "contact": "+919636853258" }
                 ],
                 "fee": "Free",
                 "registration_form": [
                   {
-                    "link": "https://unstop.com/p/promptcraft-create-using-ai-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543486",
+                    "link": "https://unstop.com/p/geoguessr-esports-showdown-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545614",
                     "info": ""
                   }
                 ]
               },
               {
                 "id": 5,
+                "name": "SmashKarts - Battle Royale",
+                "category": "Esports",
+                "prizePool": 5000,
+                "about": "Fast Wheels, Fierce Weapons.",
+                "image": "/images/posters/test.jpeg",
+                "rulespdf": "https://unstop.com/p/smashkarts-battle-royale-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545620",
+                "time": "7th Nov 10:00 AM",
+                "venue": "IIITB Campus",
+                "spocs": [
+                  { "name": "Sai Sathvik", "contact": "+919636853258" },
+                  { "name": "Shivansh Shah", "contact": "+919636853258" }
+                ],
+                "fee": "Free",
+                "registration_form": [
+                  {
+                    "link": "https://unstop.com/p/smashkarts-battle-royale-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545620",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 6,
+                "name": "Brawl Stars - 3v3 Showdown",
+                "category": "Esports",
+                "prizePool": 5000,
+                "about": "Team Up. Brawl Hard. Rule the Arena.",
+                "image": "/images/posters/test.jpeg",
+                "rulespdf": "https://unstop.com/p/brawl-stars-3v3-showdown-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545644",
+                "time": "7th Nov 10:00 AM",
+                "venue": "IIITB Campus",
+                "spocs": [
+                  { "name": "Sai Sathvik", "contact": "+919636853258" },
+                  { "name": "Shivansh Shah", "contact": "+919636853258" }
+                ],
+                "fee": "Free",
+                "registration_form": [
+                  {
+                    "link": "https://unstop.com/p/brawl-stars-3v3-showdown-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545644",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 7,
+                "name": "Valorant – Tactical 5v5",
+                "category": "Esports",
+                "prizePool": 9000,
+                "about": "Clutch or Be Crushed.",
+                "image": "/images/posters/test.jpeg",
+                "rulespdf": "https://unstop.com/p/valorant-tactical-5v5-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545647",
+                "time": "7th Nov 10:00 AM",
+                "venue": "IIITB Campus",
+                "spocs": [
+                  { "name": "Sai Sathvik", "contact": "+919636853258" },
+                  { "name": "Shivansh Shah", "contact": "+919636853258" }
+                ],
+                "fee": "Free",
+                "registration_form": [
+                  {
+                    "link": "https://unstop.com/p/valorant-tactical-5v5-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545647",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 8,
+                "name": "BGMI – Battle Royale",
+                "category": "Esports",
+                "prizePool": 10000,
+                "about": "Only the Sharpest Squads See the Final Circle.",
+                "image": "/images/posters/test.jpeg",
+                "rulespdf": "https://unstop.com/p/bgmi-battle-royale-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545650",
+                "time": "7th Nov 10:00 AM",
+                "venue": "IIITB Campus",
+                "spocs": [
+                  { "name": "Synergy IIITB", "contact": "+919636853258" }                  
+                ],
+                "fee": "Free",
+                "registration_form": [
+                  {
+                    "link": "https://unstop.com/p/bgmi-battle-royale-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545650",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 9,
+                "name": "Call of Duty: Mobile – Squad Domination",
+                "category": "Esports",
+                "prizePool": 12000,
+                "about": "Lock. Shoot. Conquer.",
+                "image": "/images/posters/test.jpeg",
+                "rulespdf": "https://unstop.com/p/call-of-duty-mobile-squad-domination-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545651",
+                "time": "7th Nov 10:00 AM",
+                "venue": "IIITB Campus",
+                "spocs": [
+                  { "name": "Synergy IIITB", "contact": "+919636853258" }                  
+                ],
+                "fee": "Free",
+                "registration_form": [
+                  {
+                    "link": "https://unstop.com/p/call-of-duty-mobile-squad-domination-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545651",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 10,
+                "name": "Gigabyte Show",
+                "category": "Trivia",
+                "prizePool": "18000",
+                "about": "Think Fast. Play Hard. Win Big.",
+                "image": "/images/posters/test.jpeg",
+                "rulespdf": "https://unstop.com/p/gigabyte-show-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545652",
+                "time": "7th Nov 1:00 PM",
+                "venue": "IIITB Campus",
+                "spocs": [
+                  { "name": "Sindhoor", "contact": "+919008695680" }
+                  
+                ],
+                "fee": "Free",
+                "registration_form": [
+                  {
+                    "link": "https://unstop.com/p/gigabyte-show-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545652",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 11,
                 "name": "PromptCraft - Create Using AI",
                 "category": "coding",
                 "prizePool": 10000,
@@ -113,7 +243,7 @@
                 ]
               },
               {
-                "id": 6,
+                "id": 12,
                 "name": "Shoti-fy",
                 "category": "photography",
                 "prizePool": 10000,
@@ -134,7 +264,7 @@
                 ]
               },
               {
-                "id": 7,
+                "id": 13,
                 "name": "Reel-riot",
                 "category": "College Festival",
                 "prizePool": 15000,
@@ -155,7 +285,7 @@
                 ]
               },
               {
-                 "id": 8,
+                 "id": 14,
                 "name": "Wiki-Race",
                 "category": "Online Navigation",
                 "prizePool": 7000,
@@ -176,7 +306,7 @@
                 ]
               },
               {
-                "id": 9,
+                "id": 15,
                 "name": "Cipher Chase",
                 "category": "hackathon",
                 "prizePool": 20000,
@@ -198,7 +328,7 @@
                 ]
               },
               {
-                "id": 10,
+                "id": 16,
                 "name": "Neural.Net",
                 "category": "hackathon",
                 "prizePool": 35000,
@@ -225,7 +355,7 @@
             "date": "8th Nov",
             "list": [
               {
-                 "id": 11,
+                 "id": 17,
                 "name": "TriviaVerse",
                 "category": "quiz",
                 "prizePool": 20000,
@@ -247,7 +377,7 @@
                 ]
               },
               {
-                "id": 12,
+                "id": 18,
                 "name": "Sensor Vault",
                 "category": "hackathon",
                 "prizePool": 5000,
@@ -268,7 +398,7 @@
                 ]
               },
                {
-                "id": 13,
+                "id": 19,
                 "name": "Skew-id Games",
                 "category": "Puzzle-Solving",
                 "prizePool": 15000,
@@ -289,7 +419,7 @@
                 ]
               },
               {
-                "id": 14,
+                "id": 20,
                 "name": "Panel Discussion",
                 "category": "hackathon",
                 "prizePool": "NA",
@@ -311,7 +441,7 @@
                 ]
               },
               {
-                 "id": 15,
+                 "id": 21,
                 "name": "Wiki-Race",
                 "category": "Online Navigation",
                 "prizePool": 7000,
@@ -332,7 +462,7 @@
                 ]
               },
               {
-                "id": 16,
+                "id": 22,
                 "name": "Real-eyes",
                 "category": "Visual Analysis",
                 "prizePool": 5000,
@@ -359,7 +489,7 @@
             "date": "9th Nov",
             "list": [
               {
-                "id": 17,
+                "id": 23,
                 "name": "Bid & Build",
                 "category": "entrepreneurship",
                 "prizePool": 20000,
@@ -381,7 +511,7 @@
                 ]
               },
               {
-                "id": 18,
+                "id": 24,
                 "name": "Sensor Vault",
                 "category": "hackathon",
                 "prizePool": 5000,
@@ -402,7 +532,7 @@
                 ]
               },
               {
-                "id": 19,
+                "id": 25,
                 "name": "Op-Amp Wars",
                 "category": "hackathon",
                 "prizePool": 10000,
@@ -423,7 +553,7 @@
                 ]
               },
               {
-                 "id": 20,
+                 "id": 26,
                 "name": "Wiki-Race",
                 "category": "Online Navigation",
                 "prizePool": 7000,
@@ -444,7 +574,7 @@
                 ]
               },
               {
-                 "id": 21,
+                 "id": 27,
                 "name": "SynPD",
                 "category": "Intellectual",
                 "prizePool": 20000,
@@ -465,7 +595,7 @@
                 ]
               },
               {
-                "id": 22,
+                "id": 28,
                 "name": "Face the Future: Deepfake ML Challenge",
                 "category": "hackathon",
                 "prizePool": 20000,
@@ -486,7 +616,7 @@
                 ]
               },
               {
-                "id": 23,
+                "id": 29,
                 "name": "PixelFlow 3.0",
                 "category": "design",
                 "prizePool": 20000,
@@ -507,7 +637,7 @@
                 ]
               },
               {
-                "id": 24,
+                "id": 30,
                 "name": "Stock-a-thon",
                 "category": "Data Analytics",
                 "prizePool": 10000,
@@ -529,7 +659,7 @@
                 ]
               },
               {
-                "id": 25,
+                "id": 31,
                 "name": "Lens Flare",
                 "category": "Short Film",
                 "prizePool": 13000,
@@ -551,7 +681,7 @@
                 ]
               },
               {
-                "id": 26,
+                "id": 32,
                 "name": "CodeQuest 2025",
                 "category": "coding",
                 "prizePool": 20000,

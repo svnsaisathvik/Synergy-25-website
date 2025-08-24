@@ -325,16 +325,6 @@ const EventTimeline = () => {
             ))}
           </div>
         </div>
-
-        {/* Status Display */}
-        <div className="status-display-wrapper">
-          <div className="status-display">
-            <div className="status-counter">
-              <div className="counter-led"></div>
-              <span className="counter-text" style={{fontFamily:"CyberAlert"}}>EVENT {currentDayEvents.length > 0 ? activeIndex + 1 : 0}/{currentDayEvents.length}</span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

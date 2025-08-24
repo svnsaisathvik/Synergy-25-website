@@ -377,27 +377,6 @@
                   }
                 ]
               },
-              {
-                "id": 18,
-                "name": "Sensor Vault",
-                "category": "hackathon",
-                "prizePool": 5000,
-                "about": "Sensors, puzzles, and a vault full of brain-bending fun.",
-                "image": "/images/posters/SensorVault.png",
-                "rulespdf": "https://unstop.com/p/the-sensor-vault-escape-room-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544674",
-                "time": "8th Nov 10:00 AM",
-                "venue": "IIITB Campus",
-                "spocs": [
-                  { "name": "Shivansh Shah", "contact": "+917307401349" }
-                ],
-                "fee": 0,
-                "registration_form": [
-                  {
-                    "link": "https://unstop.com/p/the-sensor-vault-escape-room-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544674",
-                    "info": ""
-                  }
-                ]
-              },
                {
                 "id": 19,
                 "name": "Skew-id Games",
@@ -437,27 +416,6 @@
                 "registration_form": [
                   {
                     "link": "https://forms.office.com/pages/responsepage.aspx?id=IkyogrJHEka594YPOeubEj-eQWWV1LVNlavgyC0GAspURFpORTVCM0FZWVlWN00wQU9IMzRRVFRYRy4u&route=shorturl",
-                    "info": ""
-                  }
-                ]
-              },
-              {
-                 "id": 21,
-                "name": "Wiki-Race",
-                "category": "Online Navigation",
-                "prizePool": 7000,
-                "about": "Click fast, think faster—race through Wikipedia one link at a time. No search, no shortcuts—just pure brain and browser power.",
-                "image": "/images/posters/WikiRace.png",
-                "rulespdf": "https://unstop.com/p/wiki-race-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543569",
-                "time": "8th Nov 3:00 PM",
-                "venue": "IIITB Campus",
-                "spocs": [
-                  { "name": "Jithamanyu Amara", "contact": "+918919862545" }
-                ],
-                "fee": 0,
-                "registration_form": [
-                  {
-                    "link": "https://docs.google.com/forms/d/e/1FAIpQLSfSeYkQHmQikXLZfvzNWHy6M4p54YowTKL5r_Sd3xwItC2NEQ/viewform",
                     "info": ""
                   }
                 ]
@@ -512,27 +470,6 @@
                 ]
               },
               {
-                "id": 24,
-                "name": "Sensor Vault",
-                "category": "hackathon",
-                "prizePool": 5000,
-                "about": "Sensors, puzzles, and a vault full of brain-bending fun.",
-                "image": "/images/posters/SensorVault.png",
-                "rulespdf": "https://unstop.com/p/the-sensor-vault-escape-room-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544674",
-                "time": "9th Nov 10:00 AM",
-                "venue": "IIITB Campus",
-                "spocs": [
-                  { "name": "Shivansh Shah", "contact": "+917307401349" }
-                ],
-                "fee": 0,
-                "registration_form": [
-                  {
-                    "link": "https://unstop.com/p/the-sensor-vault-escape-room-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544674",
-                    "info": ""
-                  }
-                ]
-              },
-              {
                 "id": 25,
                 "name": "Op-Amp Wars",
                 "category": "hackathon",
@@ -549,27 +486,6 @@
                 "registration_form": [
                   {
                     "link": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=IkyogrJHEka594YPOeubEjxDZMTCJiZKpDthjkViIKBUQTMySjlFNDJJMkQzNjNLNk1URFFGUlJPVS4u",
-                    "info": ""
-                  }
-                ]
-              },
-              {
-                 "id": 26,
-                "name": "Wiki-Race",
-                "category": "Online Navigation",
-                "prizePool": 7000,
-                "about": "Click fast, think faster—race through Wikipedia one link at a time. No search, no shortcuts—just pure brain and browser power.",
-                "image": "/images/posters/WikiRace.png",
-                "rulespdf": "https://unstop.com/p/wiki-race-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543569",
-                "time": "9th Nov 1:00 PM",
-                "venue": "IIITB Campus",
-                "spocs": [
-                  { "name": "Jithamanyu Amara", "contact": "+918919862545" }
-                ],
-                "fee": 0,
-                "registration_form": [
-                  {
-                    "link": "https://docs.google.com/forms/d/e/1FAIpQLSfSeYkQHmQikXLZfvzNWHy6M4p54YowTKL5r_Sd3xwItC2NEQ/viewform",
                     "info": ""
                   }
                 ]

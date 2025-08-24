@@ -73,6 +73,9 @@ const EventModal = ({ event, isOpen, onClose }) => {
           {/* Left side - Event poster */}
           <div className="hud-poster-section">
             <div className="category-tag">{event.category.toUpperCase()}</div>
+            {event.iiitb_exclusive && (
+              <div className="iiitb-exclusive-tag">IIITB EXCLUSIVE</div>
+            )}
             <div className="poster-container">
               <div className="poster-frame">
                 <div className="poster-frame-corner tl"></div>

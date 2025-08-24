@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import DaySection from './DaySection';
 import CustomScrollbar from './CustomScrollbar';
 import { events } from '../data/events.json';
@@ -16,6 +17,7 @@ const EventsPage = () => {
   const sectionRefs = useRef([]);
   const pageRef = useRef(null);
   const canvasRef = useRef(null);
+  const location = useLocation();
 
   // Matrix rain effect
   useEffect(() => {
@@ -67,6 +69,21 @@ const EventsPage = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  useEffect(()=>{
+    const id = location.hash.substring(1);
+    if(id!=null){
+      const day1 = events[0].list;
+      const day2 = events[1].list;
+      const day3 = events[2].list;
+      const days = [...day1,...day2,...day3];
+      const event = days.find((e)=>e.id==id);
+
+      if(event!=null){
+        openEventModal(event);
+      }
+    }
+  },[location])
 
   const handleScroll = () => {
     if (pageRef.current) {
@@ -127,7 +144,7 @@ const EventsPage = () => {
   return (
     <div className="events-page" ref={pageRef}>
       {/* Smaller Cyberpunk Back Button */}
-      <button className="cyber-back-button" onClick={handleBackClick}>
+      <a href="/" className="cyber-back-button">
         <div className="back-button-frame">
           <div className="frame-corner top-left"></div>
           <div className="frame-corner top-right"></div>
@@ -137,7 +154,7 @@ const EventsPage = () => {
         <ArrowLeft className="back-icon" />
         <span className="back-text">BACK</span>
         <div className="button-glow-effect"></div>
-      </button>
+      </a>
 
       {/* Events Header with Matrix Background */}
       <header className="events-header">

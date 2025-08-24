@@ -79,7 +79,7 @@ const HexBackground3 = () => (
 );
 
 // The EventPoster component with flip-on-hover functionality for the active card
-const EventPoster = ({ event, isActive, onClick }) => {
+const EventPoster = ({ event, isActive, onClick, totalEvents }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -110,9 +110,12 @@ const EventPoster = ({ event, isActive, onClick }) => {
     onClick();
   };
 
+  // Determine if we should apply low opacity (if there are more than 3 events)
+  const shouldDimNonActive = totalEvents > 3;
+
   return (
     <div
-      className={`event-poster-wrapper ${isActive ? 'active' : ''}`}
+      className={`event-poster-wrapper ${isActive ? 'active' : ''} ${shouldDimNonActive && !isActive ? 'dimmed' : ''}`}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -276,9 +279,12 @@ const EventTimeline = () => {
                   <div
                     key={event.id}
                     className={`carousel-card-slot ${isActive ? 'active' : ''}`}
-                    style={{ transform: `rotateY(${cardAngle}deg) translateZ(var(--carousel-radius))` }}
+                    style={{ 
+                      transform: `rotateY(${cardAngle}deg) translateZ(var(--carousel-radius)) ${isActive ? 'translateZ(100px)' : ''}`,
+                      zIndex: isActive ? 1000 : index
+                    }}
                   >
-                    {/* Multiple hexagon backgrounds positioned absolutely and centered */}
+                    {/* Hexagon backgrounds only for active card */}
                     {isActive && (
                       <div className="hex-background-container">
                         <HexBackground />
@@ -294,6 +300,7 @@ const EventTimeline = () => {
                     <EventPoster
                       event={event}
                       isActive={isActive}
+                      totalEvents={currentDayEvents.length}
                       onClick={() => handleCardClick(index)}
                     />
                   </div>
@@ -322,11 +329,6 @@ const EventTimeline = () => {
         {/* Status Display */}
         <div className="status-display-wrapper">
           <div className="status-display">
-            <div className="status-indicator">
-              <div className="status-led"></div>
-              <span className="status-text" style={{fontFamily:"CyberAlert"}}>SYSTEM ONLINE</span>
-            </div>
-            <div className="status-divider"></div>
             <div className="status-counter">
               <div className="counter-led"></div>
               <span className="counter-text" style={{fontFamily:"CyberAlert"}}>EVENT {currentDayEvents.length > 0 ? activeIndex + 1 : 0}/{currentDayEvents.length}</span>

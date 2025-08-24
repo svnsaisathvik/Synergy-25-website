@@ -83,6 +83,22 @@
   z-index: 3;
 }
 
+.event-iiitb-exclusive {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  background: rgba(0, 0, 0, 0.9);
+  color: #FFD700;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid #FFD700;
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px #FFD700;
+  z-index: 3;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
 /* Event details section */
 .event-details-section {
   position: relative;
@@ -238,6 +254,11 @@
   }
   
   .event-category {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.4rem;
+  }
+  
+  .event-iiitb-exclusive {
     font-size: 0.6rem;
     padding: 0.2rem 0.4rem;
   }

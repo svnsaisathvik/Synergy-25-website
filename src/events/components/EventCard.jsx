@@ -70,6 +70,11 @@ const EventCard = ({ event, onClick, delay }) => {
         <div className="event-category" style={{fontFamily:"OrbitronRegular"}}>
           {event.category.toUpperCase()}
         </div>
+        {event.iiitb_exclusive && (
+          <div className="event-iiitb-exclusive" style={{fontFamily:"OrbitronRegular"}}>
+            IIITB EXCLUSIVE
+          </div>
+        )}
       </div>
       
       {/* Event Details Section */}

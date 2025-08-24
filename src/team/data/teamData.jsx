@@ -18,10 +18,16 @@ const teamMembers = [
     linkedin: 'https://www.linkedin.com/in/navya-balaji'
   },
   {
+    name: 'Chirayu Choudhary',
+    image: '/images/team/chirayuchoudary.jpg',
+    category: 'Organizers',
+    linkedin: 'https://www.linkedin.com/in/chirayu-choudhary-560837277/'
+  },
+  {
     name: 'SVN Sathvik',
     image: '/images/team/sathvik.jpeg',
     category: 'Organizers',
-    linkedin: 'https://www.linkedin.com/in/chirayu-choudhary-560837277/'
+    linkedin: 'https://www.linkedin.com/in/svn-sai-sathvik-9b944a281/'
   },
   {
     name: 'Aryan Bansal',
@@ -29,12 +35,7 @@ const teamMembers = [
     category: 'Organizers',
     linkedin: 'https://www.linkedin.com/in/aryan-bansal-1a9aa4372/'
   },
-  {
-    name: 'Chirayu Choudhary',
-    image: '/images/team/chirayuchoudary.jpg',
-    category: 'Organizers',
-    linkedin: 'https://www.linkedin.com/in/chirayu-choudhary-560837277/'
-  },
+  
   {
     name: 'Kunal Mittal',
     image: '/images/team/kunalmittal.jpeg',

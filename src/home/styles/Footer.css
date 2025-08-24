@@ -50,13 +50,9 @@
 /* IIITB Logo Section */
 .footer-iiitb-logo {
   padding: 0;
-  /* remove extra padding */
   background: none;
-  /* no background */
   border-radius: 0;
-  /* no rounded corners */
   box-shadow: none;
-  /* no shadow */
 }
 .footer-iiitb-img {
   height: 3rem;
@@ -79,10 +75,6 @@
 }
 
 /* Contact Section */
-.footer-contact {
-  /* This div contains the contact title and icons */
-}
-
 .footer-contact-title {
   color: #ffffff;
   font-weight: 600;
@@ -100,30 +92,25 @@
 /* Contact Icons Container */
 .footer-contact-icons {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 0.5rem;
 }
 
 /* Individual Contact Icon */
 .footer-contact-icon {
-  width: 2.25rem;
-  height: 2.25rem;
-  background-color: #ffffff;
-  border-radius: 50%;
+  color: #a78bfa; /* neon violet base */
+  font-size: 1.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .footer-contact-icon:hover {
-  transform: scale(1.1);
-}
-
-.footer-contact-icon-emoji {
-  color: #2563eb;
-  font-size: 1.125rem;
+  color: #fff;
+  text-shadow: 0 0 8px #a78bfa, 0 0 16px #9333ea, 0 0 24px #3b82f6;
+  transform: scale(1.2);
 }
 
 /* Footer Bottom Section */

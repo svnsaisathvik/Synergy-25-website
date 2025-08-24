@@ -72,12 +72,6 @@ const teamMembers = [
     linkedin: 'https://www.linkedin.com/in/soham-banerjee-838b8a253/'
   },
   {
-    name: 'Aryan Bansal',
-    image: '/images/team/aryan1.jpg',
-    category: 'Organizers',
-    linkedin: 'https://www.linkedin.com/in/aryan-bansal-1a9aa4372/'
-  },
-  {
     name: 'Krisha Dhokariya',
     image: '/images/team/krisha.jpg',
     category: 'Marketing & Media',
@@ -88,6 +82,12 @@ const teamMembers = [
     image: '/images/team/shivansh.jpeg',
     category: 'Organizers',
     linkedin: 'https://www.linkedin.com/in/shivansh-shah-06774a288?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app'
+  },
+  {
+    name: 'Aryan Bansal',
+    image: '/images/team/aryan1.jpg',
+    category: 'Organizers',
+    linkedin: 'https://www.linkedin.com/in/aryan-bansal-1a9aa4372/'
   },
   {
     name: 'Saanvi Choudhary',

@@ -4,19 +4,13 @@ const SponsorsPage = () => {
 
   const titleSponsors = [
     {
-      logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
+      logo: "/images/sponsors/LG_Logo.png"
     }
   ];
 
   const presentingSponsors = [
     {
-      logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
-    },
-    {
-      logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
-    },
-    {
-      logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
+      logo: "/images/sponsors/MOSIP_Logo.jpeg"
     }
   ];
 
@@ -176,7 +170,7 @@ const SponsorsPage = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {presentingSponsors.map((sponsor, index) => (
               <div key={index} className="group relative">
-                <div className="bg-gray-900/60 border border-pink-500 h-32 transform transition-all duration-500 hover:scale-110 hover:border-cyan-400 hover:shadow-xl hover:shadow-pink-500/30 backdrop-blur-md relative overflow-hidden">
+                <div className="bg-gray-900/60 border border-pink-500 h-40 transform transition-all duration-500 hover:scale-110 hover:border-cyan-400 hover:shadow-xl hover:shadow-pink-500/30 backdrop-blur-md relative overflow-hidden">
                   <img src={sponsor.logo} alt="Sponsor" className="w-full h-full object-cover filter brightness-125 contrast-110" />
                   
                   <div className="absolute top-2 right-2 w-2 h-2 bg-pink-500 animate-pulse"></div>
@@ -187,8 +181,7 @@ const SponsorsPage = () => {
           </div>
         </section>
 
-        {/* Associate Sponsors*/}
-        <section className="mb-20">
+        {/* <section className="mb-20">
           <div className="flex items-center mb-10">
             <div className="w-4 h-4 bg-purple-500 mr-4 animate-ping"></div>
             <h2 className="lg:text-4xl text-3xl font-bold text-purple-500 tracking-wider" style={{fontFamily:"CyberAlert"}}>ASSOCIATE SPONSORS</h2>
@@ -204,10 +197,10 @@ const SponsorsPage = () => {
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
 
         {/* Partners with infinite scroll - Fixed image sizing */}
-        <section className="mb-16">
+        {/* <section className="mb-16">
           <div className="flex items-center mb-8">
             <div className="w-4 h-4 bg-yellow-400 mr-4 animate-ping"></div>
             <h2 className="lg:text-4xl text-3xl font-bold text-yellow-400 tracking-wider" style={{fontFamily:"CyberAlert"}}>PARTNERS</h2>
@@ -215,7 +208,7 @@ const SponsorsPage = () => {
           </div>
           <div className="relative overflow-hidden">
             <div className="flex animate-scroll-right gap-6" style={{width: 'calc(200% + 100px)'}}>
-              {/* First set of partners */}
+              
               {partners.map((partner, index) => (
                 <div key={index} className="group relative flex-shrink-0">
                   <div className="bg-gray-900/80 border border-yellow-400 w-48 h-32 transform transition-all duration-300 hover:scale-110 hover:border-cyan-400 hover:shadow-lg hover:shadow-yellow-400/25 backdrop-blur-sm relative overflow-hidden">
@@ -224,7 +217,7 @@ const SponsorsPage = () => {
                   </div>
                 </div>
               ))}
-              {/* Duplicate set for seamless loop */}
+              
               {partners.map((partner, index) => (
                 <div key={`duplicate-${index}`} className="group relative flex-shrink-0">
                   <div className="bg-gray-900/80 border border-yellow-400 w-48 h-32 transform transition-all duration-300 hover:scale-110 hover:border-cyan-400 hover:shadow-lg hover:shadow-yellow-400/25 backdrop-blur-sm relative overflow-hidden">
@@ -235,7 +228,7 @@ const SponsorsPage = () => {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
       </div>
 
       <style jsx>{`

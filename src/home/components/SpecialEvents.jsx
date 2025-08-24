@@ -10,31 +10,38 @@ const SpecialEvents = () => {
   const specialEvents = [
     {
       id: 1,
-      heading: "AI & Machine Learning Summit",
-      description: "Dive deep into the future of artificial intelligence with industry experts and cutting-edge workshops. Experience hands-on demos, network with AI pioneers, and discover breakthrough technologies that will shape tomorrow.",
-      image: "https://assets-in.bmscdn.com/discovery-catalog/events/et00395817-cwnnyuflce-landscape.jpg",
-      accent: "cyan"
+      heading: "Neural.net",
+      description: "Push the limits of intelligence and imagination as you race to craft breakthrough AI solutions.",
+      image: "/images/special_events/NeuralNet.png",
+      accent: "orange"
     },
     {
       id: 2,
-      heading: "Cybersecurity Championship",
-      description: "Test your skills in ethical hacking, penetration testing, and digital forensics competitions. Join elite hackers in real-world simulations and prove your cybersecurity expertise in our advanced challenge arena.",
-      image: "https://cdn.prod.website-files.com/63a71c562e3ccbc6f6a40f0f/67b98625472de816d0951c58_65bcbb02d38aec8f6ce1f1ab_L%2526D_Cyber%2526ITSecurity_Hero.png",
-      accent: "purple"
+      heading: "Deepfake ML Challenge",
+      description: "Detect and defeat deepfakes in the ultimate AI showdown—only the sharpest model survives!",
+      image: "/images/special_events/Deepfake-ML_model_making_hackathon.png",
+      accent: "cyan"
     },
     {
       id: 3,
-      heading: "Quantum Computing Workshop",
-      description: "Explore the revolutionary world of quantum computing and its applications. Learn from quantum researchers and experience the power of quantum algorithms in solving complex computational problems.",
-      image: "https://cdn.mos.cms.futurecdn.net/CBcmkyZ8v4tAc8PSDcEgvM.jpg",
+      heading: "Trivia Verse",
+      description: "From milestones to modern breakthroughs — tech trivia reimagined.",
+      image: "/images/special_events/TechTrivia.png",
       accent: "blue"
     },
     {
       id: 4,
-      heading: "Neural Interface Demo",
-      description: "Witness the future of human-computer interaction through brain-computer interfaces. Experience cutting-edge neurotechnology and see how thoughts can control digital environments in real-time.",
-      image: "src/team/assets/Organisers/sathvik.jpg",
-      accent: "pink"
+      heading: "PixelFlow 3.0",
+      description: "Get ready to hack into creativity, redefine design systems, and showcase your vision of tomorrow’s digital world.",
+      image: "/images/special_events/Pixelflow.png",
+      accent: "purple"
+    },
+    {
+      id: 5,
+      heading: "Bid & Build",
+      description: "Outsmart, outbid, and outbuild your way to startup success. Strategy meets hustle in this ultimate entrepreneurial showdown!",
+      image: "/images/special_events/BidNBuild.png",
+      accent: "yellow"
     }
   ];
 
@@ -78,38 +85,53 @@ const SpecialEvents = () => {
   };
 
   const getAccentColor = (accent) => {
-    const colors = {
-      cyan: { 
-        primary: '#06b6d4', 
-        secondary: '#0891b2', 
-        glow: 'rgba(6, 182, 212, 0.5)',
-        gradient: 'linear-gradient(135deg, #06b6d4, #0891b2)',
-        tailwind: 'cyan-500'
-      },
-      purple: { 
-        primary: '#a855f7', 
-        secondary: '#9333ea', 
-        glow: 'rgba(168, 85, 247, 0.5)',
-        gradient: 'linear-gradient(135deg, #a855f7, #9333ea)',
-        tailwind: 'purple-500'
-      },
-      blue: { 
-        primary: '#3b82f6', 
-        secondary: '#2563eb', 
-        glow: 'rgba(59, 130, 246, 0.5)',
-        gradient: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-        tailwind: 'blue-500'
-      },
-      pink: { 
-        primary: '#ec4899', 
-        secondary: '#db2777', 
-        glow: 'rgba(236, 72, 153, 0.5)',
-        gradient: 'linear-gradient(135deg, #ec4899, #db2777)',
-        tailwind: 'pink-500'
-      }
-    };
-    return colors[accent] || colors.cyan;
+  const colors = {
+    cyan: { 
+      primary: '#06b6d4', 
+      secondary: '#0891b2', 
+      glow: 'rgba(6, 182, 212, 0.5)',
+      gradient: 'linear-gradient(135deg, #06b6d4, #0891b2)',
+      tailwind: 'cyan-500'
+    },
+    purple: { 
+      primary: '#a855f7', 
+      secondary: '#9333ea', 
+      glow: 'rgba(168, 85, 247, 0.5)',
+      gradient: 'linear-gradient(135deg, #a855f7, #9333ea)',
+      tailwind: 'purple-500'
+    },
+    blue: { 
+      primary: '#3b82f6', 
+      secondary: '#2563eb', 
+      glow: 'rgba(59, 130, 246, 0.5)',
+      gradient: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+      tailwind: 'blue-500'
+    },
+    pink: { 
+      primary: '#ec4899', 
+      secondary: '#db2777', 
+      glow: 'rgba(236, 72, 153, 0.5)',
+      gradient: 'linear-gradient(135deg, #ec4899, #db2777)',
+      tailwind: 'pink-500'
+    },
+    orange: {
+      primary: '#f97316',
+      secondary: '#ea580c',
+      glow: 'rgba(249, 115, 22, 0.5)',
+      gradient: 'linear-gradient(135deg, #f97316, #ea580c)',
+      tailwind: 'orange-500'
+    },
+    yellow: {
+      primary: '#eab308',
+      secondary: '#ca8a04',
+      glow: 'rgba(234, 179, 8, 0.5)',
+      gradient: 'linear-gradient(135deg, #eab308, #ca8a04)',
+      tailwind: 'yellow-500'
+    }
   };
+  return colors[accent] || colors.cyan;
+};
+
 
   const accentColors = getAccentColor(currentEvent.accent);
 

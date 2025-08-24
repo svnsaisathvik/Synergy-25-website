@@ -6,7 +6,7 @@ const AnimatedSponsors = () => {
       title: "TITLE SPONSORS",
       sponsors: [
         {
-          logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
+          logo: "/images/sponsors/LG_Logo.png"
         }
       ]
     },
@@ -14,62 +14,56 @@ const AnimatedSponsors = () => {
       title: "PRESENTING SPONSORS",
       sponsors: [
         {
-          logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
-        },
-        {
-          logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
-        },
-        {
-          logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
+          logo: "/images/sponsors/MOSIP_Logo.jpeg"
         }
       ]
     },
-    {
-      title: "ASSOCIATE SPONSORS",
-      sponsors: [
-        {
-          logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
-        },
-        {
-          logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
-        },
-        {
-          logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
-        },
-        {
-          logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
-        }
-      ]
-    },
-    {
-      title: "PARTNERS",
-      sponsors: [
-        {
-          logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
-        },
-        {
-          logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
-        },
-        {
-          logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
-        },
-        {
-          logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
-        },
-        {
-          logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
-        },
-        {
-          logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
-        },
-        {
-          logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
-        },
-        {
-          logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
-        }
-      ]
-    }
+    // {
+    //   title: "ASSOCIATE SPONSORS",
+    //   sponsors: [
+    //     {
+    //       logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
+    //     },
+    //     {
+    //       logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
+    //     },
+    //     {
+    //       logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
+    //     },
+    //     {
+    //       logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
+    //     }
+    //   ]
+    // },
+    // {
+    //   title: "PARTNERS",
+    //   sponsors: [
+    //     {
+    //       logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
+    //     },
+    //     {
+    //       logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
+    //     },
+    //     {
+    //       logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
+    //     },
+    //     {
+    //       logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
+    //     },
+    //     {
+    //       logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
+    //     },
+    //     {
+    //       logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
+    //     },
+    //     {
+    //       logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
+    //     },
+    //     {
+    //       logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
+    //     }
+    //   ]
+    // }
   ];
 
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
@@ -231,7 +225,7 @@ const AnimatedSponsors = () => {
                 {/* Main Sponsor Container */}
                 <div 
                   className={`relative overflow-hidden bg-black/80 backdrop-blur-sm border border-cyan-400/70 group-hover:border-pink-500/80 transition-all duration-500 shadow-[0_0_20px_rgba(6,182,212,0.3)] group-hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] ${
-                    currentCategory.sponsors.length === 1 ? 'w-80 h-52' : 'w-56 h-36'
+                    currentCategory.sponsors.length === 1 ? 'lg:w-120 lg:h-52 sm:h-50' : 'w-56 h-36'
                   }`}
                   style={{
                     clipPath: 'polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px))'
@@ -279,11 +273,11 @@ const AnimatedSponsors = () => {
                   ></div>
                   
                   {/* Logo Container - Full fit */}
-                  <div className="relative flex items-center justify-center w-full h-full z-10">
+                  <div className="relative flex items-center justify-center lg:w-full h-full z-10">
                     <img 
                       src={sponsor.logo}
                       alt={`${currentCategory.title} Logo ${index + 1}`}
-                      className="w-full h-full object-cover filter brightness-110 contrast-110 group-hover:brightness-125 group-hover:contrast-125 transition-all duration-500 drop-shadow-[0_0_10px_rgba(6,182,212,0.4)] group-hover:drop-shadow-[0_0_15px_rgba(6,182,212,0.8)]"
+                      className="lg:w-full lg:h-full object-cover filter brightness-110 contrast-110 group-hover:brightness-125 group-hover:contrast-125 transition-all duration-500 drop-shadow-[0_0_10px_rgba(6,182,212,0.4)] group-hover:drop-shadow-[0_0_15px_rgba(6,182,212,0.8)]"
                       onError={(e) => {
                         e.target.style.display = 'none';
                       }}

@@ -55,10 +55,10 @@ const teamMembers = [
     linkedin: 'https://www.linkedin.com/in/srikar-vellanki-9012b5325?trk=contact-info'
   },
   {
-    name: 'Surya Karthik',
-    image: '/images/team/surya.jpg',
+    name: 'AhilNandan Kabilan',
+    image: '/images/team/ahil.jpeg',
     category: 'Sponsorship',
-    linkedin: 'https://www.linkedin.com/in/surya-karthik-chimalapati-aa0503324/'
+    linkedin: 'https://www.linkedin.com/in/ahilnandan-kabilan-536bbb32a/'
   },
   {
     name: 'Chovatiya Laksh Vipulbhai',
@@ -103,10 +103,10 @@ const teamMembers = [
     linkedin: 'https://www.linkedin.com/in/saanvi-choudhary-8a2985347?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
   },
   {
-    name: 'AhilNandan Kabilan',
-    image: '/images/team/ahil.jpeg',
+    name: 'Surya Karthik',
+    image: '/images/team/surya.jpg',
     category: 'Sponsorship',
-    linkedin: 'https://www.linkedin.com/in/ahilnandan-kabilan-536bbb32a/'
+    linkedin: 'https://www.linkedin.com/in/surya-karthik-chimalapati-aa0503324/'
   },
   {
     name: 'Gourav Anirudh',

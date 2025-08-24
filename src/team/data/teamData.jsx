@@ -6,16 +6,28 @@ const teamMembers = [
     linkedin: 'https://www.linkedin.com/in/pragun-k-kirani'
   },
   {
+    name: 'Kushaagr Mehrotra',
+    image: '/images/team/kushagra.png',
+    category: 'Design',
+    linkedin: 'https://www.linkedin.com/in/kushaagr'
+  },
+  {
     name: 'Navya Balaji',
     image: '/images/team/navyabalaji.jpg',
     category: 'Design',
     linkedin: 'https://www.linkedin.com/in/navya-balaji'
   },
   {
-    name: 'Kushaagr Mehrotra',
-    image: '/images/team/kushagra.png',
-    category: 'Design',
-    linkedin: 'https://www.linkedin.com/in/kushaagr'
+    name: 'SVN Sathvik',
+    image: '/images/team/sathvik.jpeg',
+    category: 'Organizers',
+    linkedin: 'https://www.linkedin.com/in/chirayu-choudhary-560837277/'
+  },
+  {
+    name: 'Aryan Bansal',
+    image: '/images/team/aryan1.jpg',
+    category: 'Organizers',
+    linkedin: 'https://www.linkedin.com/in/aryan-bansal-1a9aa4372/'
   },
   {
     name: 'Chirayu Choudhary',
@@ -84,22 +96,40 @@ const teamMembers = [
     linkedin: 'https://www.linkedin.com/in/shivansh-shah-06774a288?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app'
   },
   {
-    name: 'Aryan Bansal',
-    image: '/images/team/aryan1.jpg',
-    category: 'Organizers',
-    linkedin: 'https://www.linkedin.com/in/aryan-bansal-1a9aa4372/'
-  },
-  {
     name: 'Saanvi Choudhary',
     image: '/images/team/saanvi.jpg',
     category: 'Sponsorship',
     linkedin: 'https://www.linkedin.com/in/saanvi-choudhary-8a2985347?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
   },
   {
+    name: 'AhilNandan Kabilan',
+    image: '/images/team/ahil.jpeg',
+    category: 'Sponsorship',
+    linkedin: 'https://www.linkedin.com/in/ahilnandan-kabilan-536bbb32a/'
+  },
+  {
+    name: 'Gourav Anirudh',
+    image: '/images/team/gourav.jpeg',
+    category: 'Website',
+    linkedin: 'https://www.linkedin.com/in/gouravanirudh/'
+  },
+  {
     name: 'Sriram Srikanth',
     image: '/images/team/sriram.jpeg',
     category: 'Website',
     linkedin: 'https://www.linkedin.com/in/sriram-srikanth-066376284/'
+  },
+  {
+    name: 'Sathish Adithiyaa SV',
+    image: '/images/team/sathish.jpeg',
+    category: 'Website',
+    linkedin: 'https://www.linkedin.com/in/sathish-adithiyaa-sv-33408827a/'
+  },
+   {
+    name: 'Navish Malik',
+    image: '/images/team/navish.jpeg',
+    category: 'Website',
+    linkedin: 'https://www.linkedin.com/in/navish-malik-213922349/'
   },
   {
     name:'Harshita Bansal',

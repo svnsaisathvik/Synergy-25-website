@@ -14,7 +14,9 @@ const TeamPage = () => {
                  overflow-hidden text-white font-['CyberAlert'] 
                  bg-[url('/image.png')] bg-cover bg-bottom bg-no-repeat"
     >
-      <div className="relative z-10 container mx-auto px-4 py-8 pb-80">
+      <div className="relative z-10 container mx-auto px-4 py-8 
+                pb-40 sm:pb-56 md:pb-72 lg:pb-[28rem] xl:pb-[32rem]">
+
         <div className="flex flex-col md:flex-row">
           {/* Left Sidebar */}
           <div className="w-full md:w-1/4 mb-8 md:mb-0">

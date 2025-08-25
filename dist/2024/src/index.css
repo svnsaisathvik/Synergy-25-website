@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+.heading0 {
+  @apply text-4xl md:text-6xl lg:text-8xl font-bold;
+}
+.heading1 {
+  @apply text-5xl md:text-6xl lg:text-7xl font-bold;
+}
+.heading2 {
+  @apply sm:text-xl md:text-2xl lg:text-3xl;
+}
+.heading3 {
+  @apply sm:text-lg md:text-xl lg:text-2xl;
+}
+.heading4 {
+  @apply sm:text-sm md:text-lg lg:text-lg font-normal;
+}
+.para {
+  @apply text-xl max-sm:text-base max-md:text-lg;
+}
+.flexCenter {
+  @apply flex items-center justify-center;
+}
+.flexAround {
+  @apply flex items-center justify-around;
+}
+.flexBetween {
+  @apply flex items-center justify-between;
+}
+.no-scrollbar::-webkit-scrollbar {  
+  display: none;   
+} 
+}
+
+:root {
+  font-family: Poppins, serif, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: #010015;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+} 
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+section{
+  height: 100vh;
+  scroll-snap-align: start;
+  color: white;
+  overflow: hidden;
+}
+
+.faq-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+  width: 10rem;
+  background-color: #0075FF;
+  border: #0075FF 4px solid;
+  font-size: 0.7rem;
+}
+
+
+[transition-style="in:wipe:up"] {
+  animation: 2.5s cubic-bezier(.25, 1, .30, 1) wipe-in-up both;
+}
+
+::-webkit-scrollbar{
+  width: 5px;
+  height: 8px;
+  background-color: #01002F; /* or add it to the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0075FF;
+}
+
+.side {
+  display: grid;
+  height: 100%; /* Set a fixed height for .side */
+  overflow: hidden;
+  place-items: center;
+  position: absolute;
+  width: 100%;
+}
+/* EventCard.jsx CSS for cardflip */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+
+@layer utilities {
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  .logos-slide {
+    display: inline block;
+    flex-shrink: 0;
+  }
+}

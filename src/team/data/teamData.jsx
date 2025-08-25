@@ -35,12 +35,29 @@ const teamMembers = [
     category: 'Organizers',
     linkedin: 'https://www.linkedin.com/in/aryan-bansal-1a9aa4372/'
   },
-  
+    {
+    name: 'Darsh Veer Singh',
+    image: '/images/team/veer.jpg',
+    category: 'Marketing & Media',
+    linkedin: 'https://www.linkedin.com/in/darsh-veer-singh-5836bb288?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
+  },
   {
     name: 'Kunal Mittal',
     image: '/images/team/kunalmittal.jpeg',
     category: 'Marketing & Media',
     linkedin: 'https://www.linkedin.com/in/kunal-mittal-749a1a27b/'
+  },
+    {
+    name: 'Shivek Ranjan',
+    image: '/images/team/shivek.jpeg',
+    category: 'Marketing & Media',
+    linkedin: 'https://www.linkedin.com/in/shivekranjan/'
+  },
+   {
+    name: 'Prashant V S Garimella',
+    image: '/images/team/prashant.png',
+    category: 'Marketing & Media',
+    linkedin: 'https://www.linkedin.com/in/prashant-v-s-garimella-b34469380?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
   },
   {
     name: 'Mehta Yashvi Mehul',
@@ -59,6 +76,12 @@ const teamMembers = [
     image: '/images/team/ahil.jpeg',
     category: 'Sponsorship',
     linkedin: 'https://www.linkedin.com/in/ahilnandan-kabilan-536bbb32a/'
+  },
+   {
+    name: 'Krisha Dhokariya',
+    image: '/images/team/krisha.jpg',
+    category: 'Marketing & Media',
+    linkedin: 'https://www.linkedin.com/in/krisha-dhokariya'
   },
   {
     name: 'Chovatiya Laksh Vipulbhai',
@@ -84,12 +107,7 @@ const teamMembers = [
     category: 'Marketing & Media',
     linkedin: 'https://www.linkedin.com/in/soham-banerjee-838b8a253/'
   },
-  {
-    name: 'Krisha Dhokariya',
-    image: '/images/team/krisha.jpg',
-    category: 'Marketing & Media',
-    linkedin: 'https://www.linkedin.com/in/krisha-dhokariya'
-  },
+ 
   {
     name: 'Shivansh Shah',
     image: '/images/team/shivansh.jpeg',
@@ -107,6 +125,12 @@ const teamMembers = [
     image: '/images/team/surya.jpg',
     category: 'Sponsorship',
     linkedin: 'https://www.linkedin.com/in/surya-karthik-chimalapati-aa0503324/'
+  },
+  {
+    name: 'Hemant Jagnani',
+    image: '/images/team/hemant.jpg',
+    category: 'Sponsorship',
+    linkedin: 'https://www.linkedin.com/in/hemant-jagnani-38a3802b9?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
   },
   {
     name: 'Gourav Anirudh',

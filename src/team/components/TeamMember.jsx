@@ -1,29 +1,29 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const TeamMember = ({ member, index }) => {
-  const ref = useRef(null);
+const TeamMember = ({ member, index, activeCategory }) => {
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-
-    setTimeout(() => {
-      el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
+    // Reset animation when category changes
+    setIsVisible(false);
+    
+    const timer = setTimeout(() => {
+      setIsVisible(true);
     }, 150 * index);
-  }, [index]);
+
+    return () => clearTimeout(timer);
+  }, [index, activeCategory]); // Add activeCategory as dependency
 
   return (
     <div
-  ref={ref}
-  className="group relative w-full max-w-[280px] sm:max-w-[290px] rounded-lg overflow-hidden transition-all duration-500 hover:scale-105 hover:z-10 animate-float"
-  style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
->
-
+      className={`group relative w-full max-w-[280px] sm:max-w-[290px] rounded-lg overflow-hidden transition-all duration-500 hover:scale-105 hover:z-10 animate-float
+        ${isVisible 
+          ? 'opacity-100 translate-y-0' 
+          : 'opacity-0 translate-y-5'
+        }
+        transform transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]`}
+      style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
+    >
       {/* Neon Border */}
       <div className="absolute inset-0 rounded-lg border-2 border-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-border-glow" />
 

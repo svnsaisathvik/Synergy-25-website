@@ -12,7 +12,7 @@ const Navbar = () => {
       <nav className="navbar">
         <div className="navbar-container">
           {/* Logo */}
-          <div className="navbar-logo">
+          <div className="navbar-logo p-2 lg:p-0">
             <img
               src="/logo.png"
               alt="Synergy 2025 Logo"
@@ -23,7 +23,7 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="navbar-desktop">
             <a href="/events" className="navbar-link quicksand-font">Events</a>
-            <a href="#about" className="navbar-link navbar-link-about quicksand-font">About</a>
+            <a href="#about" className="navbar-link quicksand-font">About</a>
             <a href="#faq" className="navbar-link quicksand-font">FAQ</a>
             <a href="#contact-us" className="navbar-link quicksand-font">Contact Us</a>
             <a href="/teams" className="navbar-link quicksand-font">Team</a>
@@ -31,7 +31,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="navbar-mobile">
+          <div className="navbar-mobile p-3">
             <button onClick={toggleSidebar} className="navbar-mobile-button">
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>

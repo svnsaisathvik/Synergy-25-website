@@ -653,7 +653,7 @@
 }
 
 .mobile-bg-img.transitioning {
-  opacity: 0.5;
+  opacity: 0.8;
   transform: scale(1.1);
   brightness: 1.5;
   contrast: 2;
@@ -661,7 +661,7 @@
 }
 
 .mobile-bg-img.normal {
-  opacity: 0.3;
+  opacity: 0.6;
   transform: scale(1);
   brightness: 1;
   contrast: 1;

@@ -65,13 +65,13 @@ const SponsorsPage = () => {
     <div className="min-h-screen bg-black text-white font-mono relative overflow-hidden">
       {/* Cyberpunk background image with overlay */}
       <div className="fixed inset-0 opacity-80">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/50 via-blue-900/50 to-pink-900/50"></div>
+        {/* <div className="absolute inset-0 bg-gradient-to-br from-purple-900/50 via-blue-900/50 to-pink-900/50"></div> */}
         <img 
-          src="https://www.creativefabrica.com/wp-content/uploads/2023/07/18/Cyberpunk-City-Street-Scifi-Wallpaper-Graphics-74866949-1.jpg?w=1920&h=1080&fit=crop" 
+          src="/images/sponsors/sponsors-page-bg.jpg" 
           alt="Cyberpunk cityscape" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 bg-black/30"></div>
       </div>
 
       {/* Enhanced glitch overlay with more effects */}

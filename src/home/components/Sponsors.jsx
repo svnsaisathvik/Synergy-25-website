@@ -18,52 +18,17 @@ const AnimatedSponsors = () => {
         }
       ]
     },
-    // {
-    //   title: "ASSOCIATE SPONSORS",
-    //   sponsors: [
-    //     {
-    //       logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
-    //     },
-    //     {
-    //       logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
-    //     },
-    //     {
-    //       logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
-    //     },
-    //     {
-    //       logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
-    //     }
-    //   ]
-    // },
-    // {
-    //   title: "PARTNERS",
-    //   sponsors: [
-    //     {
-    //       logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
-    //     },
-    //     {
-    //       logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
-    //     },
-    //     {
-    //       logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
-    //     },
-    //     {
-    //       logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
-    //     },
-    //     {
-    //       logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
-    //     },
-    //     {
-    //       logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
-    //     },
-    //     {
-    //       logo: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
-    //     },
-    //     {
-    //       logo: "https://blogs.microsoft.com/wp-content/uploads/2012/08/8867.Microsoft_5F00_Logo_2D00_for_2D00_screen.jpg"
-    //     }
-    //   ]
-    // }
+    {
+      title: "PARTNERS",
+      sponsors: [
+        {
+          logo: "public/images/sponsors/IIITB_IC2.png"
+        },
+        {
+          logo: "/images/sponsors/SE_LAB_IIITB.jpg"
+        }
+      ]
+    }
   ];
 
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
@@ -208,8 +173,8 @@ const AnimatedSponsors = () => {
             currentCategory.sponsors.length === 1 
               ? 'grid-cols-1' 
               : currentCategory.sponsors.length <= 3 
-              ? 'grid-cols-1 md:grid-cols-3' 
-              : 'grid-cols-1 md:grid-cols-4 lg:grid-cols-4'
+              ? 'grid-cols-1 md:grid-cols-2' 
+              : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-2'
           }`}>
             {currentCategory.sponsors.map((sponsor, index) => (
               <div 
@@ -225,7 +190,7 @@ const AnimatedSponsors = () => {
                 {/* Main Sponsor Container */}
                 <div 
                   className={`relative overflow-hidden bg-black/80 backdrop-blur-sm border border-cyan-400/70 group-hover:border-pink-500/80 transition-all duration-500 shadow-[0_0_20px_rgba(6,182,212,0.3)] group-hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] ${
-                    currentCategory.sponsors.length === 1 ? 'lg:w-120 lg:h-52 sm:h-50' : 'w-56 h-36'
+                    currentCategory.sponsors.length === 1 ? 'lg:w-120 lg:h-52 md:w-120 md:h-52 sm:h-50' : 'lg:w-120 lg:h-52 md:w-120 md:h-52'
                   }`}
                   style={{
                     clipPath: 'polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px))'
@@ -236,7 +201,7 @@ const AnimatedSponsors = () => {
                   <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-cyan-400 group-hover:border-pink-500 transition-colors duration-500 animate-pulse" style={{ animationDelay: '0.3s' }}></div>
                   
                   {/* Enhanced Swish Light Effects - Much more visible */}
-                  <div 
+                  {/* <div 
                     className={`absolute inset-0 swish-light-${index + 1} pointer-events-none z-20`}
                     style={{
                       background: 'linear-gradient(45deg, transparent 30%, rgba(0,255,255,0.9) 45%, rgba(255,255,255,0.8) 50%, rgba(0,255,255,0.9) 55%, transparent 70%)',
@@ -246,10 +211,10 @@ const AnimatedSponsors = () => {
                       left: '-10%',
                       top: '-10%'
                     }}
-                  ></div>
+                  ></div> */}
                   
                   {/* Secondary Swish with Different Color */}
-                  <div 
+                  {/* <div 
                     className={`absolute inset-0 swish-reverse-${index + 1} pointer-events-none z-20`}
                     style={{
                       background: 'linear-gradient(-45deg, transparent 30%, rgba(255,20,147,0.8) 45%, rgba(255,255,255,0.6) 50%, rgba(255,20,147,0.8) 55%, transparent 70%)',
@@ -259,7 +224,7 @@ const AnimatedSponsors = () => {
                       left: '-10%',
                       top: '-10%'
                     }}
-                  ></div>
+                  ></div> */}
                   
                   {/* Additional bright flash effect */}
                   <div 

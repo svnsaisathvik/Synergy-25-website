@@ -103,7 +103,7 @@ const About = () => {
                   <div className="about-stat-label" style={{fontFamily:"CyberAlert"}}>EVENTS</div>
                 </div>
                 <div className="about-stat-item about-stat-item-purple">
-                  <div className="about-stat-number about-stat-number-purple" style={{fontFamily:"CyberAlert"}}>1000+</div>
+                  <div className="about-stat-number about-stat-number-purple" style={{fontFamily:"CyberAlert"}}>7000+</div>
                   <div className="about-stat-label" style={{fontFamily:"CyberAlert"}}>PARTICIPANTS</div>
                 </div>
                 <div className="about-stat-item about-stat-item-green">
@@ -129,11 +129,11 @@ const About = () => {
               <div className="about-title-container">
                 <h3 className="about-title">
                   <span className="about-title-gradient-purple" style={{fontFamily:"CyberAlert"}}>
-                    ABOUT IIITB
+                    ABOUT IIIT-B
                   </span>
                 </h3>
                 <div className="about-title-shadow">
-                  <span className="about-title-shadow-cyan" style={{fontFamily:"CyberAlert"}}>ABOUT IIITB</span>
+                  <span className="about-title-shadow-cyan" style={{fontFamily:"CyberAlert"}}>ABOUT IIIT-B</span>
                 </div>
                 {/* Underline */}
                 <div className="about-underline about-underline-purple"></div>

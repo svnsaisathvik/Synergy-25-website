@@ -22,7 +22,7 @@ const AnimatedSponsors = () => {
       title: "PARTNERS",
       sponsors: [
         {
-          logo: "public/images/sponsors/IIITB_IC2.png"
+          logo: "/images/sponsors/IIITB_IC2.png"
         },
         {
           logo: "/images/sponsors/SE_LAB_IIITB.jpg"

@@ -285,7 +285,7 @@ const EventTimeline = () => {
                     }}
                   >
                     {/* Hexagon backgrounds only for active card */}
-                    {isActive && (
+                    {/* {isActive && (
                       <div className="hex-background-container">
                         <HexBackground />
                         <div className="hex-background-layer-2">
@@ -295,7 +295,7 @@ const EventTimeline = () => {
                           <HexBackground3 />
                         </div>
                       </div>
-                    )}
+                    )} */}
                     
                     <EventPoster
                       event={event}

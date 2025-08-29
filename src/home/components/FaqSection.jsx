@@ -97,7 +97,7 @@ export default function FaqSection() {
                 {/* Front side */}
                 <div className="flip-front">
                   <div className="card-content">
-                    <div className="question-icon">{faq.icon}</div>
+                    {/* <div className="question-icon">{faq.icon}</div> */}
                     <div className="question-text">{faq.question}</div>
                     <div className="flip-indicator">→</div>
                   </div>

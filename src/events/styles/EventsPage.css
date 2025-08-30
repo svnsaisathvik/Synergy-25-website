@@ -505,7 +505,7 @@
 @media (max-width: 768px) {
   .sticky-search-section {
     padding: 0.75rem;
-    top: 60px; /* Position below back button on mobile */
+    top: 0px; /* Position below back button on mobile */
   }
   
   .search-container {
@@ -554,12 +554,12 @@
   
   .cyber-search-wrapper {
     min-width: 160px;
-    max-width: 200px;
+    max-width: 180px;
   }
   
   .cyber-search-input {
     padding: 6px 10px;
-    font-size: 10px;
+    font-size: 12px;
   }
   
   .cyber-filter-button {
@@ -571,6 +571,20 @@
   .filter-icon {
     width: 14px;
     height: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  .cyber-search-wrapper {
+    min-width: 120px;
+    max-width: 160px;
+  }
+}
+
+@media (max-width: 370px) {
+  .cyber-search-wrapper {
+    min-width: 120px;
+    max-width: 140px;
   }
 }
 

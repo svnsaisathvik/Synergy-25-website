@@ -38,7 +38,8 @@
                 "time": "7th Nov 9:00 AM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
-                  { "name": "Harsh Gupta", "contact": "+917425876315" }
+                  { "name": "Harsh Gupta", "contact": "+917425876315" },
+                  { "name": "Pramatha Rao", "contact": "+917349264889" }
                 ],
                 "fee": 0,
                 "registration_form": [

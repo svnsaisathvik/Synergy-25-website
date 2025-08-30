@@ -369,7 +369,7 @@
                 "about": "From milestones to modern breakthroughs — tech trivia reimagined.",
                 "image": "/images/posters/TechTrivia.png",
                 "rulespdf": "https://unstop.com/p/triviaverse-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543498",
-                "time": "8th Nov 12:00 AM",
+                "time": "8th Nov 9:00 AM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
                   { "name": "Siddharth Menon", "contact": "+919845084898" },
@@ -383,29 +383,8 @@
                   }
                 ]
               },
-               {
-                "id": 19,
-                "name": "Skew-id Games",
-                "category": "Puzzle-Solving",
-                "prizePool": 15000,
-                "about": "Quick minds. Sharp moves. One winner.",
-                "image": "/images/posters/Skew-idGames.jpg",
-                "rulespdf": "https://unstop.com/p/skew-id-games-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544681",
-                "time": "8th Nov 12:00 AM",
-                "venue": "IIIT-B Campus",
-                "spocs": [
-                  { "name": "Tharanth T J", "contact": "+919148972070" }
-                ],
-                "fee": 0,
-                "registration_form": [
-                  {
-                    "link": "https://forms.office.com/Pages/ResponsePage.aspx?id=IkyogrJHEka594YPOeubErVCUNVR7mVFnf8VQLoYs0VUNlpSQVBNNTEwMVpNVkQ4QU01SEo2REkzVS4u",
-                    "info": ""
-                  }
-                ]
-              },
               {
-                "id": 20,
+                "id": 19,
                 "name": "Panel Discussion",
                 "category": "hackathon",
                 "prizePool": "Goodies",
@@ -425,6 +404,50 @@
                     "info": ""
                   }
                 ]
+              },
+              {
+                "id": 20,
+                "name": "Skew-id Games",
+                "category": "Puzzle-Solving",
+                "prizePool": 15000,
+                "about": "Quick minds. Sharp moves. One winner.",
+                "image": "/images/posters/Skew-idGames.jpg",
+                "rulespdf": "https://unstop.com/p/skew-id-games-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544681",
+                "time": "8th Nov 3:00 PM",
+                "venue": "IIIT-B Campus",
+                "spocs": [
+                  { "name": "Tharanth T J", "contact": "+919148972070" }
+                ],
+                "fee": 0,
+                "registration_form": [
+                  {
+                    "link": "https://forms.office.com/Pages/ResponsePage.aspx?id=IkyogrJHEka594YPOeubErVCUNVR7mVFnf8VQLoYs0VUNlpSQVBNNTEwMVpNVkQ4QU01SEo2REkzVS4u",
+                    "info": ""
+                  }
+                ]
+              },
+              {
+                "id": 21,
+                "name": "CodeQuest 2025",
+                "category": "coding",
+                "prizePool": 20000,
+                "about": "Crack complex algorithms under pressure and outsmart the clock. Only the best problem-solvers will come out on top!",
+                "image": "/images/posters/Codequest.png",
+                "rulespdf": "https://unstop.com/p/codequest-2025-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543618",
+                "time": "8th Nov 3:00 PM",
+                "venue": "Online",
+                "spocs": [
+                  { "name": "Kandarp Dave", "contact": "+919023194943" },
+                  { "name": "Ayush Gupta", "contact": "++918884803648" }
+                ],
+                "fee": 0,
+                "registration_form": [
+                  {
+                    "link": "https://forms.cloud.microsoft/pages/responsepage.aspx?id=IkyogrJHEka594YPOeubEh2FwIYEmRRNu0R9SJNtJ8tURVc4NTRSNVEyRkxCVTVLMFFZWjdBQ0IyNy4u&route=shorturl",
+                    "info": ""
+                  }
+                ],
+                "iiitb_exclusive":true
               },
               {
                 "id": 22,
@@ -603,29 +626,6 @@
                     "info": ""
                   }
                 ]
-              },
-              {
-                "id": 32,
-                "name": "CodeQuest 2025",
-                "category": "coding",
-                "prizePool": 20000,
-                "about": "Crack complex algorithms under pressure and outsmart the clock. Only the best problem-solvers will come out on top!",
-                "image": "/images/posters/Codequest.png",
-                "rulespdf": "https://unstop.com/p/codequest-2025-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543618",
-                "time": "Refer to Unstop",
-                "venue": "Online",
-                "spocs": [
-                  { "name": "Kandarp Dave", "contact": "+919023194943" },
-                  { "name": "Ayush Gupta", "contact": "++918884803648" }
-                ],
-                "fee": 0,
-                "registration_form": [
-                  {
-                    "link": "https://forms.cloud.microsoft/pages/responsepage.aspx?id=IkyogrJHEka594YPOeubEh2FwIYEmRRNu0R9SJNtJ8tURVc4NTRSNVEyRkxCVTVLMFFZWjdBQ0IyNy4u&route=shorturl",
-                    "info": ""
-                  }
-                ],
-                "iiitb_exclusive":true
               }
             ]
           }          

@@ -11,6 +11,9 @@ const SponsorsPage = () => {
     {
       logo: "/images/sponsors/MOSIP_Logo.jpeg",
     },
+    {
+      logo: "/images/sponsors/LOGO_TECHOBYTES_TECHNOLOGIES.png",
+    }
   ];
 
   const partners = [

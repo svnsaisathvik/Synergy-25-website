@@ -41,6 +41,13 @@ const SpecialEvents = () => {
       heading: "Bid & Build",
       description: "Outsmart, outbid, and outbuild your way to startup success. Strategy meets hustle in this ultimate entrepreneurial showdown!",
       image: "/images/special_events/BidNBuild.png",
+      accent: "orange"
+    },
+    {
+      id: 6,
+      heading: "Raffle fundraiser",
+      description: "A raffle fundraiser is being held to support the Creature Hero Foundation, founded by Chris and Martin Kratt, the creators of Wild Kratts, to protect endangered species and their habitats. Proceeds will go toward wildlife conservation projects and inspiring the next generation of conservation heroes.",
+      image: "/images/special_events/RaffleFundraiser.png",
       accent: "yellow"
     }
   ];

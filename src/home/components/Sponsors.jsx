@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const AnimatedSponsors = () => {
   const sponsorCategories = [
     {
-      title: "TITLE SPONSORS",
+      title: "TITLE SPONSOR",
       sponsors: [
         {
           logo: "/images/sponsors/LG_Logo.png"
@@ -11,11 +11,16 @@ const AnimatedSponsors = () => {
       ]
     },
     {
-      title: "PRESENTING SPONSORS",
+      title: "PRESENTING SPONSOR",
       sponsors: [
         {
           logo: "/images/sponsors/MOSIP_Logo.jpeg"
-        },
+        }
+      ]
+    },
+    {
+      title: "WORKSHOP PARTNER",
+      sponsors: [
         {
           logo: "/images/sponsors/LOGO_TECHOBYTES_TECHNOLOGIES.png"
         }

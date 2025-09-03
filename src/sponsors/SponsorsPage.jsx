@@ -10,7 +10,10 @@ const SponsorsPage = () => {
   const presentingSponsors = [
     {
       logo: "/images/sponsors/MOSIP_Logo.jpeg",
-    },
+    }
+  ];
+
+  const workshopPartner = [
     {
       logo: "/images/sponsors/LOGO_TECHOBYTES_TECHNOLOGIES.png",
     }
@@ -139,7 +142,7 @@ const SponsorsPage = () => {
               className="lg:text-4xl text-3xl font-bold text-cyan-400 tracking-wider"
               style={{ fontFamily: "CyberAlert" }}
             >
-              TITLE SPONSORS
+              TITLE SPONSOR
             </h2>
             <div className="flex-1 h-px bg-gradient-to-r from-cyan-400 to-transparent ml-4"></div>
           </div>
@@ -174,7 +177,7 @@ const SponsorsPage = () => {
               className="lg:text-4xl text-3xl font-bold text-pink-500 tracking-wider"
               style={{ fontFamily: "CyberAlert" }}
             >
-              PRESENTING SPONSORS
+              PRESENTING SPONSOR
             </h2>
             <div className="flex-1 h-px bg-gradient-to-r from-pink-500 to-transparent ml-4"></div>
           </div>
@@ -196,23 +199,35 @@ const SponsorsPage = () => {
           </div>
         </section>
 
-        {/* <section className="mb-20">
+        {/* Workshop Partner */}
+        <section className="mb-20">
           <div className="flex items-center mb-10">
             <div className="w-4 h-4 bg-purple-500 mr-4 animate-ping"></div>
-            <h2 className="lg:text-4xl text-3xl font-bold text-purple-500 tracking-wider" style={{fontFamily:"CyberAlert"}}>ASSOCIATE SPONSORS</h2>
+            <h2
+              className="lg:text-4xl text-3xl font-bold text-purple-500 tracking-wider"
+              style={{ fontFamily: "CyberAlert" }}
+            >
+              WORKSHOP PARTNER
+            </h2>
             <div className="flex-1 h-px bg-gradient-to-r from-purple-500 to-transparent ml-4"></div>
           </div>
-          <div className="grid md:grid-cols-4 gap-6">
-            {associateSponsors.map((sponsor, index) => (
+          <div className="grid md:grid-cols-3 gap-8">
+            {workshopPartner.map((sponsor, index) => (
               <div key={index} className="group relative">
-                <div className="bg-gray-900/60 border border-purple-500 h-28 transform transition-all duration-500 hover:scale-110 hover:border-yellow-400 hover:shadow-xl hover:shadow-purple-500/30 backdrop-blur-md relative overflow-hidden">
-                  <img src={sponsor.logo} alt="Sponsor" className="w-full h-full object-cover filter brightness-125 contrast-110" />
-                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-yellow-400 opacity-0 group-hover:opacity-15 blur-md transition-opacity duration-500"></div>
+                <div className="bg-gray-900/60 border border-purple-500 h-40 transform transition-all duration-500 hover:scale-110 hover:border-cyan-400 hover:shadow-xl hover:shadow-pink-500/30 backdrop-blur-md relative overflow-hidden">
+                  <img
+                    src={sponsor.logo}
+                    alt="Sponsor"
+                    className="w-full h-full object-cover filter brightness-125 contrast-110"
+                  />
+
+                  <div className="absolute top-2 right-2 w-2 h-2 bg-purple-500 animate-pulse"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-20 blur-lg transition-opacity duration-500"></div>
                 </div>
               </div>
             ))}
           </div>
-        </section> */}
+        </section>
 
         {/* Partners with infinite scroll - Fixed image sizing */}
         <section className="mb-16">

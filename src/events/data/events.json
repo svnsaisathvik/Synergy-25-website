@@ -38,7 +38,8 @@
                 "time": "7th Nov 9:00 AM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
-                  { "name": "Harsh Gupta", "contact": "+917425876315" }
+                  { "name": "Harsh Gupta", "contact": "+917425876315" },
+                  { "name": "Pramatha Rao", "contact": "+917349264889"}
                 ],
                 "fee": 0,
                 "registration_form": [
@@ -371,8 +372,8 @@
                 "time": "8th Nov 9:00 AM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
-                  { "name": "Siddharth Menon", "contact": "+919845084898" },
-                  { "name": "Ankith Kini", "contact": "+918618147391" }
+                  { "name": "Ajay Javali", "contact": "+918296563377" },
+                  { "name": "Mithilesh", "contact": "+919591544183" }
                 ],
                 "fee": 0,
                 "registration_form": [
@@ -436,7 +437,7 @@
                 "time": "8th Nov 10:00 PM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
-                  { "name": "Synergy IIITB", "contact": "+919636853258" }
+                  { "name": "Chirayu Choudhary", "contact": "+919636853258" }
                 ],
                 "fee": 0,
                 "registration_form": [
@@ -486,7 +487,7 @@
                 "time": "9th Nov 11:00 AM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
-                  { "name": "Shaivi Nandi", "contact": "+916281671608" }
+                  { "name": "Snehal Sharma", "contact": "+917073800216" }
                 ],
                 "fee": 0,
                 "registration_form": [
@@ -507,7 +508,8 @@
                 "time": "9th Nov 1:00 PM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
-                  { "name": "Akshat Betala", "contact": "+919740340860" }
+                  { "name": "Akshat Betala", "contact": "+919740340860" },
+                  {"name": "Shantanu", "contact": "+917396821118"}
                 ],
                 "fee": 0,
                 "registration_form": [
@@ -528,7 +530,7 @@
                 "time": "Refer to Unstop",
                 "venue": "Online",
                 "spocs": [
-                  { "name": "Synergy IIITB", "contact": "+919636853258" }
+                  { "name": "Chirayu Choudhary", "contact": "+919636853258" }
                 ],
                 "fee": 0,
                 "registration_form": [
@@ -549,7 +551,8 @@
                 "time": "Refer to Unstop",
                 "venue": "Online",
                 "spocs": [
-                  { "name": "Synergy IIITB", "contact": "+919636853258" }
+                  { "name": "Chirayu Choudhary", "contact": "+919636853258" },
+                  { "name": "Aryan Bansal", "contact": "+918451979163"}
                 ],
                 "fee": 0,
                 "registration_form": [

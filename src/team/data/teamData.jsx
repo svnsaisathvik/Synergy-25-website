@@ -6,7 +6,7 @@ const teamMembers = [
     linkedin: 'https://www.linkedin.com/in/pragun-k-kirani'
   },
   {
-    name: 'Kushaagr Mehrotra',
+    name: 'Kushagra Mehrotra',
     image: '/images/team/kushagra.png',
     category: 'Design',
     linkedin: 'https://www.linkedin.com/in/kushaagr'

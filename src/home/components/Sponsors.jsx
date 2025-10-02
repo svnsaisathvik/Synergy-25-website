@@ -15,6 +15,9 @@ const AnimatedSponsors = () => {
       sponsors: [
         {
           logo: "/images/sponsors/MOSIP_Logo.jpeg"
+        },
+        {
+          logo: "/images/sponsors/ELCIA_Logo.png"
         }
       ]
     },

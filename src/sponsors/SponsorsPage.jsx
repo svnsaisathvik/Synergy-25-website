@@ -10,6 +10,9 @@ const SponsorsPage = () => {
   const presentingSponsors = [
     {
       logo: "/images/sponsors/MOSIP_Logo.jpeg",
+    },
+    {
+      logo: "/images/sponsors/ELCIA_Logo.png",
     }
   ];
 

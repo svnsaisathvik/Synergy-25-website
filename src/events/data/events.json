@@ -38,8 +38,7 @@
                 "time": "7th Nov 9:00 AM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
-                  { "name": "Harsh Gupta", "contact": "+917425876315" },
-                  { "name": "Pramatha Rao", "contact": "+917349264889"}
+                  { "name": "Harsh Gupta", "contact": "+917425876315" }
                 ],
                 "fee": 0,
                 "registration_form": [
@@ -83,8 +82,7 @@
                 "time": "7th Nov 10:00 AM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
-                  { "name": "Sai Sathvik", "contact": "+919636853258" },
-                  { "name": "Shivansh Shah", "contact": "+919636853258" }
+                  { "name": "Heer", "contact": "+919599911677" }
                 ],
                 "fee": 0,
                 "registration_form": [
@@ -105,8 +103,7 @@
                 "time": "7th Nov 10:00 AM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
-                  { "name": "Sai Sathvik", "contact": "+919636853258" },
-                  { "name": "Shivansh Shah", "contact": "+919636853258" }
+                  { "name": "Aditya Reddy", "contact": "+919392417242" }
                 ],
                 "fee": 0,
                 "registration_form": [
@@ -127,8 +124,8 @@
                 "time": "7th Nov 10:00 AM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
-                  { "name": "Sai Sathvik", "contact": "+919636853258" },
-                  { "name": "Shivansh Shah", "contact": "+919636853258" }
+                  { "name": "Nikunj Mahajan", "contact": "+919797959937" },
+                  { "name": "Akshat Tyagi", "contact": "+917011215453" }
                 ],
                 "fee": 0,
                 "registration_form": [
@@ -149,8 +146,7 @@
                 "time": "7th Nov 10:00 AM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
-                  { "name": "Sai Sathvik", "contact": "+919636853258" },
-                  { "name": "Shivansh Shah", "contact": "+919636853258" }
+                  { "name": "Lakshay Jain", "contact": "+919501242635" }
                 ],
                 "fee": 0,
                 "registration_form": [
@@ -171,7 +167,7 @@
                 "time": "7th Nov 10:00 AM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
-                  { "name": "Synergy IIITB", "contact": "+919636853258" }                  
+                  { "name": "Chirayu Choudhary", "contact": "+919636853258" }                  
                 ],
                 "fee": 0,
                 "registration_form": [
@@ -192,7 +188,7 @@
                 "time": "7th Nov 10:00 AM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
-                  { "name": "Synergy IIITB", "contact": "+919636853258" }                  
+                  { "name": "Tejas", "contact": "+916301602846" }                  
                 ],
                 "fee": 0,
                 "registration_form": [
@@ -259,7 +255,7 @@
                 "time": "7th Nov 5:00 PM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
-                  { "name": "Synergy IIITB", "contact": "+919636853258" }
+                  { "name": "Chirayu Choudhary", "contact": "+919636853258" }
                 ],
                 "fee": 0,
                 "registration_form": [
@@ -280,7 +276,7 @@
                 "time": "7th Nov 5:00 PM",
                 "venue": "IIIT-B Campus",
                 "spocs": [
-                  { "name": "Synergy IIITB", "contact": "+919636853258" }
+                  { "name": "Chirayu Choudhary", "contact": "+919636853258" }
                 ],
                 "fee": 0,
                 "registration_form": [

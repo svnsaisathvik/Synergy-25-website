@@ -330,6 +330,29 @@
                   }
                 ]
               },
+             {
+                "id": 33,
+                "name": "Planck'd",
+                "category": "hackathon",
+                "prizePool": 20000,
+                "about": "Planck’d is a 3-day online quantum computing hackathon, challenging teams to innovate in Quantum Algorithms and Quantum Machine Learning.",
+                "image": "/images/posters/Planckd.png",
+                "rulespdf": "https://unstop.com/hackathons/planckd-synergy-25-international-institute-of-information-technology-iiit-bangalore-1566998",
+                "time":"Refer to Unstop",
+                "venue" : "Online",
+                "spocs" : [
+                  {"name": "Soham Pawar", "contact": "8104151631"},
+                  {"name": "Madhav", "contact": "8237028584"}
+                ],
+                "fee": 0,
+                "registration_form": [
+                  {
+                    "link": "https://unstop.com/hackathons/planckd-synergy-25-international-institute-of-information-technology-iiit-bangalore-1566998",
+                    "info": ""
+                  }
+                ]
+    
+              },
               {
                 "id": 16,
                 "name": "Neural.Net",
@@ -629,4 +652,6 @@
           }          
     ]
 }
+
+
 

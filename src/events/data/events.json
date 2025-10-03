@@ -336,7 +336,7 @@
                 "category": "hackathon",
                 "prizePool": 20000,
                 "about": "Planck’d is a 3-day online quantum computing hackathon, challenging teams to innovate in Quantum Algorithms and Quantum Machine Learning.",
-                "image": "/images/posters/Planck'd.png",
+                "image": "/images/posters/Planckd.png",
                 "rulespdf": "https://unstop.com/hackathons/planckd-synergy-25-international-institute-of-information-technology-iiit-bangalore-1566998",
                 "time":"Refer to Unstop",
                 "venue" : "Online",
@@ -652,5 +652,6 @@
           }          
     ]
 }
+
 
 

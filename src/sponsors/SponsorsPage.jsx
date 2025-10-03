@@ -13,6 +13,9 @@ const SponsorsPage = () => {
     },
     {
       logo: "/images/sponsors/ELCIA_Logo.png",
+    },
+    {
+      logo: "/images/sponsors/CTRI_Logo.png",
     }
   ];
 

@@ -13,7 +13,7 @@
                 "image": "/images/posters/BlindSwap.jpg",
                 "rulespdf": "https://unstop.com/p/blind-swap-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543543",
                 "time": "7th Nov 9:00 AM",
-                "venue": "IIIT-B Campus",
+                "venue": "R103 ,IIIT-B Campus",
                 "spocs": [
                   { "name": "SVN Sai Sathvik", "contact": "+917416226695" },
                   { "name": "Aryan Bansal", "contact": "+918451979163" }
@@ -28,6 +28,28 @@
                 "iiitb_exclusive":true
               },
               {
+                 "id": 27,
+                "name": "SynPD",
+                "category": "Intellectual",
+                "prizePool": 20000,
+                "about": "Challenge opinions, champion arguments.",
+                "image": "/images/posters/SynPd.jpg",
+                "rulespdf": "https://unstop.com/p/synpd-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544690",
+                "time": "7th Nov 9:00 AM",
+                "venue": "Amanthran, IIIT-B Campus",
+                "spocs": [
+                  { "name": "Akshat Betala", "contact": "+919740340860" },
+                  {"name": "Shantanu", "contact": "+917396821118"}
+                ],
+                "fee": 0,
+                "registration_form": [
+                  {
+                    "link": "https://unstop.com/p/synpd-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544690",
+                    "info": ""
+                  }
+                ]
+              },
+              {
                 "id": 2,
                 "name": "Mernify",
                 "category": "hackathon",
@@ -36,7 +58,7 @@
                 "image": "/images/posters/Mernify.jpg",
                 "rulespdf": "https://unstop.com/p/mernify-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544542",
                 "time": "7th Nov 9:00 AM",
-                "venue": "IIIT-B Campus",
+                "venue": "Online",
                 "spocs": [
                   { "name": "Harsh Gupta", "contact": "+917425876315" }
                 ],
@@ -57,8 +79,8 @@
                 "about": "Sensors, puzzles, and a vault full of brain-bending fun.",
                 "image": "/images/posters/SensorVault.png",
                 "rulespdf": "https://unstop.com/p/the-sensor-vault-escape-room-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544674",
-                "time": "7th Nov 10:00 AM",
-                "venue": "IIIT-B Campus",
+                "time": "7th Nov 9:00 AM",
+                "venue": "R101, IIIT-B Campus",
                 "spocs": [
                   { "name": "Shivansh Shah", "contact": "+917307401349" }
                 ],
@@ -79,8 +101,8 @@
                 "about": "Map the World, Master the Game.",
                 "image": "/images/posters/Geoguessr.png",
                 "rulespdf": "https://unstop.com/p/geoguessr-esports-showdown-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545614",
-                "time": "7th Nov 10:00 AM",
-                "venue": "IIIT-B Campus",
+                "time": "7th Nov 9:00 AM",
+                "venue": "A307, IIIT-B Campus",
                 "spocs": [
                   { "name": "Heer", "contact": "+919599911677" }
                 ],
@@ -100,8 +122,8 @@
                 "about": "Fast Wheels, Fierce Weapons.",
                 "image": "/images/posters/SmashKarts.jpg",
                 "rulespdf": "https://unstop.com/p/smashkarts-battle-royale-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545620",
-                "time": "7th Nov 10:00 AM",
-                "venue": "IIIT-B Campus",
+                "time": "7th Nov 9:00 AM",
+                "venue": "R102, IIIT-B Campus",
                 "spocs": [
                   { "name": "Aditya Reddy", "contact": "+919392417242" }
                 ],
@@ -121,8 +143,8 @@
                 "about": "Team Up. Brawl Hard. Rule the Arena.",
                 "image": "/images/posters/BrawlStars.png",
                 "rulespdf": "https://unstop.com/p/brawl-stars-3v3-showdown-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545644",
-                "time": "7th Nov 10:00 AM",
-                "venue": "IIIT-B Campus",
+                "time": "7th Nov 9:00 AM",
+                "venue": "R104, IIIT-B Campus",
                 "spocs": [
                   { "name": "Nikunj Mahajan", "contact": "+919797959937" },
                   { "name": "Akshat Tyagi", "contact": "+917011215453" }
@@ -143,8 +165,8 @@
                 "about": "Clutch or Be Crushed.",
                 "image": "/images/posters/Valorant.png",
                 "rulespdf": "https://unstop.com/p/valorant-tactical-5v5-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545647",
-                "time": "7th Nov 10:00 AM",
-                "venue": "IIIT-B Campus",
+                "time": "7th Nov 9:00 AM",
+                "venue": "R110, IIIT-B Campus",
                 "spocs": [
                   { "name": "Lakshay Jain", "contact": "+919501242635" }
                 ],
@@ -164,8 +186,8 @@
                 "about": "Only the Sharpest Squads See the Final Circle.",
                 "image": "/images/posters/BGMI.png",
                 "rulespdf": "https://unstop.com/p/bgmi-battle-royale-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545650",
-                "time": "7th Nov 10:00 AM",
-                "venue": "IIIT-B Campus",
+                "time": "7th Nov 9:00 AM",
+                "venue": "A304, IIIT-B Campus",
                 "spocs": [
                   { "name": "Chirayu Choudhary", "contact": "+919636853258" }                  
                 ],
@@ -185,8 +207,8 @@
                 "about": "Lock. Shoot. Conquer.",
                 "image": "/images/posters/CODM.png",
                 "rulespdf": "https://unstop.com/p/call-of-duty-mobile-squad-domination-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545651",
-                "time": "7th Nov 10:00 AM",
-                "venue": "IIIT-B Campus",
+                "time": "7th Nov 9:00 AM",
+                "venue": "R105, IIIT-B Campus",
                 "spocs": [
                   { "name": "Tejas", "contact": "+916301602846" }                  
                 ],
@@ -207,7 +229,7 @@
                 "image": "/images/posters/GigaByteShow.png",
                 "rulespdf": "https://unstop.com/p/gigabyte-show-synergy-25-international-institute-of-information-technology-iiit-bangalore-1545652",
                 "time": "7th Nov 1:00 PM",
-                "venue": "IIIT-B Campus",
+                "venue": "R203, IIIT-B Campus",
                 "spocs": [
                   { "name": "Sindhoor", "contact": "+919008695680" }
                   
@@ -230,7 +252,7 @@
                 "image": "/images/posters/PromptCraft.jpg",
                 "rulespdf": "https://unstop.com/p/promptcraft-create-using-ai-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543486",
                 "time": "7th Nov 5:00 PM",
-                "venue": "IIIT-B Campus",
+                "venue": "R103 ,IIIT-B Campus",
                 "spocs": [
                   { "name": "Pragun K Kirani", "contact": "+919148894484" },
                   { "name": "Saanvi Choudhary", "contact": "+919901757919" }
@@ -252,8 +274,8 @@
                 "about": "Capture the essence. Freeze the moment. Tell the story.",
                 "image": "/images/posters/Shotify.png",
                 "rulespdf": "https://unstop.com/p/shoti-fy-synergy-25-international-institute-of-information-technology-iiit-bangalore-1539423",
-                "time": "7th Nov 5:00 PM",
-                "venue": "IIIT-B Campus",
+                "time": "Refer to Unstop",
+                "venue": "Refer to Unstop",
                 "spocs": [
                   { "name": "Chirayu Choudhary", "contact": "+919636853258" }
                 ],
@@ -274,7 +296,7 @@
                 "image": "/images/posters/ReelRiot.png",
                 "rulespdf": "https://unstop.com/p/reel-riot-synergy-25-international-institute-of-information-technology-iiit-bangalore-1539428",
                 "time": "7th Nov 5:00 PM",
-                "venue": "IIIT-B Campus",
+                "venue": "Refer to Unstop",
                 "spocs": [
                   { "name": "Chirayu Choudhary", "contact": "+919636853258" }
                 ],
@@ -288,7 +310,7 @@
                 "iiitb_exclusive":true
               },
               {
-                 "id": 14,
+                "id": 14,
                 "name": "Wiki-Race",
                 "category": "Online Navigation",
                 "prizePool": 7000,
@@ -296,7 +318,7 @@
                 "image": "/images/posters/WikiRace.png",
                 "rulespdf": "https://unstop.com/p/wiki-race-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543569",
                 "time": "7th Nov 8:00 PM",
-                "venue": "IIIT-B Campus",
+                "venue": "A303, IIIT-B Campus",
                 "spocs": [
                   { "name": "Jithamanyu Amara", "contact": "+918919862545" }
                 ],
@@ -381,7 +403,7 @@
             "date": "8th Nov",
             "list": [
               {
-                 "id": 17,
+                "id": 17,
                 "name": "TriviaVerse",
                 "category": "quiz",
                 "prizePool": 20000,
@@ -389,7 +411,7 @@
                 "image": "/images/posters/TechTrivia.png",
                 "rulespdf": "https://unstop.com/p/triviaverse-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543498",
                 "time": "8th Nov 9:00 AM",
-                "venue": "IIIT-B Campus",
+                "venue": "A106, IIIT-B Campus",
                 "spocs": [
                   { "name": "Ajay Javali", "contact": "+918296563377" },
                   { "name": "Mithilesh", "contact": "+919591544183" }
@@ -402,7 +424,7 @@
                   }
                 ]
               },
-               {
+              {
                 "id": 19,
                 "name": "Squid Games",
                 "category": "Puzzle-Solving",
@@ -410,8 +432,8 @@
                 "about": "Quick minds. Sharp moves. One winner.",
                 "image": "/images/posters/SquidGames.jpg",
                 "rulespdf": "https://unstop.com/p/skew-id-games-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544681",
-                "time": "8th Nov 8:00 PM",
-                "venue": "IIIT-B Campus",
+                "time": "8th Nov 3:00 PM",
+                "venue": "Ramanujan Basement, IIIT-B Campus",
                 "spocs": [
                   { "name": "Tharanth T J", "contact": "+919148972070" }
                 ],
@@ -431,8 +453,8 @@
                 "about": "An insightful exchange with those who’ve walked the path before.",
                 "image": "/images/posters/PanelDiscussion.jpg",
                 "rulespdf": "https://unstop.com/p/panel-discussion-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544573",
-                "time": "8th Nov 2:00 PM",
-                "venue": "IIIT-B Campus",
+                "time": "8th Nov 1:30 PM",
+                "venue": "A204, IIIT-B Campus",
                 "spocs": [
                   { "name": "Kavya Gupta", "contact": "+917842106973" },
                   { "name": "Vriddhi Agrawal", "contact": "+919620670085" }
@@ -454,7 +476,7 @@
                 "image": "/images/posters/Real-eyes.png",
                 "rulespdf": "https://unstop.com/p/real-eyes-synergy-25-international-institute-of-information-technology-iiit-bangalore-1539414",
                 "time": "8th Nov 10:00 PM",
-                "venue": "IIIT-B Campus",
+                "venue": "R103, IIIT-B Campus",
                 "spocs": [
                   { "name": "Chirayu Choudhary", "contact": "+919636853258" }
                 ],
@@ -482,7 +504,7 @@
                 "image": "/images/posters/BidNBuild.png",
                 "rulespdf": "https://unstop.com/p/bid-build-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543510",
                 "time": "9th Nov 9:00 AM",
-                "venue": "IIIT-B Campus",
+                "venue": "A106, IIIT-B Campus",
                 "spocs": [
                   { "name": "Karan Mansuria", "contact": "+919636853258" },
                   { "name": "Saharsh Hiremath", "contact": "Saharsh.Hiremath@iiitb.ac.in" }
@@ -503,8 +525,8 @@
                 "about": "Push your analog skills to the limit in a battle of precision and performance. Build the best op-amp, and let your design do the talking!",
                 "image": "/images/posters/Op-AmpWars.png",
                 "rulespdf": "https://unstop.com/p/om-amp-wars-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543560",
-                "time": "9th Nov 11:00 AM",
-                "venue": "IIIT-B Campus",
+                "time": "9th Nov 1:00 PM",
+                "venue": "A307, IIIT-B Campus",
                 "spocs": [
                   { "name": "Snehal Sharma", "contact": "+917073800216" }
                 ],
@@ -512,28 +534,6 @@
                 "registration_form": [
                   {
                     "link": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=IkyogrJHEka594YPOeubEjxDZMTCJiZKpDthjkViIKBUQTMySjlFNDJJMkQzNjNLNk1URFFGUlJPVS4u",
-                    "info": ""
-                  }
-                ]
-              },
-              {
-                 "id": 27,
-                "name": "SynPD",
-                "category": "Intellectual",
-                "prizePool": 20000,
-                "about": "Challenge opinions, champion arguments.",
-                "image": "/images/posters/SynPd.jpg",
-                "rulespdf": "https://unstop.com/p/synpd-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544690",
-                "time": "9th Nov 1:00 PM",
-                "venue": "IIIT-B Campus",
-                "spocs": [
-                  { "name": "Akshat Betala", "contact": "+919740340860" },
-                  {"name": "Shantanu", "contact": "+917396821118"}
-                ],
-                "fee": 0,
-                "registration_form": [
-                  {
-                    "link": "https://unstop.com/p/synpd-synergy-25-international-institute-of-information-technology-iiit-bangalore-1544690",
                     "info": ""
                   }
                 ]
@@ -612,7 +612,7 @@
                 "image": "/images/posters/ShortFilm.png",
                 "rulespdf": "https://unstop.com/p/lens-flare-synergy-25-international-institute-of-information-technology-iiit-bangalore-1543614",
                 "time": "Refer to Unstop",
-                "venue": "Online",
+                "venue": "Refer to Unstop",
                 "spocs": [
                   { "name": "Thrissha Arcot", "contact": "+917259400964" },
                   { "name": "Nathan Mathew", "contact": "++918848839946" }

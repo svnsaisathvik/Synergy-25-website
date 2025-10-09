@@ -22,9 +22,9 @@ const faqs = [
     icon: <DollarSign className="w-7 h-7 text-green-400 drop-shadow-glow" />,
   },
   {
-    question: "Do we need to pay for any workshops/talks?",
+    question: "Do we need to pay for any talks?",
     answer:
-      "No, This year all workshops & talks are free for everyone who attends.",
+      "No, This year all talks are free for everyone who attends.",
     icon: <GraduationCap className="w-7 h-7 text-yellow-400 drop-shadow-glow" />,
   },
   {

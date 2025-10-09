@@ -403,6 +403,27 @@
             "date": "8th Nov",
             "list": [
               {
+                "id": 34,
+                "name": "Techobytes Workshops",
+                "category": "workshop",
+                "prizePool": "experience",
+                "about": "Hands-on workshop with expert guidance, global certification, and a chance to win and represent at other IITs.",
+                "image": "/images/posters/Techo.png",
+                "rulespdf": "https://tbytes.mojo.page/siiitb",
+                "time": "8th Nov 10:00 AM",
+                "venue": "IIIT-B Campus",
+                "spocs": [
+                  { "name": "Chirayu Choudhary", "contact": "+919636853258" }
+                ],
+                "fee": 1600,
+                "registration_form": [
+                  {
+                    "link": "https://tbytes.mojo.page/siiitb",
+                    "info": ""
+                  }
+                ]
+              },
+              {
                 "id": 17,
                 "name": "TriviaVerse",
                 "category": "quiz",

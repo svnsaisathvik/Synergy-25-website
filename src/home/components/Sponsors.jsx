@@ -21,6 +21,9 @@ const AnimatedSponsors = () => {
         },
         {
           logo: "/images/sponsors/CTRI_Logo.png"
+        },
+        {
+          logo: "/images/sponsors/Aurigo_Logo.png"
         }
       ]
     },

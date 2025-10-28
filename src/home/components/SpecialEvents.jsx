@@ -17,24 +17,38 @@ const SpecialEvents = () => {
     },
     {
       id: 2,
+      heading: "Aurigo Infracode",
+      description: (
+        <>
+          Join <strong>Aurigo Hackathon 2025</strong> and shape the future of construction with technology-driven innovation.
+          <br />
+          Register now 👉{" "}
+          <a 
+            href="https://unstop.com/p/infracode-synergy-25-international-institute-of-information-technology-iiit-bangalore-1579278"
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: '#3b82f6', textDecoration: 'underline' }}
+          >
+            Click here
+          </a>
+        </>
+      ),
+      image: "/images/special_events/Aurigo_Hackathon.png",
+      accent: "blue"
+    },
+    {
+      id: 3,
       heading: "Deepfake ML Challenge",
       description: "Detect and defeat deepfakes in the ultimate AI showdown—only the sharpest model survives!",
       image: "/images/special_events/Deepfake-ML_model_making_hackathon.png",
       accent: "cyan"
     },
     {
-      id: 3,
+      id: 4,
       heading: "Trivia Verse",
       description: "From milestones to modern breakthroughs — tech trivia reimagined.",
       image: "/images/special_events/TechTrivia.png",
       accent: "blue"
-    },
-    {
-      id: 4,
-      heading: "PixelFlow 3.0",
-      description: "Get ready to hack into creativity, redefine design systems, and showcase your vision of tomorrow’s digital world.",
-      image: "/images/special_events/Pixelflow.png",
-      accent: "purple"
     },
     {
       id: 5,
@@ -279,9 +293,11 @@ const SpecialEvents = () => {
                   className={`event-description ${
                     isTransitioning ? 'transitioning' : 'normal'
                   }`}
-                  style={{fontFamily: 'Orbitron, monospace'}}
+                  style={{ fontFamily: 'Orbitron, monospace' }}
                 >
-                  {currentEvent.description}
+                  {typeof currentEvent.description === "string"
+                    ? currentEvent.description
+                    : currentEvent.description}
                 </p>
               </div>
               
@@ -404,14 +420,16 @@ const SpecialEvents = () => {
                   {currentEvent.heading}
                 </h3>
                 
-                {/* Event Description */}
+              {/* Event Description */}
                 <p 
                   className={`mobile-event-description ${
                     isTransitioning ? 'transitioning' : 'normal'
                   }`}
-                  style={{fontFamily: 'Orbitron, monospace'}}
+                  style={{ fontFamily: 'Orbitron, monospace' }}
                 >
-                  {currentEvent.description}
+                  {typeof currentEvent.description === "string"
+                    ? currentEvent.description
+                    : currentEvent.description}
                 </p>
               </div>
             </div>

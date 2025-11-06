@@ -10,9 +10,26 @@ const SpecialEvents = () => {
   const specialEvents = [
     {
       id: 1,
-      heading: "Neural.net",
-      description: "Push the limits of intelligence and imagination as you race to craft breakthrough AI solutions.",
-      image: "/images/special_events/NeuralNet.png",
+      heading: "LG Talk",
+      description: (
+        <>
+          Attend an inspiring session with <strong>Mr. Balaji Haridass</strong>, 
+          Senior Technical Leader at <strong>LG</strong>, as he shares insights on technology, innovation, and leadership. 
+          <br />
+          📅 <strong>7th November 2025</strong> | 🕚 <strong>11 AM</strong> | 📍 <strong>Amanthran</strong>
+          <br />
+          Know more about the speaker 👉{" "}
+          <a 
+            href="https://www.linkedin.com/in/balaji-haridass/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            style={{ color: '#ef4444', textDecoration: 'underline' }}
+          >
+            LinkedIn Profile
+          </a>
+        </>
+      ),
+      image: "/images/special_events/LG_Talk.png",
       accent: "orange"
     },
     {
@@ -38,9 +55,27 @@ const SpecialEvents = () => {
     },
     {
       id: 3,
-      heading: "Deepfake ML Challenge",
-      description: "Detect and defeat deepfakes in the ultimate AI showdown—only the sharpest model survives!",
-      image: "/images/special_events/Deepfake-ML_model_making_hackathon.png",
+      heading: "GE Talk",
+      description: (
+        <>
+          Join an inspiring session with <strong>Mr. GS Srinidhi</strong>, 
+          Senior Director of Software Engineering at <strong>GE Healthcare</strong>, 
+          as he speaks about the transformative role of <strong>AI in Healthcare</strong> and how technology is reshaping the medical landscape. 
+          <br />
+          📅 <strong>8th November 2025</strong> | 🕚 <strong>11 AM</strong> | 📍 <strong>A106</strong>
+          <br />
+          Know more about the speaker 👉{" "}
+          <a 
+            href="https://www.linkedin.com/in/srinidhi-gs-8bb693b0/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            style={{ color: '#06b6d4', textDecoration: 'underline' }}
+          >
+            LinkedIn Profile
+          </a>
+        </>
+      ),
+      image: "/images/special_events/GE_Talk.png",
       accent: "cyan"
     },
     {

@@ -80,9 +80,29 @@ const SpecialEvents = () => {
     },
     {
       id: 4,
-      heading: "Trivia Verse",
-      description: "From milestones to modern breakthroughs — tech trivia reimagined.",
-      image: "/images/special_events/TechTrivia.png",
+      heading: "Aurigo Talk",
+      description: (
+        <>
+          Join us for an engaging session with <strong>Mr. Sanat Kumar Mohapatra</strong>, 
+          an <strong>AI & SaaS Leader</strong> sharing insights on how 
+          <strong> AI is transforming the construction industry</strong> and redefining 
+          the future of infrastructure.
+          <br />
+          <br />
+          📅 <strong>9th November 2025</strong> | 🕚 <strong>11:00 AM</strong> | 📍 <strong>Amanthran</strong>
+          <br />
+          Know more 👉{" "}
+          <a 
+            href="https://www.linkedin.com/in/sanat-techleader/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            style={{ color: '#3b82f6', textDecoration: 'underline' }}
+          >
+            LinkedIn Profile
+          </a>
+        </>
+      ),
+      image: "/images/special_events/Aurigo_Talk.png",
       accent: "blue"
     },
     {
